@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import Reveal from './Reveal.jsx';
 
 function Checkmark() {
   return (
@@ -29,7 +30,7 @@ function QrCode() {
 function CustomerJourney() {
   return (
     <div className="journey">
-      <div className="journey-step">
+      <Reveal className="journey-step">
         <div className="journey-label"><span className="jnum">1</span> Browse locally</div>
         <div className="phone sp-mini">
           <div className="notch"></div>
@@ -41,14 +42,14 @@ function CustomerJourney() {
             </div>
             <div className="deal">
               <div className="photo" style={{ background: 'linear-gradient(135deg,#2A9E82,#3DBFA0)' }}>
-                <img src="https://images.unsplash.com/photo-1503951914875-452162b0f3f1?auto=format&fit=crop&w=500&q=80" alt="" onError={(e) => e.target.remove()} />
+                <img src="https://images.unsplash.com/photo-1503951914875-452162b0f3f1?auto=format&fit=crop&w=500&q=80" alt="" loading="lazy" decoding="async" onError={(e) => e.target.remove()} />
                 <span className="disc">40%</span><span className="timer">&#9201; 00:42</span>
               </div>
               <div className="meta"><div className="name">Frank's Barbers</div><div className="desc">Cut &middot; 0.4 mi</div></div>
             </div>
             <div className="deal" style={{ marginBottom: 0 }}>
               <div className="photo" style={{ background: 'linear-gradient(135deg,#F59E0B,#FCD34D)' }}>
-                <img src="https://images.unsplash.com/photo-1599901860904-17e6ed7083a0?auto=format&fit=crop&w=500&q=80" alt="" onError={(e) => e.target.remove()} />
+                <img src="https://images.unsplash.com/photo-1599901860904-17e6ed7083a0?auto=format&fit=crop&w=500&q=80" alt="" loading="lazy" decoding="async" onError={(e) => e.target.remove()} />
                 <span className="disc">30%</span><span className="timer red">&#9201; 00:18</span>
               </div>
               <div className="meta"><div className="name">Bayside Yoga</div><div className="desc">5pm flow &middot; 0.2 mi</div></div>
@@ -56,9 +57,9 @@ function CustomerJourney() {
           </div>
         </div>
         <p className="journey-caption">Real deals near you right now, filtered by what you actually want.</p>
-      </div>
+      </Reveal>
 
-      <div className="journey-step">
+      <Reveal className="journey-step" delay={100}>
         <div className="journey-label"><span className="jnum">2</span> Tap to claim</div>
         <div className="phone sp-mini">
           <div className="notch"></div>
@@ -67,7 +68,7 @@ function CustomerJourney() {
             <div style={{ padding: '10px 14px 0', fontSize: '11px', color: 'var(--grey)' }}>&larr; Back</div>
             <div className="deal" style={{ margin: '10px 12px 8px' }}>
               <div className="photo" style={{ background: 'linear-gradient(135deg,#2A9E82,#3DBFA0)', height: '84px' }}>
-                <img src="https://images.unsplash.com/photo-1503951914875-452162b0f3f1?auto=format&fit=crop&w=500&q=80" alt="" onError={(e) => e.target.remove()} />
+                <img src="https://images.unsplash.com/photo-1503951914875-452162b0f3f1?auto=format&fit=crop&w=500&q=80" alt="" loading="lazy" decoding="async" onError={(e) => e.target.remove()} />
                 <span className="disc">40% off</span><span className="timer">&#9201; 00:42</span>
               </div>
               <div className="meta"><div className="name">Frank's Barbers</div><div className="desc">Cut &amp; blow-dry &middot; 0.4 mi</div></div>
@@ -77,9 +78,9 @@ function CustomerJourney() {
           </div>
         </div>
         <p className="journey-caption">Pay the booking fee in-app and get a QR code instantly. No forms.</p>
-      </div>
+      </Reveal>
 
-      <div className="journey-step">
+      <Reveal className="journey-step" delay={200}>
         <div className="journey-label"><span className="jnum">3</span> Redeem &amp; go</div>
         <div className="phone sp-mini">
           <div className="notch"></div>
@@ -94,7 +95,7 @@ function CustomerJourney() {
           </div>
         </div>
         <p className="journey-caption">Show your code in store, or pick home delivery where it's on offer.</p>
-      </div>
+      </Reveal>
     </div>
   );
 }
@@ -102,7 +103,7 @@ function CustomerJourney() {
 function BusinessJourney() {
   return (
     <div className="journey">
-      <div className="journey-step">
+      <Reveal className="journey-step">
         <div className="journey-label"><span className="jnum">1</span> Snap a photo</div>
         <div className="phone sp-mini">
           <div className="notch"></div>
@@ -117,9 +118,9 @@ function BusinessJourney() {
           </div>
         </div>
         <p className="journey-caption">Of the product, the service, or the empty chair you want to fill.</p>
-      </div>
+      </Reveal>
 
-      <div className="journey-step">
+      <Reveal className="journey-step" delay={100}>
         <div className="journey-label"><span className="jnum">2</span> Set your floor</div>
         <div className="phone sp-mini">
           <div className="notch"></div>
@@ -141,9 +142,9 @@ function BusinessJourney() {
           </div>
         </div>
         <p className="journey-caption">Pick the lowest discount you'll accept. Our AI never goes lower.</p>
-      </div>
+      </Reveal>
 
-      <div className="journey-step">
+      <Reveal className="journey-step" delay={200}>
         <div className="journey-label"><span className="jnum">3</span> Go live</div>
         <div className="phone sp-mini">
           <div className="notch"></div>
@@ -157,7 +158,7 @@ function BusinessJourney() {
           </div>
         </div>
         <p className="journey-caption">The offer reaches every opted-in customer nearby, instantly.</p>
-      </div>
+      </Reveal>
     </div>
   );
 }
@@ -168,11 +169,11 @@ export default function HowItWorks() {
   return (
     <section id="how" className="section-pad">
       <div className="wrap">
-        <div className="section-head center">
+        <Reveal className="section-head center">
           <span className="eyebrow">How it works</span>
           <h2>Browse. Claim. Redeem. Done.</h2>
           <p>Three screens, sixty seconds, one very good deal.</p>
-        </div>
+        </Reveal>
 
         <div className="toggle-row">
           <div className="toggle">

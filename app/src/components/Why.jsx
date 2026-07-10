@@ -1,3 +1,5 @@
+import Reveal from './Reveal.jsx';
+
 const CARDS = [
   {
     icon: <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" strokeWidth="2" /><path d="M12 7v5l3 2" stroke="currentColor" strokeWidth="2" strokeLinecap="round" /></svg>,
@@ -25,18 +27,18 @@ export default function Why() {
   return (
     <section id="why" className="section-pad surface">
       <div className="wrap">
-        <div className="section-head">
+        <Reveal className="section-head">
           <span className="eyebrow">Why we exist</span>
           <h2>Independent businesses lose money every single hour, quietly.</h2>
           <p>An empty barber's chair at 3pm. A half-full yoga class. A table for two nobody booked. That time, and the revenue in it, vanishes the second it passes, with no way to get it back.</p>
-        </div>
+        </Reveal>
         <div className="why-grid">
-          {CARDS.map((card) => (
-            <div className="why-card" key={card.title}>
+          {CARDS.map((card, i) => (
+            <Reveal as="div" className="why-card" delay={i * 80} key={card.title}>
               <div className="icon">{card.icon}</div>
               <h3>{card.title}</h3>
               <p>{card.body}</p>
-            </div>
+            </Reveal>
           ))}
         </div>
       </div>

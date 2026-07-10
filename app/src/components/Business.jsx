@@ -1,3 +1,5 @@
+import Reveal from './Reveal.jsx';
+
 const CARDS = [
   {
     icon: <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M4 12h16M4 6h16M4 18h10" stroke="currentColor" strokeWidth="2" strokeLinecap="round" /></svg>,
@@ -20,18 +22,18 @@ export default function Business() {
   return (
     <section id="business" className="section-pad surface">
       <div className="wrap">
-        <div className="section-head">
+        <Reveal className="section-head">
           <span className="eyebrow">For business owners</span>
           <h2>Fill the chair. Save the sale. Free to join.</h2>
           <p>Turn your quietest hours into new customers, with no marketing budget and no long-term commitment.</p>
-        </div>
+        </Reveal>
         <div className="value-strip">
-          {CARDS.map((card) => (
-            <div className="value-card" key={card.title}>
+          {CARDS.map((card, i) => (
+            <Reveal as="div" className="value-card" delay={i * 80} key={card.title}>
               <div className="icon">{card.icon}</div>
               <h3>{card.title}</h3>
               <p>{card.body}</p>
-            </div>
+            </Reveal>
           ))}
         </div>
       </div>

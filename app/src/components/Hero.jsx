@@ -1,8 +1,10 @@
+import Reveal from './Reveal.jsx';
+
 export default function Hero({ onSelectAudience }) {
   return (
     <section className="hero">
       <div className="wrap hero-inner">
-        <div>
+        <Reveal>
           <div className="badge-live"><span className="dot"></span> Launching first in Brighton, UK</div>
           <h1>Local deals that find you <em>before they're gone.</em></h1>
           <p className="sub">Last Minute Local pushes real-time discounts from nearby shops, salons and restaurants straight to your phone, the moment they need filling.</p>
@@ -11,9 +13,9 @@ export default function Hero({ onSelectAudience }) {
             <a href="#how" className="btn btn-ghost">See how it works</a>
           </div>
           <p className="hero-note">Free to join. No commitment. We'll email you the day we go live near you.</p>
-        </div>
+        </Reveal>
 
-        <div className="phone-stage">
+        <Reveal className="phone-stage" delay={150}>
           <div className="phone-frame-wrap">
             <div className="phone">
               <div className="notch"></div>
@@ -57,7 +59,7 @@ export default function Hero({ onSelectAudience }) {
 
             <div className="float-toast"><span className="ft-check">&#10003;</span> Saved &pound;14 at Frank's</div>
           </div>
-        </div>
+        </Reveal>
       </div>
     </section>
   );

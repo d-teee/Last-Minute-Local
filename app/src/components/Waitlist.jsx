@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react';
+import Reveal from './Reveal.jsx';
 
 const UK_POSTCODE_RE = /^[A-Z]{1,2}[0-9][A-Z0-9]?\s*[0-9][A-Z]{2}$/i;
-const STORAGE_KEY = 'lml_waitlist_signups';
+const FORMSPREE_ENDPOINT = import.meta.env.VITE_FORMSPREE_ENDPOINT;
 
 function Checkmark({ size = 18, stroke = '#fff' }) {
   return (
@@ -14,14 +15,17 @@ function Checkmark({ size = 18, stroke = '#fff' }) {
 export default function Waitlist({ audience, onSelectAudience }) {
   const [errors, setErrors] = useState({ customer: false, business: false });
   const [success, setSuccess] = useState(null); // null | { kind, business }
+  const [submitting, setSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState(null);
 
   // Switching audience (from here or the hero CTAs) dismisses any success state,
   // matching the prototype's switchWaitlist() behavior.
   useEffect(() => {
     setSuccess(null);
+    setSubmitError(null);
   }, [audience]);
 
-  function handleSubmit(evt, kind) {
+  async function handleSubmit(evt, kind) {
     evt.preventDefault();
     const form = evt.target;
     const data = Object.fromEntries(new FormData(form).entries());
@@ -33,26 +37,49 @@ export default function Waitlist({ audience, onSelectAudience }) {
       return;
     }
 
-    try {
-      const existing = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
-      existing.push({ kind, ...data, ts: Date.now() });
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(existing));
-    } catch {
-      // localStorage unavailable (private browsing, etc.) - non-fatal for this placeholder
+    if (!FORMSPREE_ENDPOINT) {
+      console.error('VITE_FORMSPREE_ENDPOINT is not set - waitlist submissions have nowhere to go.');
+      setSubmitError("Sign-ups aren't connected yet. Please try again later.");
+      return;
     }
 
-    setSuccess({ kind, business: data.business });
+    setSubmitting(true);
+    setSubmitError(null);
+
+    try {
+      const res = await fetch(FORMSPREE_ENDPOINT, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify({
+          ...data,
+          kind,
+          _subject: kind === 'business'
+            ? `Waitlist: business signup - ${data.business || 'unnamed'}`
+            : 'Waitlist: customer signup',
+        }),
+      });
+
+      if (!res.ok) throw new Error(`Formspree responded ${res.status}`);
+
+      setSuccess({ kind, business: data.business });
+      form.reset();
+    } catch (err) {
+      console.error('Waitlist submission failed:', err);
+      setSubmitError("Something went wrong sending your details. Please try again, or email us directly.");
+    } finally {
+      setSubmitting(false);
+    }
   }
 
   return (
     <section id="waitlist" className="section-pad">
       <div className="wrap">
         <div className="waitlist">
-          <div className="waitlist-head">
+          <Reveal className="waitlist-head">
             <span className="eyebrow">Join the waitlist</span>
             <h2>Be first in line when we go live.</h2>
             <p>We're onboarding our first businesses and customers in Brighton now, with more high streets following right after. Tell us who you are and we'll let you know the moment it's your turn.</p>
-          </div>
+          </Reveal>
 
           <div className="wl-toggle">
             <button className={audience === 'customer' ? 'active' : ''} onClick={() => onSelectAudience('customer')}>I'm a customer</button>
@@ -67,7 +94,8 @@ export default function Waitlist({ audience, onSelectAudience }) {
                   <input type="text" name="postcode" id="customer-postcode" placeholder="UK postcode, e.g. BN1 1AA" autoCapitalize="characters" className={errors.customer ? 'invalid' : ''} required />
                 </div>
                 <p className={`wl-error${errors.customer ? ' active' : ''}`}>Please enter a valid UK postcode.</p>
-                <button type="submit" className="wl-submit">Get early access</button>
+                {submitError && <p className="wl-error active">{submitError}</p>}
+                <button type="submit" className="wl-submit" disabled={submitting}>{submitting ? 'Submitting…' : 'Get early access'}</button>
                 <p className="wl-fineprint">Free forever. Unsubscribe any time. We'll never sell your data.</p>
               </form>
             )}
@@ -90,7 +118,8 @@ export default function Waitlist({ audience, onSelectAudience }) {
                   <input type="text" name="postcode" id="business-postcode" placeholder="UK postcode, e.g. BN1 1AA" autoCapitalize="characters" className={errors.business ? 'invalid' : ''} required />
                 </div>
                 <p className={`wl-error${errors.business ? ' active' : ''}`}>Please enter a valid UK postcode.</p>
-                <button type="submit" className="wl-submit">List your business</button>
+                {submitError && <p className="wl-error active">{submitError}</p>}
+                <button type="submit" className="wl-submit" disabled={submitting}>{submitting ? 'Submitting…' : 'List your business'}</button>
                 <p className="wl-fineprint">Free to join. No commission until you choose to promote a deal.</p>
               </form>
             )}

@@ -1,16 +1,27 @@
-# React + Vite
+# Last Minute Local — landing page
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+React + Vite implementation of the Last Minute Local marketing/waitlist landing page.
 
-Currently, two official plugins are available:
+## Develop
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+```bash
+npm install
+npm run dev
+```
 
-## React Compiler
+## Waitlist form
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+Both waitlist forms (customer + business) submit to a [Formspree](https://formspree.io) endpoint.
 
-## Expanding the Oxlint configuration
+1. Create a free account at [formspree.io](https://formspree.io) and add a new form.
+2. Copy its endpoint (looks like `https://formspree.io/f/xxxxxxxx`).
+3. Locally: copy `.env.example` to `.env` and set `VITE_FORMSPREE_ENDPOINT` to that endpoint.
+4. On Vercel: Project Settings → Environment Variables → add `VITE_FORMSPREE_ENDPOINT` with the same value, then redeploy.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and Oxlint's TypeScript related rules in your project.
+Submissions include a `kind` field (`customer` or `business`) plus the entered form fields, so you can tell the two apart in your Formspree inbox.
+
+## Build
+
+```bash
+npm run build
+```
