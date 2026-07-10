@@ -1,0 +1,1524 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Last Minute Local — Pitch Deck 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script src="deck-stage.js"></script>
+<script src="image-slot.js"></script>
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<script type="text/babel" src="tweaks-panel.jsx"></script>
+<style>
+  :root {
+    --teal: #3DBFA0;
+    --teal-dark: #2A9E82;
+    --teal-deep: #1F7E68;
+    --teal-tint: #E6F5F0;
+    --bg: #FFFFFF;
+    --surface: #F7F9F8;
+    --ink: #2C2C2C;
+    --grey: #6B7280;
+    --grey-light: #D1D5DB;
+    --amber: #F59E0B;
+    --red: #EF4444;
+
+    --type-display: 156px;
+    --type-mega: 112px;
+    --type-title: 72px;
+    --type-subtitle: 40px;
+    --type-lead: 34px;
+    --type-body: 28px;
+    --type-small: 24px;
+
+    --pad-x: 110px;
+    --pad-top: 100px;
+    --pad-bottom: 90px;
+    --gap-title: 48px;
+    --gap-item: 28px;
+
+    --radius-card: 24px;
+    --radius-sm: 16px;
+    --radius-pill: 999px;
+    --shadow-card: 0 24px 48px -20px rgba(31, 126, 104, 0.18), 0 4px 12px rgba(44,44,44,0.06);
+  }
+
+  * { box-sizing: border-box; }
+  body { margin: 0; background: #111; font-family: 'Inter', system-ui, sans-serif; color: var(--ink); }
+
+  deck-stage section {
+    background: var(--bg);
+    color: var(--ink);
+    padding: var(--pad-top) var(--pad-x) var(--pad-bottom);
+    font-size: var(--type-body);
+    line-height: 1.45;
+    letter-spacing: -0.005em;
+    overflow: hidden;
+  }
+
+  /* ---------- Type ---------- */
+  h1, h2, h3, h4, p { margin: 0; }
+  .eyebrow {
+    font-size: var(--type-small);
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--teal-dark);
+  }
+  .eyebrow.on-teal { color: rgba(255,255,255,0.7); }
+  .title {
+    font-size: var(--type-title);
+    font-weight: 700;
+    line-height: 1.05;
+    letter-spacing: -0.025em;
+    text-wrap: balance;
+    max-width: 22ch;
+  }
+  .title.full { max-width: none; }
+  .subtitle {
+    font-size: var(--type-subtitle);
+    font-weight: 500;
+    line-height: 1.25;
+    color: var(--grey);
+    text-wrap: pretty;
+    max-width: 28ch;
+  }
+  .lead {
+    font-size: var(--type-lead);
+    font-weight: 400;
+    line-height: 1.35;
+    color: var(--ink);
+    text-wrap: pretty;
+    max-width: 26ch;
+  }
+  .body { font-size: var(--type-body); line-height: 1.5; color: var(--ink); text-wrap: pretty; max-width: 32ch; }
+  .micro { font-size: var(--type-small); color: var(--grey); }
+  .mono { font-family: 'JetBrains Mono', monospace; letter-spacing: -0.01em; }
+
+  /* ---------- Slide chrome ---------- */
+  .slide-num {
+    position: absolute;
+    left: var(--pad-x);
+    bottom: 44px;
+    font-size: var(--type-small);
+    color: var(--grey);
+    font-weight: 500;
+    letter-spacing: 0.12em;
+  }
+  .brand-tick {
+    position: absolute;
+    right: var(--pad-x);
+    bottom: 44px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    font-size: var(--type-small);
+    color: var(--grey);
+    font-weight: 600;
+    letter-spacing: 0.04em;
+  }
+  .brand-tick .dot { width: 10px; height: 10px; border-radius: 50%; background: var(--teal); }
+
+  section.teal {
+    background: var(--teal);
+    color: #fff;
+  }
+  section.teal .grey, section.teal .micro { color: rgba(255,255,255,0.7); }
+  section.teal .slide-num { color: rgba(255,255,255,0.6); }
+  section.teal .brand-tick { color: rgba(255,255,255,0.85); }
+  section.teal .brand-tick .dot { background: #fff; }
+
+  section.surface { background: var(--surface); }
+
+  /* ---------- Logo mark ---------- */
+  .logo-mark {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .logo-mark svg { display: block; }
+
+  .wordmark {
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    line-height: 0.95;
+  }
+
+  /* ---------- Reusable bits ---------- */
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 22px;
+    border-radius: var(--radius-pill);
+    background: var(--teal-tint);
+    color: var(--teal-deep);
+    font-size: var(--type-small);
+    font-weight: 600;
+    letter-spacing: 0.02em;
+  }
+  .badge.on-teal { background: rgba(255,255,255,0.18); color: #fff; }
+  .badge .pulse { width: 8px; height: 8px; border-radius: 50%; background: var(--teal-dark); }
+  .badge.on-teal .pulse { background: #fff; }
+
+  .pill-tag {
+    display: inline-block;
+    padding: 8px 18px;
+    border-radius: var(--radius-pill);
+    background: #fff;
+    border: 1.5px solid var(--grey-light);
+    color: var(--ink);
+    font-size: var(--type-small);
+    font-weight: 600;
+  }
+
+  .discount-chip {
+    display: inline-flex;
+    align-items: baseline;
+    padding: 6px 14px;
+    border-radius: 10px;
+    background: var(--teal);
+    color: #fff;
+    font-weight: 700;
+    font-size: 26px;
+    letter-spacing: -0.02em;
+  }
+
+  /* ---------- Phone frame (original LML app UI) ---------- */
+  .phone {
+    width: 380px;
+    aspect-ratio: 380 / 780;
+    background: #111;
+    border-radius: 52px;
+    padding: 12px;
+    box-shadow: var(--shadow-card);
+    position: relative;
+    flex-shrink: 0;
+  }
+  .phone.lg { width: 420px; }
+  .phone .screen {
+    width: 100%;
+    height: 100%;
+    border-radius: 42px;
+    background: var(--surface);
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+  }
+  .phone .notch {
+    position: absolute;
+    top: 22px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 110px;
+    height: 30px;
+    background: #111;
+    border-radius: 999px;
+    z-index: 3;
+  }
+  .phone .status {
+    display: flex;
+    justify-content: space-between;
+    padding: 18px 28px 6px;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--ink);
+  }
+  .phone .app-header {
+    padding: 16px 18px 12px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .phone .app-header .app-title {
+    font-size: 18px;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+  }
+  .phone .app-header .loc {
+    font-size: 11px;
+    color: var(--grey);
+    font-weight: 500;
+  }
+
+  .deal-card {
+    background: #fff;
+    border-radius: 16px;
+    box-shadow: 0 6px 18px -8px rgba(0,0,0,0.12);
+    overflow: hidden;
+    margin: 0 14px 12px;
+  }
+  .deal-card .photo {
+    height: 110px;
+    background: linear-gradient(135deg, var(--teal-tint) 0%, #d4ebe2 100%);
+    position: relative;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    padding: 10px;
+    overflow: hidden;
+  }
+  .deal-card .photo img {
+    position: absolute; inset: 0;
+    width: 100%; height: 100%;
+    object-fit: cover;
+    z-index: 0;
+  }
+  .deal-card .photo:has(img)::after {
+    content: "";
+    position: absolute; inset: 0;
+    background: linear-gradient(180deg, rgba(0,0,0,0) 40%, rgba(0,0,0,0.45) 100%);
+    z-index: 1;
+  }
+  .deal-card .photo .disc,
+  .deal-card .photo .timer { position: relative; z-index: 2; }
+  .deal-card .photo .disc {
+    background: var(--teal);
+    color: #fff;
+    font-weight: 800;
+    font-size: 22px;
+    padding: 6px 12px;
+    border-radius: 10px;
+    letter-spacing: -0.02em;
+  }
+  .deal-card .photo .timer {
+    background: rgba(0,0,0,0.7);
+    color: var(--amber);
+    font-weight: 700;
+    font-size: 13px;
+    padding: 5px 10px;
+    border-radius: 8px;
+    font-family: 'JetBrains Mono', monospace;
+  }
+  .deal-card .photo .timer.red { color: var(--red); }
+  .deal-card .meta {
+    padding: 10px 14px 14px;
+  }
+  .deal-card .meta .name {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--ink);
+  }
+  .deal-card .meta .desc {
+    font-size: 12px;
+    color: var(--grey);
+    margin-top: 2px;
+  }
+  .deal-card .meta .row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 8px;
+    font-size: 11px;
+    color: var(--grey);
+    font-weight: 500;
+  }
+
+  .phone .cta {
+    margin: auto 14px 22px;
+    height: 50px;
+    background: var(--teal);
+    color: #fff;
+    border-radius: 999px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 15px;
+  }
+
+  /* ---------- Big stat ---------- */
+  .stat-num {
+    font-size: var(--type-mega);
+    font-weight: 800;
+    line-height: 0.9;
+    letter-spacing: -0.04em;
+    color: var(--ink);
+  }
+  .stat-num.teal { color: var(--teal-dark); }
+  .stat-num.white { color: #fff; }
+  .stat-label {
+    font-size: var(--type-small);
+    color: var(--grey);
+    margin-top: 18px;
+    line-height: 1.35;
+    max-width: 18ch;
+  }
+
+  /* ---------- Grid utility ---------- */
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+  .grid-2.t { align-items: flex-start; }
+  .col { display: flex; flex-direction: column; }
+  .gap-l { gap: 48px; }
+  .gap-m { gap: 28px; }
+  .gap-s { gap: 16px; }
+
+  /* ---------- Section breakers etc ---------- */
+  hr.rule { border: 0; border-top: 1.5px solid var(--grey-light); margin: 0; }
+
+  /* Phone screen scaling (so they fit alongside content) */
+  .phone-row { display: flex; gap: 36px; align-items: flex-end; justify-content: center; }
+
+  /* ---------- Source links ---------- */
+  a.src-link {
+    color: var(--teal-dark);
+    text-decoration: underline;
+    text-decoration-color: rgba(42,158,130,0.45);
+    text-decoration-thickness: 1.5px;
+    text-underline-offset: 3px;
+    font-weight: 500;
+  }
+  a.src-link:hover { text-decoration-color: var(--teal-dark); color: var(--teal-deep); }
+  section.teal a.src-link {
+    color: #fff;
+    text-decoration-color: rgba(255,255,255,0.55);
+  }
+  .src-line { font-size: 22px; color: var(--grey); letter-spacing: 0.005em; }
+  .src-line.compact { font-size: 20px; }
+
+  /* Hook image tiles */
+  .hook-tile {
+    position: relative;
+    width: 100%;
+    height: 460px;
+    border-radius: 20px;
+    overflow: hidden;
+  }
+  .hook-tile img {
+    position: absolute; inset: 0;
+    width: 100%; height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  /* Tweak: hide source citations */
+  body.hide-sources .src-line,
+  body.hide-sources p.micro { display: none !important; }
+</style>
+</head>
+<body>
+
+<template id="__bundler_thumbnail" data-bg-color="#3DBFA0">
+  <svg viewBox="0 0 100 120" xmlns="http://www.w3.org/2000/svg">
+    <path d="M50 4 C 24 4, 8 24, 8 49 C 8 80, 50 116, 50 116 C 50 116, 92 80, 92 49 C 92 24, 76 4, 50 4 Z" fill="#FFFFFF"/>
+    <circle cx="50" cy="49" r="24" fill="#3DBFA0"/>
+    <rect x="46" y="20" width="8" height="6" rx="1.5" fill="#FFFFFF"/>
+    <line x1="50" y1="49" x2="50" y2="34" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round"/>
+    <line x1="50" y1="49" x2="62" y2="51" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round"/>
+    <circle cx="50" cy="49" r="2.5" fill="#FFFFFF"/>
+  </svg>
+</template>
+
+<deck-stage width="1920" height="1080">
+
+<!-- ============================================== -->
+<!-- 01  COVER                                       -->
+<!-- ============================================== -->
+<section class="teal" data-label="01 Cover" style="display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding: 80px;">
+  <div class="logo-mark" style="margin-bottom: 56px;">
+    <svg width="180" height="216" viewBox="0 0 100 120" aria-hidden="true">
+      <path d="M50 4 C 24 4, 8 24, 8 49 C 8 80, 50 116, 50 116 C 50 116, 92 80, 92 49 C 92 24, 76 4, 50 4 Z" fill="#FFFFFF"/>
+      <circle cx="50" cy="49" r="24" fill="#3DBFA0"/>
+      <rect x="46" y="20" width="8" height="6" rx="1.5" fill="#FFFFFF"/>
+      <line x1="50" y1="49" x2="50" y2="34" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round"/>
+      <line x1="50" y1="49" x2="62" y2="51" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round"/>
+      <circle cx="50" cy="49" r="2.5" fill="#FFFFFF"/>
+    </svg>
+  </div>
+
+  <h1 class="wordmark" style="font-size: 156px; color:#fff; margin-bottom: 32px;">Last Minute Local</h1>
+
+  <p style="font-size: var(--type-subtitle); font-weight: 500; color: rgba(255,255,255,0.92); max-width: 22ch; margin-bottom: 28px;">The last-minute deals platform for your local high street.</p>
+
+  <p style="font-size: var(--type-body); font-weight: 600; color: #fff; letter-spacing: 0.18em; text-transform: uppercase; margin-bottom: 80px;">
+    <span>Real&#8209;time</span> &nbsp;·&nbsp; <span>AI&#8209;powered</span> &nbsp;·&nbsp; <span>Community&#8209;first</span>
+  </p>
+
+  <div style="display:flex; gap:80px; font-size: var(--type-small); color: rgba(255,255,255,0.78); font-weight: 500;">
+    <span>Seed Round &nbsp;·&nbsp; 2026</span>
+    <span>founders@lastminutelocal.co</span>
+  </div>
+</section>
+
+
+<!-- ============================================== -->
+<!-- 02  HOOK                                        -->
+<!-- ============================================== -->
+<section data-label="02 Hook" style="display:flex; flex-direction:column; gap: 56px;">
+  <div class="col gap-s" style="max-width: 1700px;">
+    <span class="eyebrow">The problem</span>
+    <h2 class="title" style="max-width: 32ch;">Every day, millions of pounds vanish into thin air.</h2>
+  </div>
+
+  <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 22px; flex: 1;">
+    <div style="display:flex; flex-direction:column; gap: 18px;">
+      <div class="hook-tile" style="background: linear-gradient(135deg,#d4ebe2,#a7d7c8);">
+        <img src="https://images.unsplash.com/photo-1503951914875-452162b0f3f1?auto=format&amp;fit=crop&amp;w=900&amp;q=80" alt="Empty barber chairs" onerror="this.remove()">
+      </div>
+      <p class="body" style="font-size: 26px; color: var(--ink); max-width: none;"><strong>A barber</strong> with three empty chairs at 2pm.</p>
+    </div>
+    <div style="display:flex; flex-direction:column; gap: 18px;">
+      <div class="hook-tile" style="background: linear-gradient(135deg,#e6f5f0,#c5e2d6);">
+        <img src="https://images.unsplash.com/photo-1599901860904-17e6ed7083a0?auto=format&amp;fit=crop&amp;w=900&amp;q=80" alt="Half-full yoga class" onerror="this.remove()">
+      </div>
+      <p class="body" style="font-size: 26px; color: var(--ink); max-width: none;"><strong>A yoga studio</strong> with half-full classes.</p>
+    </div>
+    <div style="display:flex; flex-direction:column; gap: 18px;">
+      <div class="hook-tile" style="background: linear-gradient(135deg,#dceee6,#b6d8c8);">
+        <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&amp;fit=crop&amp;w=900&amp;q=80" alt="Quiet restaurant" onerror="this.remove()">
+      </div>
+      <p class="body" style="font-size: 26px; color: var(--ink); max-width: none;"><strong>A restaurant</strong> with tables unbooked on a Tuesday.</p>
+    </div>
+    <div style="display:flex; flex-direction:column; gap: 18px;">
+      <div class="hook-tile" style="background: linear-gradient(135deg,#e2f0ea,#bcdccc);">
+        <img src="https://images.unsplash.com/photo-1567401893414-76b7b1e5a7a5?auto=format&amp;fit=crop&amp;w=900&amp;q=80" alt="Boutique clothing rail" onerror="this.remove()">
+      </div>
+      <p class="body" style="font-size: 26px; color: var(--ink); max-width: none;"><strong>A boutique</strong> with last season's stock gathering dust.</p>
+    </div>
+  </div>
+
+  <p style="font-size: var(--type-subtitle); font-weight: 600; color: var(--teal-dark); margin-top: 8px;">That revenue is gone forever. Until now.</p>
+</section>
+
+
+<!-- ============================================== -->
+<!-- 03  PROBLEM IN NUMBERS                          -->
+<!-- ============================================== -->
+<section class="surface" data-label="03 Problem in numbers">
+  <div class="col gap-s" style="margin-bottom: 80px;">
+    <span class="eyebrow">The problem · in numbers</span>
+    <h2 class="title" style="max-width: 28ch;">The high street is under enormous pressure.</h2>
+  </div>
+
+  <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 60px; margin-bottom: 44px;">
+    <div class="col gap-s">
+      <div class="stat-num teal">13,479</div>
+      <p class="stat-label">UK shops closed in 2024 &mdash; 37 every day &mdash; a 28% rise on 2023.</p>
+      <p class="src-line compact" style="margin-top: 4px;"><a class="src-link" href="https://www.retail-insight-network.com/news/crr-data-store-closures-2024/" target="_blank" rel="noopener">Centre for Retail Research, Dec 2024 &nearr;</a></p>
+    </div>
+    <div class="col gap-s">
+      <div class="stat-num teal">170k</div>
+      <p class="stat-label">UK retail jobs lost in 2024 &mdash; rising to ~17,350 closures projected for 2025.</p>
+      <p class="src-line compact" style="margin-top: 4px;"><a class="src-link" href="https://www.nationalworld.com/business/high-street-closures-which-major-stores-did-we-lose-in-2024-4928517" target="_blank" rel="noopener">CRR 2024 / 2025 outlook &nearr;</a></p>
+    </div>
+    <div class="col gap-s">
+      <div class="stat-num teal">100<span style="font-size: 90px;">%</span></div>
+      <p class="stat-label">Of an unfilled appointment slot's value &mdash; lost the moment the clock ticks past it.</p>
+      <p class="src-line compact" style="margin-top: 4px; color: var(--grey);">Universal to time-bound inventory.</p>
+    </div>
+  </div>
+
+  <hr class="rule">
+
+  <p style="font-size: var(--type-lead); font-weight: 500; color: var(--ink); margin-top: 40px; max-width: 36ch; line-height: 1.3;">
+    Empty chairs, empty covers, empty classes. <span style="color: var(--teal-dark); font-weight: 600;">No salvage value. No second chance.</span>
+  </p>
+
+  <p class="micro" style="position: absolute; bottom: 44px; left: var(--pad-x); right: var(--pad-x); text-align: right;">Sources: Centre for Retail Research (Dec 2024) &middot; PwC Store Openings &amp; Closures (H1 2024) &middot; ONS Business Demography.</p>
+</section>
+
+
+<!-- ============================================== -->
+<!-- 04  SOLUTION                                    -->
+<!-- ============================================== -->
+<section data-label="04 Solution" style="display:grid; grid-template-columns: 1.05fr 0.95fr; gap: 80px; align-items: center;">
+  <div class="col" style="gap: 40px;">
+    <span class="eyebrow">The solution</span>
+    <h2 class="title" style="max-width: 18ch;">Real-time deals, right when they're needed.</h2>
+    <p class="lead" style="max-width: 24ch;">A free app that lets every independent service business and retailer post a time-limited offer in under 60 seconds &mdash; pushed instantly to nearby consumers.</p>
+
+    <div class="col" style="gap: 18px; margin-top: 8px;">
+      <div style="display:flex; gap: 20px; align-items: flex-start;">
+        <span style="font-size: 24px;">→</span>
+        <p style="font-size: var(--type-body); max-width: 38ch; margin: 0;"><strong>The barber</strong> fills the 3pm slot before it disappears.</p>
+      </div>
+      <div style="display:flex; gap: 20px; align-items: flex-start;">
+        <span style="font-size: 24px;">→</span>
+        <p style="font-size: var(--type-body); max-width: 38ch; margin: 0;"><strong>The consumer</strong> claims 40% off a cut &amp; blow-dry, 0.4 miles away.</p>
+      </div>
+      <div style="display:flex; gap: 20px; align-items: flex-start;">
+        <span style="font-size: 24px;">→</span>
+        <p style="font-size: var(--type-body); max-width: 38ch; margin: 0;"><strong>The high street</strong> gets a new revenue layer that rewards local loyalty.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Consumer feed phone -->
+  <div style="display:flex; justify-content:center; align-items:center;">
+    <div class="phone lg">
+      <div class="notch"></div>
+      <div class="screen">
+        <div class="status"><span>9:41</span><span>●●● ▲ 92%</span></div>
+        <div class="app-header">
+          <div>
+            <div class="app-title">Nearby deals</div>
+            <div class="loc">📍 Brighton · within 1 mi</div>
+          </div>
+          <div style="width:36px;height:36px;border-radius:50%;background:var(--teal-tint);display:flex;align-items:center;justify-content:center;font-size:18px;">⏱</div>
+        </div>
+
+        <div class="deal-card">
+          <div class="photo" style="background: linear-gradient(135deg,#2A9E82,#3DBFA0);">
+            <img src="https://images.unsplash.com/photo-1503951914875-452162b0f3f1?auto=format&amp;fit=crop&amp;w=600&amp;q=80" alt="" onerror="this.remove()">
+            <span class="disc">40% off</span>
+            <span class="timer">⏱ 00:42:18</span>
+          </div>
+          <div class="meta">
+            <div class="name">Frank's Barbers</div>
+            <div class="desc">Cut &amp; blow-dry · 0.4 mi</div>
+            <div class="row"><span>Expires 3:30pm today</span><span style="color: var(--teal-dark);">Claim →</span></div>
+          </div>
+        </div>
+
+        <div class="deal-card">
+          <div class="photo" style="background: linear-gradient(135deg,#F59E0B,#FCD34D);">
+            <img src="https://images.unsplash.com/photo-1599901860904-17e6ed7083a0?auto=format&amp;fit=crop&amp;w=600&amp;q=80" alt="" onerror="this.remove()">
+            <span class="disc">30% off</span>
+            <span class="timer red">⏱ 00:18:04</span>
+          </div>
+          <div class="meta">
+            <div class="name">Bayside Yoga</div>
+            <div class="desc">5pm Vinyasa flow · 0.2 mi</div>
+            <div class="row"><span>4 spaces left</span><span style="color: var(--teal-dark);">Claim →</span></div>
+          </div>
+        </div>
+
+        <div class="deal-card" style="margin-bottom:0;">
+          <div class="photo" style="background: linear-gradient(135deg,#1F7E68,#3DBFA0);">
+            <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&amp;fit=crop&amp;w=600&amp;q=80" alt="" onerror="this.remove()">
+            <span class="disc">25% off</span>
+            <span class="timer">⏱ 01:12:55</span>
+          </div>
+          <div class="meta">
+            <div class="name">Plot 22 Kitchen</div>
+            <div class="desc">Dinner for two · 0.6 mi</div>
+            <div class="row"><span>Tonight from 6pm</span><span style="color: var(--teal-dark);">Claim →</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <span class="slide-num">04</span>
+  <div class="brand-tick"><span class="dot"></span> Last Minute Local</div>
+</section>
+
+
+<!-- ============================================== -->
+<!-- 05  HOW IT WORKS — RETAILER                     -->
+<!-- ============================================== -->
+<section class="surface" data-label="05 Retailer flow" style="display:grid; grid-template-columns: 0.9fr 1.1fr; gap: 90px; align-items: center;">
+
+  <!-- Retailer phone: Post an Offer -->
+  <div style="display:flex; justify-content:center;">
+    <div class="phone lg">
+      <div class="notch"></div>
+      <div class="screen" style="background:#fff;">
+        <div class="status"><span>9:41</span><span>●●● ▲ 92%</span></div>
+
+        <div style="padding: 18px 22px 8px; display:flex; align-items:center; justify-content:space-between;">
+          <span style="font-size: 13px; color: var(--grey); font-weight: 600;">← Cancel</span>
+          <span style="font-size: 17px; font-weight: 800; letter-spacing:-0.02em;">Post an offer</span>
+          <span style="font-size: 13px; color: var(--teal-dark); font-weight: 700;">Preview</span>
+        </div>
+
+        <div style="padding: 0 22px;">
+          <div style="height: 150px; border-radius: 14px; background: var(--teal-tint); display:flex; align-items:center; justify-content:center; color: var(--teal-dark); font-size: 13px; font-weight: 600; border: 1.5px dashed var(--teal); margin-bottom: 16px;">
+            + Add photo
+          </div>
+
+          <p style="font-size: 11px; font-weight: 700; color: var(--grey); letter-spacing:0.1em; text-transform:uppercase; margin-bottom: 6px;">Offer</p>
+          <div style="background: var(--surface); border-radius: 12px; padding: 12px 14px; margin-bottom: 12px;">
+            <p style="font-size: 14px; font-weight: 600; margin:0;">Cut &amp; blow-dry</p>
+            <p style="font-size: 11px; color: var(--grey); margin: 2px 0 0;">£35 → £21</p>
+          </div>
+
+          <p style="font-size: 11px; font-weight: 700; color: var(--grey); letter-spacing:0.1em; text-transform:uppercase; margin-bottom: 6px;">Discount</p>
+          <div style="display:flex; gap: 8px; margin-bottom: 14px;">
+            <div style="flex:1; padding: 10px; border-radius: 10px; background:#fff; border:1.5px solid var(--grey-light); text-align:center; font-weight: 600; font-size: 13px;">20%</div>
+            <div style="flex:1; padding: 10px; border-radius: 10px; background: var(--teal); color:#fff; text-align:center; font-weight: 700; font-size: 13px;">40%</div>
+            <div style="flex:1; padding: 10px; border-radius: 10px; background:#fff; border:1.5px solid var(--grey-light); text-align:center; font-weight: 600; font-size: 13px;">50%</div>
+          </div>
+
+          <div style="background: var(--teal-tint); border-radius: 12px; padding: 12px 14px; display:flex; gap: 10px; align-items:flex-start;">
+            <span style="font-size: 18px;">✦</span>
+            <div>
+              <p style="font-size: 12px; font-weight: 700; color: var(--teal-deep); margin: 0;">AI suggestion</p>
+              <p style="font-size: 11px; color: var(--teal-deep); margin: 2px 0 0; line-height: 1.4;">Try 40% &mdash; you have 3 unbooked slots between 2–4pm.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="cta" style="margin-top: 18px;">Go live · 60 min window</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col" style="gap: 44px;">
+    <div class="col gap-s">
+      <span class="eyebrow">For retailers</span>
+      <h2 class="title" style="max-width: 16ch;">Three taps. Live in 60 seconds.</h2>
+    </div>
+
+    <div class="col" style="gap: 32px;">
+      <div style="display:flex; gap: 28px; align-items: flex-start;">
+        <div style="width: 64px; height: 64px; border-radius: 50%; background: var(--teal); color:#fff; font-weight: 800; font-size: 30px; display:flex; align-items:center; justify-content:center; flex-shrink:0;">1</div>
+        <div>
+          <p style="font-size: 32px; font-weight: 700; margin: 0; letter-spacing:-0.015em;">Snap a photo.</p>
+          <p style="font-size: var(--type-body); color: var(--grey); margin: 6px 0 0; max-width: 26ch;">Of the product, the service, or the empty chair.</p>
+        </div>
+      </div>
+
+      <div style="display:flex; gap: 28px; align-items: flex-start;">
+        <div style="width: 64px; height: 64px; border-radius: 50%; background: var(--teal); color:#fff; font-weight: 800; font-size: 30px; display:flex; align-items:center; justify-content:center; flex-shrink:0;">2</div>
+        <div>
+          <p style="font-size: 32px; font-weight: 700; margin: 0; letter-spacing:-0.015em;">Set the discount &amp; expiry.</p>
+          <p style="font-size: var(--type-body); color: var(--grey); margin: 6px 0 0; max-width: 26ch;">Or accept the AI suggestion in one tap.</p>
+        </div>
+      </div>
+
+      <div style="display:flex; gap: 28px; align-items: flex-start;">
+        <div style="width: 64px; height: 64px; border-radius: 50%; background: var(--teal); color:#fff; font-weight: 800; font-size: 30px; display:flex; align-items:center; justify-content:center; flex-shrink:0;">3</div>
+        <div>
+          <p style="font-size: 32px; font-weight: 700; margin: 0; letter-spacing:-0.015em;">Hit Go Live.</p>
+          <p style="font-size: var(--type-body); color: var(--grey); margin: 6px 0 0; max-width: 26ch;">The offer reaches every opted-in consumer nearby. Instantly.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="badge" style="align-self: flex-start; margin-top: 8px;"><span class="pulse"></span> AI suggests the optimal discount &amp; posting time</div>
+  </div>
+
+  <span class="slide-num">05</span>
+  <div class="brand-tick"><span class="dot"></span> Last Minute Local</div>
+</section>
+
+
+<!-- ============================================== -->
+<!-- 06  HOW IT WORKS — CONSUMER                     -->
+<!-- ============================================== -->
+<section data-label="06 Consumer flow">
+  <div class="col gap-s" style="margin-bottom: 60px;">
+    <span class="eyebrow">For consumers</span>
+    <h2 class="title" style="max-width: 22ch;">Browse. Claim. Redeem. Done.</h2>
+  </div>
+
+  <div style="display:grid; grid-template-columns: repeat(3, 1fr); gap: 60px; align-items: flex-end;">
+
+    <!-- 1. Browse -->
+    <div class="col" style="gap: 24px; align-items: center;">
+      <div style="display:flex; align-items: baseline; gap: 14px; align-self:flex-start;">
+        <span style="font-size: 56px; font-weight: 800; color: var(--teal-dark); letter-spacing:-0.03em; line-height: 1;">01</span>
+        <span style="font-size: 28px; font-weight: 700; letter-spacing:-0.015em;">Browse nearby</span>
+      </div>
+      <p style="font-size: var(--type-small); color: var(--grey); align-self: flex-start; max-width: 30ch; margin: 0;">Real-time deals within walking distance, filtered by what you actually want.</p>
+
+      <div class="phone" style="transform: scale(0.78); transform-origin: top center; margin-top: -10px; margin-bottom: -120px;">
+        <div class="notch"></div>
+        <div class="screen">
+          <div class="status"><span>9:41</span><span>●●●</span></div>
+          <div class="app-header">
+            <div>
+              <div class="app-title">Nearby deals</div>
+              <div class="loc">📍 Brighton · 1 mi</div>
+            </div>
+          </div>
+          <div class="deal-card">
+            <div class="photo" style="background: linear-gradient(135deg,#2A9E82,#3DBFA0);"><img src="https://images.unsplash.com/photo-1503951914875-452162b0f3f1?auto=format&amp;fit=crop&amp;w=500&amp;q=80" alt="" onerror="this.remove()"><span class="disc">40%</span><span class="timer">⏱ 00:42</span></div>
+            <div class="meta"><div class="name">Frank's Barbers</div><div class="desc">Cut · 0.4 mi</div></div>
+          </div>
+          <div class="deal-card">
+            <div class="photo" style="background: linear-gradient(135deg,#F59E0B,#FCD34D);"><img src="https://images.unsplash.com/photo-1599901860904-17e6ed7083a0?auto=format&amp;fit=crop&amp;w=500&amp;q=80" alt="" onerror="this.remove()"><span class="disc">30%</span><span class="timer red">⏱ 00:18</span></div>
+            <div class="meta"><div class="name">Bayside Yoga</div><div class="desc">5pm flow · 0.2 mi</div></div>
+          </div>
+          <div class="deal-card" style="margin-bottom: 0;">
+            <div class="photo" style="background: linear-gradient(135deg,#1F7E68,#3DBFA0);"><img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&amp;fit=crop&amp;w=500&amp;q=80" alt="" onerror="this.remove()"><span class="disc">25%</span><span class="timer">⏱ 01:12</span></div>
+            <div class="meta"><div class="name">Plot 22 Kitchen</div><div class="desc">Dinner · 0.6 mi</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2. Claim -->
+    <div class="col" style="gap: 24px; align-items: center;">
+      <div style="display:flex; align-items: baseline; gap: 14px; align-self:flex-start;">
+        <span style="font-size: 56px; font-weight: 800; color: var(--teal-dark); letter-spacing:-0.03em; line-height: 1;">02</span>
+        <span style="font-size: 28px; font-weight: 700; letter-spacing:-0.015em;">Tap to claim</span>
+      </div>
+      <p style="font-size: var(--type-small); color: var(--grey); align-self: flex-start; max-width: 30ch; margin: 0;">One tap. Instant QR voucher on your phone &mdash; no sign-up forms, no friction.</p>
+
+      <div class="phone" style="transform: scale(0.78); transform-origin: top center; margin-top: -10px; margin-bottom: -120px;">
+        <div class="notch"></div>
+        <div class="screen" style="background:#fff;">
+          <div class="status"><span>9:41</span><span>●●●</span></div>
+          <div style="padding: 16px 22px 0; font-size: 13px; color: var(--grey);">← Back</div>
+          <div style="position:relative; overflow:hidden; height: 200px; background: linear-gradient(135deg,#2A9E82,#3DBFA0); margin: 14px 18px 0; border-radius: 16px; display:flex; align-items:flex-end; justify-content:space-between; padding: 14px;">
+            <img src="https://images.unsplash.com/photo-1503951914875-452162b0f3f1?auto=format&amp;fit=crop&amp;w=700&amp;q=80" alt="" onerror="this.remove()" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover; z-index:0;">
+            <div style="position:absolute; inset:0; background: linear-gradient(180deg, rgba(0,0,0,0.05) 30%, rgba(0,0,0,0.45) 100%); z-index:1;"></div>
+            <span style="background:#fff; color: var(--teal-dark); font-weight:800; font-size: 28px; padding: 8px 14px; border-radius: 12px; position:relative; z-index:2;">40% off</span>
+            <span style="background: rgba(0,0,0,0.6); color: var(--amber); font-family: 'JetBrains Mono', monospace; font-weight: 700; font-size: 16px; padding: 6px 12px; border-radius: 8px; position:relative; z-index:2;">⏱ 00:42:08</span>
+          </div>
+          <div style="padding: 14px 22px;">
+            <p style="font-size: 18px; font-weight: 800; margin: 0;">Frank's Barbers</p>
+            <p style="font-size: 13px; color: var(--grey); margin: 4px 0 14px;">Cut &amp; blow-dry · 0.4 mi · 12 Trafalgar St</p>
+            <div style="height: 110px; background: var(--surface); border-radius: 14px; margin-bottom: 14px; display:flex; align-items:center; justify-content:center;">
+              <div style="display:grid; grid-template-columns: repeat(8, 8px); grid-template-rows: repeat(8, 8px); gap: 2px;">
+                <!-- pseudo QR -->
+              </div>
+              <svg width="80" height="80" viewBox="0 0 8 8" shape-rendering="crispEdges">
+                <rect width="8" height="8" fill="#fff"/>
+                <g fill="#2C2C2C">
+                  <rect x="0" y="0" width="3" height="3"/><rect x="1" y="1" width="1" height="1" fill="#fff"/>
+                  <rect x="5" y="0" width="3" height="3"/><rect x="6" y="1" width="1" height="1" fill="#fff"/>
+                  <rect x="0" y="5" width="3" height="3"/><rect x="1" y="6" width="1" height="1" fill="#fff"/>
+                  <rect x="4" y="3" width="1" height="1"/><rect x="3" y="4" width="1" height="1"/>
+                  <rect x="5" y="4" width="1" height="1"/><rect x="4" y="5" width="1" height="1"/>
+                  <rect x="6" y="5" width="1" height="1"/><rect x="3" y="6" width="1" height="1"/>
+                  <rect x="5" y="6" width="1" height="1"/><rect x="7" y="4" width="1" height="1"/>
+                  <rect x="7" y="6" width="1" height="1"/>
+                </g>
+              </svg>
+            </div>
+            <div class="cta" style="margin: 0;">Claimed · tap to redeem</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3. Redeem -->
+    <div class="col" style="gap: 24px; align-items: center;">
+      <div style="display:flex; align-items: baseline; gap: 14px; align-self:flex-start;">
+        <span style="font-size: 56px; font-weight: 800; color: var(--teal-dark); letter-spacing:-0.03em; line-height: 1;">03</span>
+        <span style="font-size: 28px; font-weight: 700; letter-spacing:-0.015em;">Walk in &amp; enjoy</span>
+      </div>
+      <p style="font-size: var(--type-small); color: var(--grey); align-self: flex-start; max-width: 30ch; margin: 0;">Show your code at the counter. Discount applied. No app fees, no faff.</p>
+
+      <div class="phone" style="transform: scale(0.78); transform-origin: top center; margin-top: -10px; margin-bottom: -120px;">
+        <div class="notch"></div>
+        <div class="screen" style="background: var(--teal);">
+          <div class="status" style="color:#fff;"><span>9:41</span><span>●●●</span></div>
+          <div style="flex: 1; display:flex; flex-direction: column; align-items:center; justify-content:center; color:#fff; text-align:center; padding: 0 24px;">
+            <div style="width: 120px; height: 120px; border-radius: 50%; background: #fff; display:flex; align-items:center; justify-content:center; margin-bottom: 24px;">
+              <svg width="64" height="64" viewBox="0 0 24 24" fill="none"><path d="M5 12.5 L10 17 L19 7" stroke="#3DBFA0" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <p style="font-size: 24px; font-weight: 800; margin: 0; letter-spacing:-0.02em;">Redeemed!</p>
+            <p style="font-size: 13px; opacity: 0.85; margin: 8px 0 28px; max-width: 24ch;">You saved £14 at Frank's Barbers. Rate your visit?</p>
+            <div style="display:flex; gap: 6px;">
+              <span style="font-size: 22px;">★ ★ ★ ★ ★</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <span class="slide-num">06</span>
+  <div class="brand-tick"><span class="dot"></span> Last Minute Local</div>
+</section>
+
+
+<!-- ============================================== -->
+<!-- 07  PUSH NOTIFICATIONS                          -->
+<!-- ============================================== -->
+<section data-label="07 Push notifications" style="display:grid; grid-template-columns: 0.85fr 1.15fr; gap: 90px; align-items: center;">
+
+  <!-- Lock-screen phone -->
+  <div style="display:flex; justify-content:center;">
+    <div class="phone lg" style="background:#000;">
+      <div class="notch"></div>
+      <div class="screen" style="background: linear-gradient(160deg, #1a1a1a 0%, #2C2C2C 100%); color:#fff;">
+        <div class="status" style="color:#fff; padding-top: 24px;"><span>9:41</span><span>●●● ▲ 92%</span></div>
+
+        <div style="text-align:center; padding: 14px 0 0;">
+          <p style="font-size: 16px; font-weight: 500; opacity: 0.8; margin: 0;">Tuesday, 14 May</p>
+          <p style="font-size: 64px; font-weight: 200; margin: 4px 0 0; letter-spacing: -0.02em;">2:38</p>
+        </div>
+
+        <div style="padding: 26px 14px 0; display:flex; flex-direction: column; gap: 10px;">
+          <div style="background: rgba(255,255,255,0.18); backdrop-filter: blur(10px); border-radius: 14px; padding: 12px 14px;">
+            <div style="display:flex; justify-content:space-between; align-items:center; font-size: 10px; opacity: 0.85; margin-bottom: 4px;">
+              <span style="font-weight: 700;">LML · 2m ago</span>
+              <span>📍 0.2 mi</span>
+            </div>
+            <p style="font-size: 12px; font-weight: 700; margin: 0; line-height: 1.3;">Bayside Yoga · 30% off</p>
+            <p style="font-size: 11px; margin: 2px 0 0; opacity: 0.9; line-height: 1.35;">5pm Vinyasa flow — 4 spaces, expires in 18 min.</p>
+          </div>
+
+          <div style="background: rgba(61,191,160,0.88); backdrop-filter: blur(10px); border-radius: 14px; padding: 12px 14px;">
+            <div style="display:flex; justify-content:space-between; align-items:center; font-size: 10px; opacity: 0.95; margin-bottom: 4px;">
+              <span style="font-weight: 700;">LML · just now</span>
+              <span>↪ walked past</span>
+            </div>
+            <p style="font-size: 12px; font-weight: 700; margin: 0; line-height: 1.3;">You're 80m from Frank's Barbers</p>
+            <p style="font-size: 11px; margin: 2px 0 0; opacity: 0.95; line-height: 1.35;">40% off a cut &amp; blow-dry — they've a 3pm slot free.</p>
+          </div>
+
+          <div style="background: rgba(239,68,68,0.88); backdrop-filter: blur(10px); border-radius: 14px; padding: 12px 14px;">
+            <div style="display:flex; justify-content:space-between; align-items:center; font-size: 10px; opacity: 0.95; margin-bottom: 4px;">
+              <span style="font-weight: 700;">LML · 14m ago</span>
+              <span>⏱ last call</span>
+            </div>
+            <p style="font-size: 12px; font-weight: 700; margin: 0; line-height: 1.3;">Plot 22 Kitchen — now 40% off</p>
+            <p style="font-size: 11px; margin: 2px 0 0; opacity: 0.95; line-height: 1.35;">15 minutes left. Tap to claim before it goes.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Right: explanation -->
+  <div class="col" style="gap: 40px;">
+    <div class="col gap-s">
+      <span class="eyebrow">Push notifications</span>
+      <h2 class="title" style="max-width: 22ch;">The deal finds you the moment it's live.</h2>
+    </div>
+
+    <p class="lead" style="max-width: 28ch;">Three signals trigger a push. Each is engineered to convert intent into footfall in under five minutes.</p>
+
+    <div class="col" style="gap: 22px; margin-top: 4px;">
+      <div style="display:flex; gap: 22px; align-items: flex-start;">
+        <span style="width: 56px; height: 56px; border-radius: 14px; background: var(--teal-tint); color: var(--teal-deep); font-weight: 800; font-size: 22px; display:flex; align-items:center; justify-content:center; flex-shrink:0;">01</span>
+        <div>
+          <p style="font-size: 28px; font-weight: 700; margin: 0; letter-spacing:-0.015em;">Category match</p>
+          <p style="font-size: var(--type-small); color: var(--grey); margin: 4px 0 0; max-width: 38ch; line-height: 1.4;">A deal drops in one of your saved categories within walking distance. <span style="color: var(--ink); font-weight: 500;">Retailer-paid: £1 per push.</span></p>
+        </div>
+      </div>
+      <div style="display:flex; gap: 22px; align-items: flex-start;">
+        <span style="width: 56px; height: 56px; border-radius: 14px; background: var(--teal); color: #fff; font-weight: 800; font-size: 22px; display:flex; align-items:center; justify-content:center; flex-shrink:0;">02</span>
+        <div>
+          <p style="font-size: 28px; font-weight: 700; margin: 0; letter-spacing:-0.015em;">Walk-by geo-trigger</p>
+          <p style="font-size: var(--type-small); color: var(--grey); margin: 4px 0 0; max-width: 38ch; line-height: 1.4;">You pass within range of a participating shop with a live offer. <span style="color: var(--ink); font-weight: 500;">Retailer-paid: £1 per geo-fence push.</span></p>
+        </div>
+      </div>
+      <div style="display:flex; gap: 22px; align-items: flex-start;">
+        <span style="width: 56px; height: 56px; border-radius: 14px; background: var(--red); color: #fff; font-weight: 800; font-size: 22px; display:flex; align-items:center; justify-content:center; flex-shrink:0;">03</span>
+        <div>
+          <p style="font-size: 28px; font-weight: 700; margin: 0; letter-spacing:-0.015em;">Last-call urgency</p>
+          <p style="font-size: var(--type-small); color: var(--grey); margin: 4px 0 0; max-width: 38ch; line-height: 1.4;">AI ramps the discount and pings consumers who saved or viewed the offer as the window closes.</p>
+        </div>
+      </div>
+    </div>
+
+    <div style="display:flex; gap: 14px; flex-wrap: wrap;">
+      <span class="pill-tag" style="font-size: 18px;">✓ Opt-in by category</span>
+      <span class="pill-tag" style="font-size: 18px;">✓ AI-throttled · 3/day max</span>
+      <span class="pill-tag" style="font-size: 18px;">✓ One-tap unsubscribe</span>
+    </div>
+  </div>
+
+  <span class="slide-num">07</span>
+  <div class="brand-tick"><span class="dot"></span> Last Minute Local</div>
+</section>
+
+
+<!-- ============================================== -->
+<!-- 08  AI ADVANTAGE                                -->
+<!-- ============================================== -->
+<section class="surface" data-label="08 AI advantage">
+  <div class="col gap-s" style="margin-bottom: 56px;">
+    <span class="eyebrow">The AI advantage</span>
+    <h2 class="title" style="max-width: 24ch;">Smarter pricing. Better timing. Zero effort.</h2>
+  </div>
+
+  <!-- AI loop diagram -->
+  <div style="display:flex; align-items:center; justify-content:space-between; gap: 14px; margin-bottom: 56px;">
+    <div style="flex: 1; background:#fff; border-radius: var(--radius-card); padding: 28px; box-shadow: var(--shadow-card); min-height: 200px; display:flex; flex-direction:column; gap:10px;">
+      <div style="width: 40px; height: 40px; border-radius: 50%; background: var(--teal-tint); color: var(--teal-deep); display:flex; align-items:center; justify-content:center; font-weight: 800; font-size: 18px;">1</div>
+      <p style="font-size: 24px; font-weight: 700; margin: 0; letter-spacing:-0.01em;">Detect</p>
+      <p style="font-size: var(--type-small); color: var(--grey); margin: 0; line-height: 1.4;">Sync with Fresha, Booksy, Square to spot calendar gaps.</p>
+    </div>
+    <span style="font-size: 28px; color: var(--teal); font-weight: 700;">→</span>
+    <div style="flex: 1; background:#fff; border-radius: var(--radius-card); padding: 28px; box-shadow: var(--shadow-card); min-height: 200px; display:flex; flex-direction:column; gap:10px;">
+      <div style="width: 40px; height: 40px; border-radius: 50%; background: var(--teal-tint); color: var(--teal-deep); display:flex; align-items:center; justify-content:center; font-weight: 800; font-size: 18px;">2</div>
+      <p style="font-size: 24px; font-weight: 700; margin: 0; letter-spacing:-0.01em;">Suggest</p>
+      <p style="font-size: var(--type-small); color: var(--grey); margin: 0; line-height: 1.4;">Recommend a discount level and posting time based on demand signals.</p>
+    </div>
+    <span style="font-size: 28px; color: var(--teal); font-weight: 700;">→</span>
+    <div style="flex: 1; background: var(--teal); color:#fff; border-radius: var(--radius-card); padding: 28px; box-shadow: var(--shadow-card); min-height: 200px; display:flex; flex-direction:column; gap:10px;">
+      <div style="width: 40px; height: 40px; border-radius: 50%; background: rgba(255,255,255,0.22); color: #fff; display:flex; align-items:center; justify-content:center; font-weight: 800; font-size: 18px;">3</div>
+      <p style="font-size: 24px; font-weight: 700; margin: 0; letter-spacing:-0.01em;">Push</p>
+      <p style="font-size: var(--type-small); color: rgba(255,255,255,0.85); margin: 0; line-height: 1.4;">Offer goes live to nearby consumers with a short claim window.</p>
+    </div>
+    <span style="font-size: 28px; color: var(--teal); font-weight: 700;">→</span>
+    <div style="flex: 1; background:#fff; border-radius: var(--radius-card); padding: 28px; box-shadow: var(--shadow-card); min-height: 200px; display:flex; flex-direction:column; gap:10px;">
+      <div style="width: 40px; height: 40px; border-radius: 50%; background: var(--teal-tint); color: var(--teal-deep); display:flex; align-items:center; justify-content:center; font-weight: 800; font-size: 18px;">4</div>
+      <p style="font-size: 24px; font-weight: 700; margin: 0; letter-spacing:-0.01em;">Adapt</p>
+      <p style="font-size: var(--type-small); color: var(--grey); margin: 0; line-height: 1.4;">Discount urgency ramps as the expiry window closes.</p>
+    </div>
+    <span style="font-size: 28px; color: var(--teal); font-weight: 700;">↻</span>
+    <div style="flex: 1; background:#fff; border-radius: var(--radius-card); padding: 28px; box-shadow: var(--shadow-card); min-height: 200px; display:flex; flex-direction:column; gap:10px;">
+      <div style="width: 40px; height: 40px; border-radius: 50%; background: var(--teal-tint); color: var(--teal-deep); display:flex; align-items:center; justify-content:center; font-weight: 800; font-size: 18px;">5</div>
+      <p style="font-size: 24px; font-weight: 700; margin: 0; letter-spacing:-0.01em;">Learn</p>
+      <p style="font-size: var(--type-small); color: var(--grey); margin: 0; line-height: 1.4;">Outcomes feed the model. Each retailer's offers get sharper over time.</p>
+    </div>
+  </div>
+
+  <hr class="rule">
+
+  <p style="font-size: var(--type-lead); font-weight: 500; color: var(--ink); margin-top: 44px; max-width: 38ch; line-height: 1.3;">
+    Dynamic pricing has worked for airlines and hotels for thirty years. <span style="color: var(--teal-dark); font-weight: 600;">We're bringing it to the high street for the first time.</span>
+  </p>
+</section>
+
+
+<!-- ============================================== -->
+<!-- 08  TGTG PROOF                                  -->
+<!-- ============================================== -->
+<section data-label="09 TGTG proof">
+  <div class="col gap-s" style="margin-bottom: 56px;">
+    <span class="eyebrow">Proof the behaviour exists</span>
+    <h2 class="title" style="max-width: 32ch;">Consumers already move for a local, time-limited deal.</h2>
+  </div>
+
+  <div class="grid-2 t" style="gap: 100px;">
+    <div class="col" style="gap: 32px;">
+      <div>
+        <div class="stat-num teal">120M+</div>
+        <p class="stat-label" style="max-width: 24ch;">Registered users across 20 countries since 2016.</p>
+      </div>
+      <div>
+        <div class="stat-num teal">500M<span style="font-size: 64px; color: var(--teal-dark);">+</span></div>
+        <p class="stat-label" style="max-width: 24ch;">Meals saved since launch &mdash; 180,000+ active business partners.</p>
+      </div>
+      <p class="src-line compact" style="margin-top: 4px;"><a class="src-link" href="https://www.toogoodtogo.com/en-us/press/too-good-to-go-accelerates-u-s-expansion" target="_blank" rel="noopener">Too Good To Go press, Aug 2025 &nearr;</a></p>
+    </div>
+
+    <div class="col" style="gap: 28px;">
+      <p class="lead" style="font-size: var(--type-lead); max-width: 28ch; font-weight: 500;">Their entire business proves a single insight:</p>
+      <p style="font-size: 44px; font-weight: 700; letter-spacing:-0.025em; line-height: 1.15; max-width: 22ch; color: var(--ink);">"Time-limited local availability drives immediate consumer action."</p>
+
+      <div style="margin-top: 16px; padding: 28px 32px; background: var(--surface); border-radius: var(--radius-card); border-left: 6px solid var(--teal);">
+        <p style="font-size: var(--type-body); font-weight: 600; margin: 0; line-height: 1.35;">LML applies that same psychology to the vastly larger non-food service economy &mdash; hair, beauty, fitness, restaurants, retail.</p>
+        <p style="font-size: var(--type-small); color: var(--grey); margin: 14px 0 0;">Worth hundreds of billions annually in the UK alone.</p>
+      </div>
+    </div>
+  </div>
+
+  <span class="slide-num">09</span>
+  <div class="brand-tick"><span class="dot"></span> Last Minute Local</div>
+</section>
+
+
+<!-- ============================================== -->
+<!-- 10  MARKET                                      -->
+<!-- ============================================== -->
+<section class="surface" data-label="10 Market">
+  <div class="col gap-s" style="margin-bottom: 70px;">
+    <span class="eyebrow">The market</span>
+    <h2 class="title" style="max-width: 28ch;">A massive market hiding in plain sight.</h2>
+  </div>
+
+  <div style="display:grid; grid-template-columns: 1.3fr 1fr; gap: 90px; align-items: flex-start;">
+
+    <div style="display:grid; grid-template-columns: 1fr 1fr; gap: 56px 60px;">
+      <div>
+        <div class="stat-num teal" style="font-size: 96px;">320k</div>
+        <p class="stat-label">UK retail businesses operating in 2024 &mdash; plus the wider service economy.</p>
+        <p class="src-line compact" style="margin-top: 6px;"><a class="src-link" href="https://www.sumup.com/en-gb/point-of-sale-overview/pos-lite/high-street-trend-report/" target="_blank" rel="noopener">SumUp / ONS, 2024 &nearr;</a></p>
+      </div>
+      <div>
+        <div class="stat-num teal" style="font-size: 96px;">~7,000</div>
+        <p class="stat-label">High streets across Great Britain.</p>
+        <p class="src-line compact" style="margin-top: 6px;"><a class="src-link" href="https://www.sumup.com/en-gb/point-of-sale-overview/pos-lite/high-street-trend-report/" target="_blank" rel="noopener">SumUp High Street Trend Report &nearr;</a></p>
+      </div>
+      <div>
+        <div class="stat-num teal" style="font-size: 96px;">400+</div>
+        <p class="stat-label">Retail and service categories represented.</p>
+      </div>
+      <div>
+        <div class="stat-num teal" style="font-size: 96px;">£0</div>
+        <p class="stat-label">Of that supply currently served by a dedicated real-time deals platform.</p>
+      </div>
+    </div>
+
+    <div class="col gap-m">
+      <p style="font-size: var(--type-small); font-weight: 700; color: var(--teal-dark); letter-spacing: 0.12em; text-transform: uppercase; margin: 0;">Comparable marketplaces</p>
+      <div class="col gap-s">
+        <div style="display:flex; justify-content:space-between; padding: 18px 24px; background:#fff; border-radius: 14px; box-shadow: var(--shadow-card);">
+          <span style="font-size: var(--type-body); font-weight: 600;">Just Eat Takeaway</span>
+          <span style="font-size: var(--type-body); font-weight: 700; color: var(--teal-dark);">£15.6bn mcap*</span>
+        </div>
+        <div style="display:flex; justify-content:space-between; padding: 18px 24px; background:#fff; border-radius: 14px; box-shadow: var(--shadow-card);">
+          <span style="font-size: var(--type-body); font-weight: 600;">Airbnb</span>
+          <span style="font-size: var(--type-body); font-weight: 700; color: var(--teal-dark);">£75bn+ mcap</span>
+        </div>
+        <div style="display:flex; justify-content:space-between; padding: 18px 24px; background:#fff; border-radius: 14px; box-shadow: var(--shadow-card);">
+          <span style="font-size: var(--type-body); font-weight: 600;">Treatwell</span>
+          <span style="font-size: var(--type-body); font-weight: 700; color: var(--teal-dark);">£200m+ rev. run-rate</span>
+        </div>
+        <div style="display:flex; justify-content:space-between; padding: 18px 24px; background:#fff; border-radius: 14px; box-shadow: var(--shadow-card);">
+          <span style="font-size: var(--type-body); font-weight: 600;">Too Good To Go</span>
+          <span style="font-size: var(--type-body); font-weight: 700; color: var(--teal-dark);">120m users</span>
+        </div>
+      </div>
+      <p class="micro" style="margin-top: 4px;">Marketplaces serving fragmented local supply scale enormously. *Indicative; figures to be refreshed pre-meeting. <a class="src-link" href="https://www.statista.com/statistics/1345670/uk-largest-retail-companies-by-market-capitalization/" target="_blank" rel="noopener">Statista, Oct 2024 &nearr;</a></p>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================== -->
+<!-- 10  BUSINESS MODEL                              -->
+<!-- ============================================== -->
+<section data-label="11 Business model">
+  <div class="col gap-s" style="margin-bottom: 56px;">
+    <span class="eyebrow">Business model</span>
+    <h2 class="title" style="max-width: 26ch;">Free for retailers. Four revenue streams.</h2>
+  </div>
+
+  <div style="display:grid; grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr; gap: 28px; height: 640px;">
+
+    <div style="background: var(--surface); border-radius: var(--radius-card); padding: 40px 44px; display:flex; flex-direction:column; justify-content:space-between;">
+      <div>
+        <p style="font-size: 18px; color: var(--teal-dark); font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; margin: 0 0 18px;">Stream 01</p>
+        <p style="font-size: 38px; font-weight: 700; letter-spacing:-0.02em; margin: 0 0 14px;">Consumer convenience fee</p>
+        <p style="font-size: var(--type-body); color: var(--ink); margin: 0; max-width: 32ch; line-height: 1.4;">A small fee baked into the checkout price. Invisible to the consumer. Meaningful at scale.</p>
+      </div>
+      <p class="mono" style="font-size: 22px; color: var(--teal-dark); font-weight: 600;">Volume engine · always-on</p>
+    </div>
+
+    <div style="background: var(--surface); border-radius: var(--radius-card); padding: 40px 44px; display:flex; flex-direction:column; justify-content:space-between;">
+      <div>
+        <p style="font-size: 18px; color: var(--teal-dark); font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; margin: 0 0 18px;">Stream 02</p>
+        <p style="font-size: 38px; font-weight: 700; letter-spacing:-0.02em; margin: 0 0 14px;">Deal of the Day</p>
+        <p style="font-size: var(--type-body); color: var(--ink); margin: 0; max-width: 32ch; line-height: 1.4;">Retailers pay for the premium top slot inside their category.</p>
+      </div>
+      <p class="mono" style="font-size: 22px; color: var(--teal-dark); font-weight: 600;">£[TBC] per day · per category</p>
+    </div>
+
+    <div style="background: var(--teal); color:#fff; border-radius: var(--radius-card); padding: 40px 44px; display:flex; flex-direction:column; justify-content:space-between;">
+      <div>
+        <p style="font-size: 18px; color: rgba(255,255,255,0.8); font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; margin: 0 0 18px;">Stream 03</p>
+        <p style="font-size: 38px; font-weight: 700; letter-spacing:-0.02em; margin: 0 0 14px;">Deal Alerts</p>
+        <p style="font-size: var(--type-body); margin: 0; max-width: 32ch; line-height: 1.4;">Pay to push a promotional notification to opted-in consumers in your category.</p>
+      </div>
+      <p class="mono" style="font-size: 22px; color: rgba(255,255,255,0.95); font-weight: 600;">£1 per alert</p>
+    </div>
+
+    <div style="background: var(--teal-deep); color:#fff; border-radius: var(--radius-card); padding: 40px 44px; display:flex; flex-direction:column; justify-content:space-between;">
+      <div>
+        <p style="font-size: 18px; color: rgba(255,255,255,0.8); font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; margin: 0 0 18px;">Stream 04</p>
+        <p style="font-size: 38px; font-weight: 700; letter-spacing:-0.02em; margin: 0 0 14px;">Geo-location Alerts</p>
+        <p style="font-size: var(--type-body); margin: 0; max-width: 32ch; line-height: 1.4;">Auto-triggered alerts when an opted-in consumer walks within range of your shop.</p>
+      </div>
+      <p class="mono" style="font-size: 22px; color: rgba(255,255,255,0.95); font-weight: 600;">£1 per push</p>
+    </div>
+  </div>
+
+  <p style="font-size: var(--type-body); font-weight: 600; color: var(--teal-dark); margin-top: 36px;">The platform is free to join. Retailers only spend when it's working.</p>
+</section>
+
+
+<!-- ============================================== -->
+<!-- 11  COMPETITIVE LANDSCAPE                       -->
+<!-- ============================================== -->
+<section class="surface" data-label="12 Competitive landscape">
+  <div class="col gap-s" style="margin-bottom: 40px;">
+    <span class="eyebrow">Competitive landscape</span>
+    <h2 class="title" style="max-width: 32ch;">We feed booking platforms. We don't replace them.</h2>
+  </div>
+
+  <div style="display:grid; grid-template-columns: 1.05fr 0.95fr; gap: 80px; align-items: center;">
+    <div class="col gap-m">
+      <p class="lead" style="max-width: 32ch;">Think Skyscanner for the high street &mdash; we're the discovery and demand layer that sends customers to the booking, payment and POS systems already in place.</p>
+
+      <div class="col" style="gap: 14px; margin-top: 8px;">
+        <div style="display:flex; gap: 18px; align-items:center;">
+          <span class="pill-tag" style="min-width: 140px; text-align:center;">Fresha · Treatwell</span>
+          <span style="color: var(--grey); font-size: var(--type-small);">own booking &amp; scheduling</span>
+        </div>
+        <div style="display:flex; gap: 18px; align-items:center;">
+          <span class="pill-tag" style="min-width: 140px; text-align:center;">Groupon</span>
+          <span style="color: var(--grey); font-size: var(--type-small);">owns static bulk discounting</span>
+        </div>
+        <div style="display:flex; gap: 18px; align-items:center;">
+          <span class="pill-tag" style="min-width: 140px; text-align:center;">TGTG</span>
+          <span style="color: var(--grey); font-size: var(--type-small);">owns surplus food</span>
+        </div>
+        <div style="display:flex; gap: 18px; align-items:center; margin-top: 6px;">
+          <span class="pill-tag" style="min-width: 140px; text-align:center; background: var(--teal); color:#fff; border-color: var(--teal);">LML</span>
+          <span style="color: var(--ink); font-size: var(--type-small); font-weight: 700;">owns real-time, AI-powered last-minute</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2x2 matrix -->
+    <div style="position: relative; width: 100%; aspect-ratio: 1 / 0.95;">
+      <!-- axes -->
+      <div style="position:absolute; inset: 50px 30px 80px 80px;">
+        <!-- grid -->
+        <div style="position:absolute; inset: 0; background: #fff; border-radius: 18px; box-shadow: var(--shadow-card);"></div>
+        <div style="position:absolute; left:0; right:0; top:50%; height:2px; background: var(--grey-light);"></div>
+        <div style="position:absolute; top:0; bottom:0; left:50%; width:2px; background: var(--grey-light);"></div>
+
+        <!-- bottom-left: Fresha/Treatwell (single category + static) -->
+        <div style="position:absolute; left: 8%; top: 65%; text-align:center;">
+          <div style="background: var(--ink); color:#fff; padding: 10px 18px; border-radius: 999px; font-weight: 700; font-size: 18px;">Fresha · Treatwell</div>
+          <p style="font-size: 13px; color: var(--grey); margin-top: 8px; max-width: 22ch;">Static-ish, beauty &amp; wellness only</p>
+        </div>
+        <!-- bottom-right: TGTG (single category + real-time) -->
+        <div style="position:absolute; right: 12%; top: 65%; text-align:center;">
+          <div style="background: var(--ink); color:#fff; padding: 10px 18px; border-radius: 999px; font-weight: 700; font-size: 18px;">TGTG</div>
+          <p style="font-size: 13px; color: var(--grey); margin-top: 8px; max-width: 18ch;">Real-time, food only</p>
+        </div>
+        <!-- top-left: Groupon (all categories + static) -->
+        <div style="position:absolute; left: 12%; top: 18%; text-align:center;">
+          <div style="background: var(--ink); color:#fff; padding: 10px 18px; border-radius: 999px; font-weight: 700; font-size: 18px;">Groupon</div>
+          <p style="font-size: 13px; color: var(--grey); margin-top: 8px; max-width: 18ch;">Static, broad</p>
+        </div>
+        <!-- top-right: LML -->
+        <div style="position:absolute; right: 8%; top: 14%; text-align:center;">
+          <div style="background: var(--teal); color:#fff; padding: 14px 24px; border-radius: 999px; font-weight: 800; font-size: 22px; box-shadow: 0 14px 28px -10px rgba(61,191,160,0.6);">LML</div>
+          <p style="font-size: 14px; color: var(--teal-deep); font-weight: 600; margin-top: 10px; max-width: 20ch;">Real-time across all local services &amp; retail</p>
+        </div>
+
+        <!-- axis labels -->
+        <p style="position:absolute; left: 0; right: 0; bottom: -42px; text-align:center; font-size: 14px; font-weight: 700; color: var(--grey); letter-spacing: 0.1em; text-transform: uppercase;">Static discounts &nbsp;→&nbsp; Real-time dynamic pricing</p>
+      </div>
+      <p style="position:absolute; left: 28px; top: 50px; bottom: 80px; writing-mode: vertical-rl; transform: rotate(180deg); display:flex; align-items:center; justify-content:center; font-size: 14px; font-weight: 700; color: var(--grey); letter-spacing: 0.1em; text-transform: uppercase; white-space: nowrap; margin: 0;">Single category &nbsp;→&nbsp; All services &amp; retail</p>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================== -->
+<!-- 12  GO TO MARKET — BRIGHTON                     -->
+<!-- ============================================== -->
+<section data-label="13 Brighton pilot">
+  <div class="col gap-s" style="margin-bottom: 56px;">
+    <span class="eyebrow">Go to market</span>
+    <h2 class="title" style="max-width: 28ch;">Prove it in Brighton. Then take it everywhere.</h2>
+  </div>
+
+  <div style="display:grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: stretch;">
+
+    <!-- Phase 1 -->
+    <div style="background: var(--teal); color:#fff; border-radius: var(--radius-card); padding: 48px 52px;">
+      <div style="display:flex; align-items:baseline; gap: 16px; margin-bottom: 32px;">
+        <span style="font-size: 22px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; opacity: 0.78;">Phase 1</span>
+        <span style="font-size: 22px; font-weight: 600; opacity: 0.78;">·</span>
+        <span style="font-size: 22px; font-weight: 700;">Brighton pilot</span>
+      </div>
+
+      <p style="font-size: 56px; font-weight: 800; letter-spacing:-0.025em; margin: 0 0 36px; line-height: 1.05;">Dense indie high street.<br>280k population.<br>One city, end-to-end.</p>
+
+      <div class="col" style="gap: 18px;">
+        <div style="display:flex; gap: 18px; align-items: baseline;"><span style="font-size: 24px; font-weight: 800; min-width: 80px;">50</span><span style="font-size: var(--type-body);">signed-up businesses across 5 categories</span></div>
+        <div style="display:flex; gap: 18px; align-items: baseline;"><span style="font-size: 24px; font-weight: 800; min-width: 80px;">5k</span><span style="font-size: var(--type-body);">consumer app downloads in month one</span></div>
+        <div style="display:flex; gap: 18px; align-items: baseline;"><span style="font-size: 24px; font-weight: 800; min-width: 80px;">1</span><span style="font-size: var(--type-body);">launch event &mdash; "Brighton's Black Saturday"</span></div>
+        <div style="display:flex; gap: 18px; align-items: baseline;"><span style="font-size: 24px; font-weight: 800; min-width: 80px;">30d</span><span style="font-size: var(--type-body);">prove claim rate &amp; retailer repeat usage</span></div>
+      </div>
+    </div>
+
+    <!-- Phase 2 -->
+    <div style="background: var(--surface); border-radius: var(--radius-card); padding: 48px 52px;">
+      <div style="display:flex; align-items:baseline; gap: 16px; margin-bottom: 32px;">
+        <span style="font-size: 22px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--teal-dark);">Phase 2</span>
+        <span style="font-size: 22px; font-weight: 600; color: var(--grey);">·</span>
+        <span style="font-size: 22px; font-weight: 700; color: var(--ink);">UK rollout</span>
+      </div>
+
+      <p style="font-size: 56px; font-weight: 800; letter-spacing:-0.025em; margin: 0 0 36px; line-height: 1.05; color: var(--ink);">Brighton data<br>raises Series A.<br>10 cities, year one.</p>
+
+      <div class="col" style="gap: 18px;">
+        <div style="display:flex; gap: 18px; align-items: baseline;"><span style="font-size: 24px; font-weight: 800; min-width: 80px; color: var(--teal-dark);">10</span><span style="font-size: var(--type-body); color: var(--ink);">UK cities live by end of year one</span></div>
+        <div style="display:flex; gap: 18px; align-items: baseline;"><span style="font-size: 24px; font-weight: 800; min-width: 80px; color: var(--teal-dark);">API</span><span style="font-size: var(--type-body); color: var(--ink);">integrations with Fresha &amp; Booksy</span></div>
+        <div style="display:flex; gap: 18px; align-items: baseline;"><span style="font-size: 24px; font-weight: 800; min-width: 80px; color: var(--teal-dark);">∞</span><span style="font-size: var(--type-body); color: var(--ink);">retailer onboarding via existing platforms</span></div>
+        <div style="display:flex; gap: 18px; align-items: baseline;"><span style="font-size: 24px; font-weight: 800; min-width: 80px; color: var(--teal-dark);">Chamber</span><span style="font-size: var(--type-body); color: var(--ink);">of Commerce ties as the city template</span></div>
+      </div>
+    </div>
+  </div>
+
+  <p style="font-size: var(--type-body); color: var(--grey); margin-top: 36px; max-width: 80ch;"><strong style="color: var(--ink);">Why Brighton:</strong> dense independent high street, innovation-friendly business community, established Chamber and BrilliantBrighton relationships, 280k population.</p>
+</section>
+
+
+<!-- ============================================== -->
+<!-- 13  TRACTION                                    -->
+<!-- ============================================== -->
+<section class="surface" data-label="14 Traction">
+  <div class="col gap-s" style="margin-bottom: 56px;">
+    <span class="eyebrow">Traction</span>
+    <h2 class="title" style="max-width: 32ch;">Real signal, ahead of the pilot.</h2>
+    <p class="micro" style="margin-top: 6px;">Figures update before every investor meeting &mdash; placeholders shown here.</p>
+  </div>
+
+  <div style="display:grid; grid-template-columns: 1.1fr 0.9fr; gap: 64px; align-items: flex-start;">
+
+    <div class="col" style="gap: 32px;">
+      <div style="display:grid; grid-template-columns: 1fr 1fr; gap: 22px;">
+        <div style="background: #fff; padding: 36px; border-radius: var(--radius-card); box-shadow: var(--shadow-card);">
+          <div style="font-size: 72px; font-weight: 800; letter-spacing:-0.03em; color: var(--teal-dark); line-height: 1;">[XX]</div>
+          <p style="font-size: var(--type-small); color: var(--grey); margin-top: 14px; max-width: 22ch;">Brighton businesses with signed letters of intent.</p>
+        </div>
+        <div style="background: #fff; padding: 36px; border-radius: var(--radius-card); box-shadow: var(--shadow-card);">
+          <div style="font-size: 72px; font-weight: 800; letter-spacing:-0.03em; color: var(--teal-dark); line-height: 1;">[X,XXX]</div>
+          <p style="font-size: var(--type-small); color: var(--grey); margin-top: 14px; max-width: 22ch;">Consumer waitlist sign-ups to date.</p>
+        </div>
+        <div style="background: #fff; padding: 36px; border-radius: var(--radius-card); box-shadow: var(--shadow-card);">
+          <div style="font-size: 72px; font-weight: 800; letter-spacing:-0.03em; color: var(--teal-dark); line-height: 1;">Live</div>
+          <p style="font-size: var(--type-small); color: var(--grey); margin-top: 14px; max-width: 22ch;">App prototype &mdash; demo-ready for investor meetings.</p>
+        </div>
+        <div style="background: #fff; padding: 36px; border-radius: var(--radius-card); box-shadow: var(--shadow-card);">
+          <div style="font-size: 72px; font-weight: 800; letter-spacing:-0.03em; color: var(--teal-dark); line-height: 1;">3</div>
+          <p style="font-size: var(--type-small); color: var(--grey); margin-top: 14px; max-width: 22ch;">Active partnership conversations.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="col" style="gap: 28px;">
+      <p style="font-size: var(--type-small); font-weight: 700; color: var(--teal-dark); letter-spacing: 0.12em; text-transform: uppercase; margin: 0;">Partners in discussion</p>
+      <div class="col gap-s">
+        <div style="background:#fff; border-radius: 16px; padding: 22px 28px; box-shadow: var(--shadow-card); display:flex; justify-content:space-between; align-items:center;">
+          <span style="font-size: var(--type-body); font-weight: 700;">Brighton Chamber of Commerce</span>
+          <span style="font-size: 14px; color: var(--teal-dark); font-weight: 700;">●  Active</span>
+        </div>
+        <div style="background:#fff; border-radius: 16px; padding: 22px 28px; box-shadow: var(--shadow-card); display:flex; justify-content:space-between; align-items:center;">
+          <span style="font-size: var(--type-body); font-weight: 700;">BrilliantBrighton (BID)</span>
+          <span style="font-size: 14px; color: var(--teal-dark); font-weight: 700;">●  Active</span>
+        </div>
+        <div style="background:#fff; border-radius: 16px; padding: 22px 28px; box-shadow: var(--shadow-card); display:flex; justify-content:space-between; align-items:center;">
+          <span style="font-size: var(--type-body); font-weight: 700;">Reach PLC (local press)</span>
+          <span style="font-size: 14px; color: var(--amber); font-weight: 700;">●  Intro stage</span>
+        </div>
+      </div>
+
+      <div style="margin-top: 12px; padding: 24px 28px; background: var(--teal-tint); border-radius: var(--radius-card);">
+        <p style="font-size: var(--type-small); font-weight: 700; color: var(--teal-deep); margin: 0; letter-spacing:0.08em; text-transform: uppercase;">Note</p>
+        <p style="font-size: var(--type-body); color: var(--teal-deep); margin: 10px 0 0; line-height: 1.4;">Even ten signed retailers is a meaningful seed-stage signal. LOIs are our pre-pitch priority.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================== -->
+<!-- 14  TEAM                                        -->
+<!-- ============================================== -->
+<section data-label="15 Team">
+  <div class="col gap-s" style="margin-bottom: 70px;">
+    <span class="eyebrow">The team</span>
+    <h2 class="title" style="max-width: 34ch;">Built by people who know the high street &mdash; and the technology.</h2>
+  </div>
+
+  <div style="display:grid; grid-template-columns: repeat(3, 1fr); gap: 64px;">
+
+    <div class="col" style="gap: 28px; align-items: flex-start;">
+      <image-slot id="team-1" shape="circle" placeholder="Founder 1 headshot" style="width: 260px; height: 260px; background: linear-gradient(135deg, var(--teal), var(--teal-deep));"></image-slot>
+      <div>
+        <p style="font-size: 32px; font-weight: 800; letter-spacing:-0.02em; margin: 0; color: var(--teal-dark);">[Founder Name]</p>
+        <p style="font-size: var(--type-body); font-weight: 600; color: var(--ink); margin: 6px 0 18px;">Co-founder &amp; CEO</p>
+        <p style="font-size: var(--type-small); color: var(--ink); margin: 0; line-height: 1.5; max-width: 28ch;">[Two-line bio: prior high street / marketplace experience that earns the right to build this.]</p>
+      </div>
+    </div>
+
+    <div class="col" style="gap: 28px; align-items: flex-start;">
+      <image-slot id="team-2" shape="circle" placeholder="Founder 2 headshot" style="width: 260px; height: 260px; background: linear-gradient(135deg, var(--teal-dark), var(--teal-deep));"></image-slot>
+      <div>
+        <p style="font-size: 32px; font-weight: 800; letter-spacing:-0.02em; margin: 0; color: var(--teal-dark);">[Co-founder Name]</p>
+        <p style="font-size: var(--type-body); font-weight: 600; color: var(--ink); margin: 6px 0 18px;">Co-founder &amp; COO</p>
+        <p style="font-size: var(--type-small); color: var(--ink); margin: 0; line-height: 1.5; max-width: 28ch;">[Two-line bio: operations, local business relationships, retailer GTM.]</p>
+      </div>
+    </div>
+
+    <div class="col" style="gap: 28px; align-items: flex-start;">
+      <image-slot id="team-3" shape="circle" placeholder="CTO headshot" style="width: 260px; height: 260px; background: linear-gradient(135deg, var(--teal-deep), #145a4a);"></image-slot>
+      <div>
+        <p style="font-size: 32px; font-weight: 800; letter-spacing:-0.02em; margin: 0; color: var(--teal-dark);">[CTO Name]</p>
+        <p style="font-size: var(--type-body); font-weight: 600; color: var(--ink); margin: 6px 0 18px;">Co-founder &amp; CTO</p>
+        <p style="font-size: var(--type-small); color: var(--ink); margin: 0; line-height: 1.5; max-width: 28ch;">[Two-line bio: ML / mobile product leadership, ideally with marketplace experience.]</p>
+      </div>
+    </div>
+  </div>
+
+  <p class="micro" style="margin-top: 72px;">Advisors: [Name, role] · [Name, role] · [Name, role]</p>
+</section>
+
+
+<!-- ============================================== -->
+<!-- 15  THE ASK                                     -->
+<!-- ============================================== -->
+<section class="surface" data-label="16 The Ask">
+  <div class="col gap-s" style="margin-bottom: 56px;">
+    <span class="eyebrow">The Ask</span>
+    <h2 class="title" style="max-width: 30ch;">Raising <span style="color: var(--teal-dark);">£[TBC]</span> to prove the model in Brighton.</h2>
+  </div>
+
+  <div style="display:grid; grid-template-columns: 1fr 1.1fr; gap: 80px; align-items: center;">
+
+    <!-- Donut / use of funds -->
+    <div style="display:flex; align-items:center; gap: 48px;">
+      <svg viewBox="-100 -100 200 200" width="400" height="400" style="flex-shrink: 0;">
+        <!-- 40% product (teal) -->
+        <circle r="80" cx="0" cy="0" fill="transparent" stroke="#3DBFA0" stroke-width="40"
+                stroke-dasharray="201.06 502.65" transform="rotate(-90)"/>
+        <!-- 30% pilot (teal-dark) -->
+        <circle r="80" cx="0" cy="0" fill="transparent" stroke="#2A9E82" stroke-width="40"
+                stroke-dasharray="150.79 502.65" stroke-dashoffset="-201.06" transform="rotate(-90)"/>
+        <!-- 20% team (teal-deep) -->
+        <circle r="80" cx="0" cy="0" fill="transparent" stroke="#1F7E68" stroke-width="40"
+                stroke-dasharray="100.53 502.65" stroke-dashoffset="-351.85" transform="rotate(-90)"/>
+        <!-- 10% ops (amber) -->
+        <circle r="80" cx="0" cy="0" fill="transparent" stroke="#F59E0B" stroke-width="40"
+                stroke-dasharray="50.26 502.65" stroke-dashoffset="-452.38" transform="rotate(-90)"/>
+      </svg>
+      <div class="col gap-s">
+        <div style="display:flex; align-items:center; gap: 14px;"><span style="width:18px; height:18px; background:#3DBFA0; border-radius: 4px;"></span><span style="font-size: var(--type-body);"><strong>40%</strong> · Product &amp; app build</span></div>
+        <div style="display:flex; align-items:center; gap: 14px;"><span style="width:18px; height:18px; background:#2A9E82; border-radius: 4px;"></span><span style="font-size: var(--type-body);"><strong>30%</strong> · Brighton pilot &amp; marketing</span></div>
+        <div style="display:flex; align-items:center; gap: 14px;"><span style="width:18px; height:18px; background:#1F7E68; border-radius: 4px;"></span><span style="font-size: var(--type-body);"><strong>20%</strong> · Team</span></div>
+        <div style="display:flex; align-items:center; gap: 14px;"><span style="width:18px; height:18px; background:#F59E0B; border-radius: 4px;"></span><span style="font-size: var(--type-body);"><strong>10%</strong> · Operations &amp; legal</span></div>
+      </div>
+    </div>
+
+    <!-- What we'll prove -->
+    <div class="col" style="gap: 28px;">
+      <p style="font-size: var(--type-small); font-weight: 700; color: var(--teal-dark); letter-spacing: 0.12em; text-transform: uppercase; margin: 0;">What this round proves</p>
+      <div class="col" style="gap: 18px;">
+        <div style="display:flex; gap: 18px; align-items: flex-start;"><span style="color: var(--teal); font-size: 24px; line-height: 1.1;">✓</span><p style="font-size: var(--type-body); margin: 0; max-width: 38ch;"><strong>50+</strong> active retailer partners across Brighton.</p></div>
+        <div style="display:flex; gap: 18px; align-items: flex-start;"><span style="color: var(--teal); font-size: 24px; line-height: 1.1;">✓</span><p style="font-size: var(--type-body); margin: 0; max-width: 38ch;"><strong>10,000+</strong> consumer app downloads.</p></div>
+        <div style="display:flex; gap: 18px; align-items: flex-start;"><span style="color: var(--teal); font-size: 24px; line-height: 1.1;">✓</span><p style="font-size: var(--type-body); margin: 0; max-width: 38ch;">Measurable <strong>claim rate</strong> and <strong>30-day retailer retention</strong>.</p></div>
+        <div style="display:flex; gap: 18px; align-items: flex-start;"><span style="color: var(--teal); font-size: 24px; line-height: 1.1;">✓</span><p style="font-size: var(--type-body); margin: 0; max-width: 38ch;">Integration pipeline with <strong>Fresha &amp; Booksy</strong> underway.</p></div>
+      </div>
+      <p class="micro" style="margin-top: 14px;">Target close: [Date TBC]</p>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================== -->
+<!-- 16  CLOSING                                     -->
+<!-- ============================================== -->
+<section class="teal" data-label="17 Close" style="display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding: 80px;">
+  <div class="logo-mark" style="margin-bottom: 48px;">
+    <svg width="140" height="168" viewBox="0 0 100 120" aria-hidden="true">
+      <path d="M50 4 C 24 4, 8 24, 8 49 C 8 80, 50 116, 50 116 C 50 116, 92 80, 92 49 C 92 24, 76 4, 50 4 Z" fill="#FFFFFF"/>
+      <circle cx="50" cy="49" r="24" fill="#3DBFA0"/>
+      <rect x="46" y="20" width="8" height="6" rx="1.5" fill="#FFFFFF"/>
+      <line x1="50" y1="49" x2="50" y2="34" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round"/>
+      <line x1="50" y1="49" x2="62" y2="51" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round"/>
+      <circle cx="50" cy="49" r="2.5" fill="#FFFFFF"/>
+    </svg>
+  </div>
+
+  <h1 style="font-size: 96px; font-weight: 800; color:#fff; letter-spacing:-0.03em; line-height: 1.05; max-width: 22ch; margin: 0 0 32px;">The high street doesn't need saving.<br>It needs the right tools.</h1>
+
+  <p style="font-size: var(--type-subtitle); font-weight: 500; color: rgba(255,255,255,0.92); max-width: 36ch; line-height: 1.3; margin: 0 0 80px;">Dynamic pricing &mdash; the same advantage airlines and hotels have had for decades &mdash; brought to every independent business on the high street.</p>
+
+  <div style="display:flex; gap: 80px; font-size: var(--type-body); color: #fff; font-weight: 500;">
+    <span><strong>[Founder Name]</strong> &nbsp;·&nbsp; founders@lastminutelocal.co</span>
+    <span>lastminutelocal.co</span>
+  </div>
+</section>
+
+</deck-stage>
+
+<script type="application/json" id="speaker-notes">
+[
+  "Welcome — thanks for the time. I'm here to talk to you about Last Minute Local. The one-liner is this: it's Too Good To Go, but for everything except food. We help every independent business on the high street fill the slot, table or appointment that would otherwise have been wasted, by pushing real-time, AI-powered, last-minute deals to people walking past their door. We're raising a seed round to prove this in Brighton and roll it out across the UK. Today I want to walk you through the problem, the product, the model, and what we'll do with the money.",
+
+  "Start with the picture. Every single day on every single high street in the country, millions of pounds of revenue just evaporate. A barber with three empty chairs at 2 on a Tuesday. A yoga studio teaching to a half-empty room. A restaurant with tables sitting cold on a weeknight. A boutique with last season's stock that nobody is going to come in for at full price. Once that hour has gone, that revenue is gone. There is no second chance for it. And that is the gap we are walking into.",
+
+  "Let's put numbers on it. There are over 320,000 retail businesses still operating on UK high streets today, plus the much larger service economy on top — hair, beauty, fitness, restaurants. In 2024 alone, 13,479 shops closed permanently. That's 37 every single day, a 28% increase on 2023, and the Centre for Retail Research projects more than 17,000 closures in 2025. Around 170,000 retail jobs went with them. And the part that gets missed in every retail story is the service side: an unbooked appointment slot, a class space, a restaurant cover — those don't have salvage value. A shop can mark down stock next week. A barber can't sell yesterday's 3pm. It is 100% lost, every single time.",
+
+  "So here's what we're building. A free app that lets any independent business post a time-limited offer in under sixty seconds, and pushes it instantly to nearby consumers. The barber fills the 3pm slot before it disappears. The consumer claims 40% off a cut and blow-dry, four-tenths of a mile from where they're standing, in one tap. And the high street gets a sustainable new revenue layer that rewards being local and being independent. It's a discovery layer, not a booking layer — which matters, and I'll come back to that.",
+
+  "From the retailer side, the whole flow is three taps and roughly sixty seconds. Snap a photo. Set the discount and the expiry window. Hit go live. That's it. And critically — most independent owners don't have time to play discount strategist — our AI looks at their calendar gaps, looks at local demand patterns, and just suggests the right discount at the right time. They accept in one tap. That's the difference between a tool a barber will actually use on a busy Wednesday and a tool that sits on the shelf.",
+
+  "On the consumer side it's just as fast. Open the app, see real-time deals within walking distance, filtered by what you actually care about. Tap to claim and you get an instant QR voucher straight to your phone — no sign-up friction. Walk in, show your code, enjoy the deal. And because we know your category preferences, you also get a push the moment something relevant lights up nearby. Three steps. Built for impulse. Built for the way people actually move around a high street.",
+
+  "Now — the engine that actually converts a posted offer into footfall isn't the feed. It's the push notification. Three different signals trigger a push to a consumer's phone. One: a category match. They've opted into, say, Fitness, and a yoga studio nearby has just put a 5pm class on offer. Two: a walk-by geo-trigger. They're physically passing within range of a participating shop that has a live deal, and they get a tap on the lock screen at exactly the right moment. Three: last-call urgency. The window is closing, the AI ramps the discount, and we ping consumers who already saved or viewed the offer. Everything is opt-in by category, AI-throttled to a maximum of three pushes a day so it never becomes noise, and one tap to unsubscribe. And for retailers, push is also a paid product. The category alert and the geo-fence alert are pound-per-push line items — which means retailers only pay when we are reaching exactly the right consumer at exactly the right moment.",
+
+  "AI is genuinely core to this, not a buzzword on the deck. We connect to the booking calendars these businesses already use — Fresha, Booksy, Square — and detect gaps automatically. We suggest the right discount level at the right time based on historical patterns and local signals. We dynamically ramp the urgency of the offer as the expiry window closes. And we learn for each business individually over time. Airlines and hotels have run on dynamic pricing for thirty years. We are the first company bringing that capability to the high street.",
+
+  "If you're wondering whether consumers actually behave this way — that question is already answered. Too Good To Go has grown to more than 120 million registered users across 20 countries, with 180,000 active business partners, and they've saved over half a billion meals since launch. Their entire model is built on a single insight: time-limited local availability drives immediate consumer action. We are taking that proven behaviour and applying it to the vastly larger non-food service economy — hair, beauty, fitness, restaurants, retail. We're not inspired by TGTG. We're the next chapter of the same story.",
+
+  "And the market underneath us is enormous and largely unaddressed. Over 320,000 UK retail businesses. Nearly 7,000 high streets across Great Britain. 400-plus categories. Zero dedicated platforms serving this real-time use case today. To anchor the scale: marketplaces that serve fragmented local supply — Just Eat, Airbnb, Treatwell — scale into the billions. We are looking at one of the last large, fragmented local categories that doesn't yet have its marketplace. That's the prize.",
+
+  "The business model is deliberately retailer-friendly. Joining is free — no commission, no monthly fee. We make money in four ways. One, a small consumer-side convenience fee baked invisibly into the checkout — that's the always-on volume engine. Two, paid 'Deal of the Day' placement in each category. Three, opt-in deal alerts — one pound per push. Four, geo-location triggered alerts when a consumer walks within range of a shop — also one pound per push. The platform is free to join, and retailers only spend money when it's working for them.",
+
+  "Now — the obvious investor question. What about Fresha and Treatwell? What about Groupon? Honest answer: we don't compete with them. Fresha and Treatwell own the booking and scheduling layer. Groupon owns static bulk discounting. TGTG owns surplus food. Nobody owns real-time, AI-powered, last-minute, across every local category. We are the discovery and demand-generation layer that sits above all of them. We send Fresha customers. We send restaurants diners. Think of us as Skyscanner for the high street — we don't replace the airlines, we feed them.",
+
+  "Our go-to-market is two phases. Phase one: prove it in Brighton end-to-end. Fifty signed-up businesses across five categories, five thousand consumer downloads in month one, anchored around a one-day city-wide launch event we're calling Brighton's Black Saturday. We pick Brighton because it's got the densest independent high street in the country, a population of 280,000, and we already have Chamber of Commerce and BrilliantBrighton relationships in place. Phase two: use that data to raise a Series A, roll out to ten UK cities in year one, and accelerate retailer onboarding via API integrations with Fresha and Booksy.",
+
+  "On traction — I want to be straight with you. We are pre-launch. The honest numbers go on this slide and we update them before every meeting. What we're focused on right now is converting verbal interest from Brighton retailers into signed letters of intent, growing the consumer waitlist ahead of the Brighton's Black Saturday launch, and getting the prototype to demo-ready. Conversations with the Chamber, BrilliantBrighton and Reach PLC for local press are all live. Even ten signed retailers is a meaningful seed-stage signal — and that is exactly what we're chasing in the weeks before this round closes.",
+
+  "Quickly on the team. We're three founders. The combination is the high street and the technology — that's the bet. [Founder one] brings the operator and marketplace background. [Founder two] brings the on-the-ground retailer and local business relationships. [Founder three] is our CTO and brings the mobile and ML capability that makes the AI layer credible rather than aspirational. We have advisors in retail, mobile product and local government — all named on the slide.",
+
+  "So — the ask. We're raising [amount] to prove this in Brighton and build the foundation for Series A. Roughly forty percent goes to product and app build. Thirty percent to the Brighton pilot and its launch marketing. Twenty percent to team. Ten percent to operations and legal. What we will have to show you twelve months from now: fifty-plus active retailer partners, ten thousand-plus consumer downloads, real measurable claim rates and retailer retention, and an integration pipeline with Fresha and Booksy underway. Target close is [date].",
+
+  "I'll leave you with the line we keep coming back to internally. The high street doesn't need saving. It needs the right tools. Airlines, hotels, ride-share apps — every industry that adopted dynamic pricing didn't just survive, it scaled. Independent local businesses have never had that same advantage. We are building it for them. Real-time. AI-powered. Community-first. Thanks very much — happy to take questions, and details are on the slide."
+]
+</script>
+
+<div id="tweaks-mount"></div>
+
+<script type="text/babel" data-presets="env,react">
+const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
+  "palette": ["#3DBFA0", "#2A9E82", "#1F7E68", "#E6F5F0"],
+  "titleScale": 1.0,
+  "showSources": true,
+  "matrixLabels": "axes"
+}/*EDITMODE-END*/;
+
+const PALETTES = [
+  ["#3DBFA0", "#2A9E82", "#1F7E68", "#E6F5F0"],  // brand teal (default)
+  ["#0E7C86", "#0B6E74", "#085A60", "#D8ECEE"],  // deep ocean
+  ["#14B8A6", "#0D9488", "#0F766E", "#CCFBF1"],  // bright teal
+  ["#5B8DEF", "#3B6FCC", "#27529B", "#E1ECFA"]   // cobalt
+];
+
+function LMLTweaks() {
+  const [t, setTweak] = useTweaks(TWEAK_DEFAULTS);
+
+  React.useEffect(() => {
+    const root = document.documentElement;
+    const [teal, dark, deep, tint] = t.palette;
+    root.style.setProperty('--teal', teal);
+    root.style.setProperty('--teal-dark', dark);
+    root.style.setProperty('--teal-deep', deep);
+    root.style.setProperty('--teal-tint', tint);
+    root.style.setProperty('--type-title', (72 * t.titleScale) + 'px');
+    root.style.setProperty('--type-subtitle', (40 * t.titleScale) + 'px');
+    document.body.classList.toggle('hide-sources', !t.showSources);
+  }, [t]);
+
+  return (
+    <TweaksPanel title="Tweaks">
+      <TweakSection label="Brand palette" />
+      <TweakColor
+        label="Palette"
+        value={t.palette}
+        options={PALETTES}
+        onChange={(v) => setTweak('palette', v)}
+      />
+
+      <TweakSection label="Typography" />
+      <TweakSlider
+        label="Title scale"
+        value={t.titleScale}
+        min={0.85}
+        max={1.2}
+        step={0.05}
+        onChange={(v) => setTweak('titleScale', v)}
+      />
+
+      <TweakSection label="Content" />
+      <TweakToggle
+        label="Source citations"
+        value={t.showSources}
+        onChange={(v) => setTweak('showSources', v)}
+      />
+    </TweaksPanel>
+  );
+}
+
+const __tweaksRoot = ReactDOM.createRoot(document.getElementById('tweaks-mount'));
+__tweaksRoot.render(<LMLTweaks />);
+</script>
+
+</body>
+</html>

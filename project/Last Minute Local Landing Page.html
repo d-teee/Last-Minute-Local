@@ -1,0 +1,1028 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Last Minute Local: Live deals on your high street</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --teal: #3DBFA0;
+    --teal-dark: #2A9E82;
+    --teal-deep: #1F7E68;
+    --teal-tint: #E6F5F0;
+    --bg: #FFFFFF;
+    --surface: #F7F9F8;
+    --ink: #2C2C2C;
+    --grey: #6B7280;
+    --grey-light: #D1D5DB;
+    --amber: #F59E0B;
+    --red: #EF4444;
+    --shadow-card: 0 24px 48px -20px rgba(31, 126, 104, 0.18), 0 4px 12px rgba(44,44,44,0.06);
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'Inter', system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: var(--teal-dark); }
+  a:hover { color: var(--teal-deep); }
+  img { max-width: 100%; display: block; }
+  .mono { font-family: 'JetBrains Mono', monospace; }
+  .wrap { max-width: 1160px; margin: 0 auto; padding: 0 32px; }
+  section { position: relative; }
+
+  h1, h2, h3, p { margin: 0; }
+  .eyebrow {
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--teal-deep);
+  }
+
+  /* ---------- Nav ---------- */
+  header.nav {
+    position: sticky;
+    top: 0;
+    z-index: 40;
+    background: rgba(255,255,255,0.85);
+    backdrop-filter: blur(14px) saturate(1.1);
+    border-bottom: 1px solid rgba(44,44,44,0.06);
+  }
+  .nav-inner {
+    max-width: 1160px;
+    margin: 0 auto;
+    padding: 18px 32px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 800;
+    font-size: 19px;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    text-decoration: none;
+  }
+  .brand svg { display: block; }
+  .nav-links { display: flex; align-items: center; gap: 34px; }
+  .nav-links a {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--grey);
+    text-decoration: none;
+  }
+  .nav-links a:hover { color: var(--ink); }
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 13px 26px;
+    border-radius: 999px;
+    font-weight: 700;
+    font-size: 15px;
+    letter-spacing: -0.01em;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+  }
+  .btn:hover { transform: translateY(-1px); }
+  .btn-primary { background: var(--teal); color: #fff; box-shadow: 0 10px 24px -10px rgba(42,158,130,0.55); }
+  .btn-primary:hover { background: var(--teal-dark); }
+  .btn-dark { background: var(--ink); color: #fff; }
+  .btn-dark:hover { background: #1a1a1a; }
+  .btn-ghost { background: transparent; color: var(--ink); border: 1.5px solid var(--grey-light); }
+  .btn-ghost:hover { border-color: var(--ink); }
+  .btn-sm { padding: 10px 20px; font-size: 14px; }
+
+  /* ---------- Hero ---------- */
+  .hero {
+    padding: 96px 0 60px;
+    overflow: visible;
+  }
+  .hero-inner {
+    display: grid;
+    grid-template-columns: 1.05fr 0.95fr;
+    gap: 60px;
+    align-items: center;
+  }
+  .badge-live {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 9px 18px;
+    border-radius: 999px;
+    background: var(--teal-tint);
+    color: var(--teal-deep);
+    font-size: 14px;
+    font-weight: 700;
+    margin-bottom: 28px;
+  }
+  .badge-live .dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--teal-dark);
+    box-shadow: 0 0 0 0 rgba(42,158,130,0.6);
+    animation: pulse 2s infinite;
+  }
+  @keyframes pulse {
+    0% { box-shadow: 0 0 0 0 rgba(42,158,130,0.45); }
+    70% { box-shadow: 0 0 0 8px rgba(42,158,130,0); }
+    100% { box-shadow: 0 0 0 0 rgba(42,158,130,0); }
+  }
+  .hero h1 {
+    font-size: 66px;
+    font-weight: 800;
+    line-height: 1.03;
+    letter-spacing: -0.03em;
+    max-width: 12ch;
+    text-wrap: balance;
+  }
+  .hero h1 em { font-style: normal; color: var(--teal-dark); }
+  .hero .sub {
+    font-size: 21px;
+    font-weight: 500;
+    color: var(--grey);
+    line-height: 1.5;
+    max-width: 42ch;
+    margin: 26px 0 36px;
+    text-wrap: pretty;
+  }
+  .hero-ctas { display: flex; gap: 14px; flex-wrap: wrap; }
+  .hero-note { font-size: 14px; color: var(--grey); margin-top: 18px; font-weight: 500; }
+
+  /* ---------- Phone mock ---------- */
+  .phone-stage { display: flex; justify-content: center; }
+  .phone {
+    width: 320px;
+    aspect-ratio: 320 / 660;
+    background: #111;
+    border-radius: 44px;
+    padding: 10px;
+    box-shadow: var(--shadow-card);
+    position: relative;
+  }
+  .phone .notch {
+    position: absolute; top: 18px; left: 50%; transform: translateX(-50%);
+    width: 92px; height: 24px; background: #111; border-radius: 999px; z-index: 3;
+  }
+  .phone .screen {
+    width: 100%; height: 100%; border-radius: 36px;
+    background: var(--surface); overflow: hidden; position: relative;
+    display: flex; flex-direction: column;
+  }
+  .phone .status { display: flex; justify-content: space-between; padding: 16px 22px 4px; font-size: 12px; font-weight: 600; }
+  .phone .app-header { padding: 14px 16px 10px; }
+  .phone .app-header .t { font-size: 16px; font-weight: 800; letter-spacing: -0.02em; }
+  .phone .app-header .l { font-size: 10px; color: var(--grey); font-weight: 500; margin-top: 2px; }
+
+  .phone-frame-wrap { position: relative; display: inline-block; }
+  .float-banner {
+    position: absolute;
+    z-index: 5;
+    top: -22px; right: -34px;
+    width: 220px;
+    background: #fff;
+    border-radius: 16px;
+    box-shadow: 0 20px 40px -14px rgba(44,44,44,0.28);
+    padding: 13px 15px;
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+    transform: rotate(3deg);
+  }
+  .fb-dot { width: 9px; height: 9px; border-radius: 50%; background: var(--teal); flex-shrink: 0; margin-top: 4px; box-shadow: 0 0 0 0 rgba(42,158,130,0.5); animation: pulse 2s infinite; }
+  .fb-title { font-size: 11.5px; font-weight: 700; margin: 0; letter-spacing: -0.01em; }
+  .fb-body { font-size: 11px; color: var(--grey); margin: 3px 0 0; line-height: 1.35; }
+  .float-toast {
+    position: absolute;
+    z-index: 5;
+    bottom: 54px; left: -30px;
+    background: var(--ink);
+    color: #fff;
+    font-size: 13px;
+    font-weight: 700;
+    padding: 11px 18px;
+    border-radius: 999px;
+    box-shadow: 0 16px 32px -12px rgba(0,0,0,0.35);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transform: rotate(-2deg);
+  }
+  .ft-check { width: 20px; height: 20px; border-radius: 50%; background: var(--teal); display: inline-flex; align-items: center; justify-content: center; font-size: 12px; }
+  .deal {
+    background: #fff;
+    border-radius: 14px;
+    box-shadow: 0 6px 16px -8px rgba(0,0,0,0.12);
+    overflow: hidden;
+    margin: 0 12px 10px;
+  }
+  .deal .photo {
+    height: 96px; position: relative; display: flex; align-items: flex-end; justify-content: space-between; padding: 8px;
+  }
+  .deal .photo img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0; }
+  .deal .photo::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(0,0,0,0) 40%, rgba(0,0,0,0.45) 100%); z-index: 1; }
+  .deal .photo .disc, .deal .photo .timer { position: relative; z-index: 2; }
+  .deal .photo .disc { background: var(--teal); color: #fff; font-weight: 800; font-size: 17px; padding: 4px 9px; border-radius: 8px; letter-spacing: -0.01em; }
+  .deal .photo .timer { background: rgba(0,0,0,0.7); color: var(--amber); font-weight: 700; font-size: 11px; padding: 4px 8px; border-radius: 7px; font-family: 'JetBrains Mono', monospace; }
+  .deal .photo .timer.red { color: var(--red); }
+  .deal .meta { padding: 9px 12px 12px; }
+  .deal .meta .name { font-size: 13px; font-weight: 700; }
+  .deal .meta .desc { font-size: 11px; color: var(--grey); margin-top: 1px; }
+
+  /* ---------- section frame ---------- */
+  .section-pad { padding: 108px 0; }
+  .section-head { max-width: 640px; margin-bottom: 56px; }
+  .section-head h2 {
+    font-size: 42px;
+    font-weight: 800;
+    letter-spacing: -0.025em;
+    line-height: 1.12;
+    margin-top: 14px;
+    text-wrap: balance;
+  }
+  .section-head p {
+    font-size: 19px;
+    color: var(--grey);
+    font-weight: 500;
+    line-height: 1.5;
+    margin-top: 16px;
+    max-width: 52ch;
+    text-wrap: pretty;
+  }
+  .surface { background: var(--surface); }
+
+  /* ---------- Why ---------- */
+  .why-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; }
+  .why-card {
+    background: #fff;
+    border-radius: 20px;
+    padding: 32px;
+    border: 1px solid rgba(44,44,44,0.07);
+  }
+  .why-card .icon {
+    width: 46px; height: 46px; border-radius: 12px;
+    background: var(--teal-tint); color: var(--teal-deep);
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: 18px;
+  }
+  .why-card h3 { font-size: 19px; font-weight: 700; letter-spacing: -0.01em; margin-bottom: 8px; }
+  .why-card p { font-size: 15.5px; color: var(--grey); line-height: 1.55; }
+
+  /* ---------- The AI ---------- */
+  .ai-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
+  .ai-copy h2 { font-size: 38px; font-weight: 800; letter-spacing: -0.025em; line-height: 1.14; margin-top: 14px; text-wrap: balance; }
+  .ai-copy p { font-size: 18px; color: var(--grey); font-weight: 500; line-height: 1.55; margin-top: 18px; max-width: 48ch; text-wrap: pretty; }
+  .ai-chips { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 26px; }
+
+  .surge {
+    position: relative;
+    background: #fff;
+    border-radius: 22px;
+    border: 1px solid rgba(44,44,44,0.07);
+    padding: 40px 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+  }
+  .surge-line {
+    position: absolute;
+    left: 52px; top: 56px; bottom: 56px;
+    width: 2px;
+    background: linear-gradient(180deg, var(--teal-tint), var(--red));
+  }
+  .surge-stage { display: grid; grid-template-columns: 84px auto 1fr; align-items: center; gap: 18px; position: relative; }
+  .surge-time { font-size: 13px; font-weight: 700; color: var(--grey); }
+  .surge-dot { width: 14px; height: 14px; border-radius: 50%; background: var(--teal); box-shadow: 0 0 0 6px var(--teal-tint); z-index: 1; }
+  .surge-stage.urgent .surge-dot { background: var(--red); box-shadow: 0 0 0 6px rgba(239,68,68,0.14); }
+  .surge-pct { font-size: 22px; font-weight: 800; letter-spacing: -0.02em; color: var(--ink); }
+  .surge-stage.urgent .surge-pct { color: var(--red); }
+  .surge-stage.urgent .surge-time { color: var(--red); }
+
+  /* ---------- How it works ---------- */
+  .toggle-row { display: flex; justify-content: center; margin-bottom: 56px; }
+  .toggle {
+    display: inline-flex;
+    padding: 5px;
+    background: var(--surface);
+    border-radius: 999px;
+    gap: 4px;
+  }
+  .toggle button {
+    padding: 12px 28px;
+    border-radius: 999px;
+    border: none;
+    background: transparent;
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--grey);
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+  .toggle button.active { background: var(--ink); color: #fff; }
+
+  .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+  .step-panel { display: none; }
+  .step-panel.active { display: grid; }
+  .step {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    background: #fff;
+    border: 1px solid rgba(44,44,44,0.07);
+    border-radius: 20px;
+    padding: 0 0 28px;
+    box-shadow: 0 16px 32px -24px rgba(31,126,104,0.25);
+    overflow: hidden;
+  }
+  .step-photo { height: 150px; position: relative; }
+  .step-photo img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  .step-body { display: flex; flex-direction: column; gap: 14px; padding: 24px 28px 0; }
+  .step .num {
+    width: 40px; height: 40px; border-radius: 12px;
+    background: var(--teal-tint); color: var(--teal-deep);
+    font-weight: 800; font-size: 17px;
+    display: flex; align-items: center; justify-content: center;
+  }
+
+  /* ---------- Customer journey (phones) ---------- */
+  .journey { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; align-items: start; }
+  .journey-step { display: flex; flex-direction: column; align-items: center; gap: 18px; text-align: center; }
+  .journey-label { display: flex; align-items: center; gap: 10px; font-size: 17px; font-weight: 700; letter-spacing: -0.01em; }
+  .jnum { width: 28px; height: 28px; border-radius: 50%; background: var(--teal); color: #fff; font-size: 13px; font-weight: 800; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .journey-caption { font-size: 14.5px; color: var(--grey); max-width: 26ch; line-height: 1.45; }
+  .phone.sp-mini { width: 208px; }
+  .phone.sp-mini .notch { width: 72px; height: 18px; top: 14px; }
+  .sp-qr { height: 68px; margin: 0 12px 10px; background: var(--surface); border-radius: 10px; display: flex; align-items: center; justify-content: center; }
+  .sp-cta { margin: auto 12px 16px; height: 36px; background: var(--teal); color: #fff; border-radius: 999px; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 11.5px; }
+  .sp-redeem-body { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+  .sp-check { width: 58px; height: 58px; border-radius: 50%; background: #fff; display: flex; align-items: center; justify-content: center; margin-bottom: 12px; }
+  .sp-photo-add { margin: 10px 12px 8px; height: 64px; border-radius: 12px; background: var(--teal-tint); color: var(--teal-deep); border: 1.5px dashed var(--teal); display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 700; }
+  .sp-offer-box { margin: 0 12px 8px; background: var(--surface); border-radius: 10px; padding: 9px 11px; }
+  .sp-offer-box .n { font-size: 11.5px; font-weight: 700; margin: 0; }
+  .sp-offer-box .pr { font-size: 10px; color: var(--grey); margin: 3px 0 0; }
+  .sp-chip-row { display: flex; gap: 6px; padding: 0 12px; margin-bottom: 8px; }
+  .sp-chip { flex: 1; padding: 8px 0; border-radius: 8px; background: #fff; border: 1.5px solid var(--grey-light); text-align: center; font-weight: 700; font-size: 10.5px; }
+  .sp-chip.active { background: var(--teal); color: #fff; border-color: var(--teal); }
+  .step h3 { font-size: 20px; font-weight: 700; letter-spacing: -0.01em; }
+  .step p { font-size: 15.5px; color: var(--grey); line-height: 1.55; max-width: 30ch; }
+
+  /* ---------- Model strip ---------- */
+  /* ---------- Value strip ---------- */
+  .value-strip {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 28px;
+  }
+  .value-card {
+    background: #fff;
+    border-radius: 20px;
+    padding: 32px;
+    border: 1px solid rgba(44,44,44,0.07);
+  }
+  .value-card .icon {
+    width: 46px; height: 46px; border-radius: 12px;
+    background: var(--teal-tint); color: var(--teal-deep);
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: 18px;
+  }
+  .value-card h3 { font-size: 19px; font-weight: 700; letter-spacing: -0.01em; margin-bottom: 8px; }
+  .value-card p { font-size: 15.5px; color: var(--grey); line-height: 1.55; }
+
+  /* ---------- Waitlist ---------- */
+  .waitlist {
+    background: var(--ink);
+    color: #fff;
+    border-radius: 28px;
+    padding: 64px;
+    position: relative;
+    overflow: hidden;
+  }
+  .waitlist::before {
+    content: "";
+    position: absolute;
+    top: -140px; right: -140px;
+    width: 420px; height: 420px;
+    background: radial-gradient(circle, rgba(61,191,160,0.35), transparent 70%);
+  }
+  .waitlist-head { position: relative; z-index: 1; max-width: 560px; }
+  .waitlist-head .eyebrow { color: var(--teal); }
+  .waitlist-head h2 {
+    font-size: 38px; font-weight: 800; letter-spacing: -0.025em; line-height: 1.12; margin-top: 14px;
+  }
+  .waitlist-head p { font-size: 17px; color: rgba(255,255,255,0.7); margin-top: 16px; line-height: 1.55; font-weight: 500; }
+
+  .wl-toggle {
+    display: inline-flex; margin-top: 34px; padding: 5px; background: rgba(255,255,255,0.08); border-radius: 999px; gap: 4px; position: relative; z-index: 1;
+  }
+  .wl-toggle button {
+    padding: 11px 24px; border-radius: 999px; border: none; background: transparent;
+    font-size: 14px; font-weight: 700; color: rgba(255,255,255,0.65); cursor: pointer;
+  }
+  .wl-toggle button.active { background: var(--teal); color: #fff; }
+
+  .wl-form-wrap { position: relative; z-index: 1; margin-top: 30px; max-width: 480px; }
+  .wl-form { display: none; flex-direction: column; gap: 14px; }
+  .wl-form.active { display: flex; }
+  .wl-row { display: flex; gap: 12px; flex-wrap: wrap; }
+  .wl-form input, .wl-form select {
+    flex: 1;
+    min-width: 180px;
+    background: rgba(255,255,255,0.07);
+    border: 1.5px solid rgba(255,255,255,0.14);
+    border-radius: 12px;
+    padding: 15px 18px;
+    font-size: 15px;
+    font-family: inherit;
+    color: #fff;
+    outline: none;
+  }
+  .wl-form input::placeholder { color: rgba(255,255,255,0.4); }
+  .wl-form select { color: #fff; appearance: none; }
+  .wl-form select option { color: #111; }
+  .wl-form input:focus, .wl-form select:focus { border-color: var(--teal); background: rgba(255,255,255,0.1); }
+  .wl-submit {
+    margin-top: 4px;
+    padding: 16px 28px;
+    border-radius: 12px;
+    background: var(--teal);
+    color: #fff;
+    font-weight: 700;
+    font-size: 15.5px;
+    border: none;
+    cursor: pointer;
+    transition: background 0.15s ease;
+  }
+  .wl-submit:hover { background: #34ab8e; }
+  .wl-fineprint { font-size: 13px; color: rgba(255,255,255,0.45); margin-top: 12px; }
+  .wl-error { display: none; font-size: 13px; color: #FCA5A5; margin: -4px 0 0; }
+  .wl-error.active { display: block; }
+  .wl-form input.invalid { border-color: #EF4444; }
+  .wl-contact { position: relative; z-index: 1; margin-top: 26px; font-size: 13.5px; color: rgba(255,255,255,0.5); }
+  .wl-contact a { color: rgba(255,255,255,0.75); font-weight: 600; text-decoration: underline; text-decoration-color: rgba(255,255,255,0.3); text-underline-offset: 3px; }
+  .wl-contact a:hover { color: #fff; }
+
+  .wl-success {
+    display: none;
+    position: relative; z-index: 1;
+    margin-top: 30px;
+    max-width: 480px;
+    background: rgba(61,191,160,0.14);
+    border: 1px solid rgba(61,191,160,0.35);
+    border-radius: 16px;
+    padding: 26px 28px;
+    align-items: flex-start;
+    gap: 16px;
+  }
+  .wl-success.active { display: flex; }
+  .wl-success .check {
+    width: 34px; height: 34px; border-radius: 50%; background: var(--teal); flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .wl-success h4 { font-size: 17px; font-weight: 700; margin-bottom: 4px; }
+  .wl-success p { font-size: 14.5px; color: rgba(255,255,255,0.75); line-height: 1.5; }
+
+  /* ---------- Footer ---------- */
+  footer {
+    padding: 56px 0 48px;
+    border-top: 1px solid rgba(44,44,44,0.08);
+  }
+  .footer-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+  .footer-brand { display: flex; align-items: center; gap: 10px; font-weight: 800; font-size: 16px; letter-spacing: -0.02em; }
+  .footer-note { font-size: 14px; color: var(--grey); font-weight: 500; }
+  .footer-links { display: flex; gap: 24px; }
+  .footer-links a { font-size: 14px; color: var(--grey); text-decoration: none; font-weight: 600; }
+  .footer-links a:hover { color: var(--ink); }
+
+  @media (max-width: 900px) {
+    .hero-inner { grid-template-columns: 1fr; }
+    .hero h1 { font-size: 46px; max-width: none; }
+    .phone-stage { margin-top: 20px; }
+    .why-grid { grid-template-columns: 1fr; }
+    .journey { grid-template-columns: 1fr; gap: 40px; }
+    .ai-grid { grid-template-columns: 1fr; gap: 36px; }
+    .float-banner { width: 190px; right: -8px; top: -18px; }
+    .float-toast { left: -8px; }
+    .steps { grid-template-columns: 1fr; gap: 32px; }
+    .value-strip { grid-template-columns: 1fr; }
+    .waitlist { padding: 40px 28px; }
+    .nav-links { display: none; }
+    .section-head h2 { font-size: 32px; }
+  }
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="nav-inner">
+    <a class="brand" href="#top">
+      <svg width="26" height="31" viewBox="0 0 100 120" aria-hidden="true">
+        <path d="M50 4 C 24 4, 8 24, 8 49 C 8 80, 50 116, 50 116 C 50 116, 92 80, 92 49 C 92 24, 76 4, 50 4 Z" fill="#3DBFA0"/>
+        <circle cx="50" cy="49" r="24" fill="#fff"/>
+        <line x1="50" y1="49" x2="50" y2="36" stroke="#3DBFA0" stroke-width="4" stroke-linecap="round"/>
+        <line x1="50" y1="49" x2="61" y2="51" stroke="#3DBFA0" stroke-width="4" stroke-linecap="round"/>
+        <circle cx="50" cy="49" r="2.8" fill="#3DBFA0"/>
+      </svg>
+      Last Minute Local
+    </a>
+    <nav class="nav-links">
+      <a href="#how">How it works</a>
+      <a href="#why">Why we exist</a>
+      <a href="#ai">The AI</a>
+      <a href="#business">For business</a>
+    </nav>
+    <a href="#waitlist" class="btn btn-primary btn-sm">Join the waitlist</a>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="wrap hero-inner">
+      <div>
+        <div class="badge-live"><span class="dot"></span> Launching first in Brighton, UK</div>
+        <h1>Local deals that find you <em>before they're gone.</em></h1>
+        <p class="sub">Last Minute Local pushes real-time discounts from nearby shops, salons and restaurants straight to your phone, the moment they need filling.</p>
+        <div class="hero-ctas">
+          <a href="#waitlist" class="btn btn-primary" onclick="selectAudience('customer')">Get early access</a>
+          <a href="#how" class="btn btn-ghost">See how it works</a>
+        </div>
+        <p class="hero-note">Free to join. No commitment. We'll email you the day we go live near you.</p>
+      </div>
+
+      <div class="phone-stage">
+        <div class="phone-frame-wrap">
+          <div class="phone">
+            <div class="notch"></div>
+            <div class="screen">
+              <div class="status"><span>9:41</span><span>●●●</span></div>
+              <div class="app-header">
+                <div class="t">Nearby deals</div>
+                <div class="l">📍 Brighton · within 1 mi</div>
+              </div>
+              <div class="deal">
+                <div class="photo" style="background: linear-gradient(135deg,#2A9E82,#3DBFA0);">
+                  <img src="https://images.unsplash.com/photo-1503951914875-452162b0f3f1?auto=format&fit=crop&w=500&q=80" alt="" onerror="this.remove()">
+                  <span class="disc">40% off</span><span class="timer">⏱ 00:42</span>
+                </div>
+                <div class="meta"><div class="name">Frank's Barbers</div><div class="desc">Cut &amp; blow-dry · 0.4 mi</div></div>
+              </div>
+              <div class="deal">
+                <div class="photo" style="background: linear-gradient(135deg,#F59E0B,#FCD34D);">
+                  <img src="https://images.unsplash.com/photo-1599901860904-17e6ed7083a0?auto=format&fit=crop&w=500&q=80" alt="" onerror="this.remove()">
+                  <span class="disc">30% off</span><span class="timer red">⏱ 00:18</span>
+                </div>
+                <div class="meta"><div class="name">Bayside Yoga</div><div class="desc">5pm flow · 0.2 mi</div></div>
+              </div>
+              <div class="deal" style="margin-bottom:0;">
+                <div class="photo" style="background: linear-gradient(135deg,#1F7E68,#3DBFA0);">
+                  <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=500&q=80" alt="" onerror="this.remove()">
+                  <span class="disc">25% off</span><span class="timer">⏱ 01:12</span>
+                </div>
+                <div class="meta"><div class="name">LittleItaly</div><div class="desc">Dinner for two · 0.6 mi</div></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="float-banner">
+            <span class="fb-dot"></span>
+            <div>
+              <p class="fb-title">Frank's Barbers &middot; just now</p>
+              <p class="fb-body">You're 80m away. 40% off a cut, 3pm slot free.</p>
+            </div>
+          </div>
+
+          <div class="float-toast"><span class="ft-check">✓</span> Saved &pound;14 at Frank's</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section id="how" class="section-pad">
+    <div class="wrap">
+      <div class="section-head" style="margin-left:auto;margin-right:auto;text-align:center;">
+        <span class="eyebrow">How it works</span>
+        <h2>Browse. Claim. Redeem. Done.</h2>
+        <p style="margin-left:auto;margin-right:auto;">Three screens, sixty seconds, one very good deal.</p>
+      </div>
+
+      <div class="toggle-row">
+        <div class="toggle">
+          <button class="active" onclick="showJourney('customer', this)">I'm a customer</button>
+          <button onclick="showJourney('business', this)">I'm a business owner</button>
+        </div>
+      </div>
+
+      <div class="journey" id="journey-customer">
+        <div class="journey-step">
+          <div class="journey-label"><span class="jnum">1</span> Browse locally</div>
+          <div class="phone sp-mini">
+            <div class="notch"></div>
+            <div class="screen">
+              <div class="status"><span>9:41</span><span>&#9679;&#9679;&#9679;</span></div>
+              <div class="app-header">
+                <div class="t">Nearby deals</div>
+                <div class="l">&#128205; Brighton &middot; 1 mi</div>
+              </div>
+              <div class="deal">
+                <div class="photo" style="background: linear-gradient(135deg,#2A9E82,#3DBFA0);">
+                  <img src="https://images.unsplash.com/photo-1503951914875-452162b0f3f1?auto=format&fit=crop&w=500&q=80" alt="" onerror="this.remove()">
+                  <span class="disc">40%</span><span class="timer">&#9201; 00:42</span>
+                </div>
+                <div class="meta"><div class="name">Frank's Barbers</div><div class="desc">Cut &middot; 0.4 mi</div></div>
+              </div>
+              <div class="deal" style="margin-bottom:0;">
+                <div class="photo" style="background: linear-gradient(135deg,#F59E0B,#FCD34D);">
+                  <img src="https://images.unsplash.com/photo-1599901860904-17e6ed7083a0?auto=format&fit=crop&w=500&q=80" alt="" onerror="this.remove()">
+                  <span class="disc">30%</span><span class="timer red">&#9201; 00:18</span>
+                </div>
+                <div class="meta"><div class="name">Bayside Yoga</div><div class="desc">5pm flow &middot; 0.2 mi</div></div>
+              </div>
+            </div>
+          </div>
+          <p class="journey-caption">Real deals near you right now, filtered by what you actually want.</p>
+        </div>
+
+        <div class="journey-step">
+          <div class="journey-label"><span class="jnum">2</span> Tap to claim</div>
+          <div class="phone sp-mini">
+            <div class="notch"></div>
+            <div class="screen">
+              <div class="status"><span>9:41</span><span>&#9679;&#9679;&#9679;</span></div>
+              <div style="padding:10px 14px 0; font-size:11px; color:var(--grey);">&larr; Back</div>
+              <div class="deal" style="margin:10px 12px 8px;">
+                <div class="photo" style="background: linear-gradient(135deg,#2A9E82,#3DBFA0); height:84px;">
+                  <img src="https://images.unsplash.com/photo-1503951914875-452162b0f3f1?auto=format&fit=crop&w=500&q=80" alt="" onerror="this.remove()">
+                  <span class="disc">40% off</span><span class="timer">&#9201; 00:42</span>
+                </div>
+                <div class="meta"><div class="name">Frank's Barbers</div><div class="desc">Cut &amp; blow-dry &middot; 0.4 mi</div></div>
+              </div>
+              <div class="sp-qr">
+                <svg width="52" height="52" viewBox="0 0 8 8" shape-rendering="crispEdges">
+                  <rect width="8" height="8" fill="#fff"/>
+                  <g fill="#2C2C2C">
+                    <rect x="0" y="0" width="3" height="3"/><rect x="1" y="1" width="1" height="1" fill="#fff"/>
+                    <rect x="5" y="0" width="3" height="3"/><rect x="6" y="1" width="1" height="1" fill="#fff"/>
+                    <rect x="0" y="5" width="3" height="3"/><rect x="1" y="6" width="1" height="1" fill="#fff"/>
+                    <rect x="4" y="3" width="1" height="1"/><rect x="3" y="4" width="1" height="1"/>
+                    <rect x="5" y="4" width="1" height="1"/><rect x="4" y="5" width="1" height="1"/>
+                    <rect x="6" y="5" width="1" height="1"/><rect x="3" y="6" width="1" height="1"/>
+                    <rect x="5" y="6" width="1" height="1"/><rect x="7" y="4" width="1" height="1"/>
+                    <rect x="7" y="6" width="1" height="1"/>
+                  </g>
+                </svg>
+              </div>
+              <div class="sp-cta">Claimed &middot; tap to redeem</div>
+            </div>
+          </div>
+          <p class="journey-caption">Pay the booking fee in-app and get a QR code instantly. No forms.</p>
+        </div>
+
+        <div class="journey-step">
+          <div class="journey-label"><span class="jnum">3</span> Redeem &amp; go</div>
+          <div class="phone sp-mini">
+            <div class="notch"></div>
+            <div class="screen" style="background: var(--teal);">
+              <div class="status" style="color:#fff;"><span>9:41</span><span>&#9679;&#9679;&#9679;</span></div>
+              <div class="sp-redeem-body">
+                <div class="sp-check"><svg width="26" height="26" viewBox="0 0 24 24" fill="none"><path d="M5 12.5 10 17 19 7" stroke="#3DBFA0" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+                <p style="font-size:16px; font-weight:800; margin:0; color:#fff;">Redeemed!</p>
+                <p style="font-size:11px; opacity:0.85; margin:6px 0 0; color:#fff;">You saved &pound;14 at Frank's Barbers.</p>
+                <div style="font-size:14px; margin-top:14px; color:#fff;">&#9733; &#9733; &#9733; &#9733; &#9733;</div>
+              </div>
+            </div>
+          </div>
+          <p class="journey-caption">Show your code in store, or pick home delivery where it's on offer.</p>
+        </div>
+      </div>
+
+      <div class="journey" id="journey-business" style="display:none;">
+        <div class="journey-step">
+          <div class="journey-label"><span class="jnum">1</span> Snap a photo</div>
+          <div class="phone sp-mini">
+            <div class="notch"></div>
+            <div class="screen">
+              <div class="status"><span>9:41</span><span>&#9679;&#9679;&#9679;</span></div>
+              <div class="app-header"><div class="t">New offer</div></div>
+              <div class="sp-photo-add">+ Add photo</div>
+              <div class="sp-offer-box">
+                <p class="n">Cut &amp; blow-dry</p>
+                <p class="pr">Frank's Barbers</p>
+              </div>
+            </div>
+          </div>
+          <p class="journey-caption">Of the product, the service, or the empty chair you want to fill.</p>
+        </div>
+
+        <div class="journey-step">
+          <div class="journey-label"><span class="jnum">2</span> Set your floor</div>
+          <div class="phone sp-mini">
+            <div class="notch"></div>
+            <div class="screen">
+              <div class="status"><span>9:41</span><span>&#9679;&#9679;&#9679;</span></div>
+              <div class="app-header"><div class="t">Set discount</div></div>
+              <div class="sp-offer-box">
+                <p class="n">Cut &amp; blow-dry</p>
+                <p class="pr">&pound;35 &rarr; &pound;21</p>
+              </div>
+              <div class="sp-chip-row">
+                <div class="sp-chip">40%</div>
+                <div class="sp-chip active">50%</div>
+                <div class="sp-chip">60%</div>
+              </div>
+              <div class="sp-offer-box" style="margin-top:8px;">
+                <p class="n" style="font-weight:600;">Expires in 1 hour</p>
+              </div>
+            </div>
+          </div>
+          <p class="journey-caption">Pick the lowest discount you'll accept. Our AI never goes lower.</p>
+        </div>
+
+        <div class="journey-step">
+          <div class="journey-label"><span class="jnum">3</span> Go live</div>
+          <div class="phone sp-mini">
+            <div class="notch"></div>
+            <div class="screen" style="background: var(--teal);">
+              <div class="status" style="color:#fff;"><span>9:41</span><span>&#9679;&#9679;&#9679;</span></div>
+              <div class="sp-redeem-body">
+                <div class="sp-check"><svg width="26" height="26" viewBox="0 0 24 24" fill="none"><path d="M5 12.5 10 17 19 7" stroke="#3DBFA0" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+                <p style="font-size:16px; font-weight:800; margin:0; color:#fff;">You're live!</p>
+                <p style="font-size:11px; opacity:0.85; margin:6px 0 0; color:#fff;">Reaching nearby customers now.</p>
+              </div>
+            </div>
+          </div>
+          <p class="journey-caption">The offer reaches every opted-in customer nearby, instantly.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHY -->
+  <section id="why" class="section-pad surface">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">Why we exist</span>
+        <h2>Independent businesses lose money every single hour, quietly.</h2>
+        <p>An empty barber's chair at 3pm. A half-full yoga class. A table for two nobody booked. That time, and the revenue in it, vanishes the second it passes, with no way to get it back.</p>
+      </div>
+      <div class="why-grid">
+        <div class="why-card">
+          <div class="icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2"/><path d="M12 7v5l3 2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></div>
+          <h3>Time-bound inventory has no second chance</h3>
+          <p>Unlike products on a shelf, a missed appointment or unsold seating can't be sold tomorrow. Once the clock passes, that value is gone for good.</p>
+        </div>
+        <div class="why-card">
+          <div class="icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M12 2 3 7v6c0 5 4 8 9 9 5-1 9-4 9-9V7l-9-5Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg></div>
+          <h3>Small businesses can't compete on visibility</h3>
+          <p>Big chains run promotions with dedicated marketing teams. The independent shop on the corner has never had an easy way to say "we're quiet right now, come save."</p>
+        </div>
+        <div class="why-card">
+          <div class="icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M4 12h16M4 6h16M4 18h10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></div>
+          <h3>Customers want spontaneity, not spam</h3>
+          <p>People already act fast on time-limited local deals. They just need them delivered at the right moment, for the right category, without noise.</p>
+        </div>
+        <div class="why-card">
+          <div class="icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M13 2 4 14h7l-1 8 9-12h-7l1-8Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg></div>
+          <h3>The gap has simply never been filled</h3>
+          <p>No platform today matches real-time local availability with real-time local demand. We built one, free for both sides to use.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- THE AI -->
+  <section id="ai" class="section-pad surface">
+    <div class="wrap">
+      <div class="ai-grid">
+        <div class="ai-copy">
+          <span class="eyebrow">The AI</span>
+          <h2>Our AI sets the price. Not guesswork, not panic.</h2>
+          <p>The moment a slot is about to go to waste, our pricing engine starts lifting the discount in real time, calibrated to exactly how much time is left and how much interest the offer is getting. Retailers set the floor they're comfortable with. The AI never crosses it. It just finds the smallest discount that still fills the seat before the clock runs out.</p>
+          <div class="ai-chips">
+            <span class="pill-tag">Retailer sets the floor</span>
+            <span class="pill-tag">Repriced in real time</span>
+            <span class="pill-tag">Zero manual work</span>
+          </div>
+        </div>
+        <div class="surge">
+          <div class="surge-line"></div>
+          <div class="surge-stage">
+            <div class="surge-time">2 hrs left</div>
+            <div class="surge-dot"></div>
+            <div class="surge-pct">10% off</div>
+          </div>
+          <div class="surge-stage">
+            <div class="surge-time">45 min left</div>
+            <div class="surge-dot"></div>
+            <div class="surge-pct">25% off</div>
+          </div>
+          <div class="surge-stage">
+            <div class="surge-time">15 min left</div>
+            <div class="surge-dot"></div>
+            <div class="surge-pct">40% off</div>
+          </div>
+          <div class="surge-stage urgent">
+            <div class="surge-time">Last call</div>
+            <div class="surge-dot"></div>
+            <div class="surge-pct">55% off</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BUSINESS MODEL -->
+  <section id="business" class="section-pad surface">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">For business owners</span>
+        <h2>Fill the chair. Save the sale. Free to join.</h2>
+        <p>Turn your quietest hours into new customers, with no marketing budget and no long-term commitment.</p>
+      </div>
+      <div class="value-strip">
+        <div class="value-card">
+          <div class="icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M4 12h16M4 6h16M4 18h10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></div>
+          <h3>Free to list, always</h3>
+          <p>Create an account and start posting live offers in minutes. No subscription, no setup fee, no catch.</p>
+        </div>
+        <div class="value-card">
+          <div class="icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M12 2 3 7v6c0 5 4 8 9 9 5-1 9-4 9-9V7l-9-5Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg></div>
+          <h3>Reach real local demand</h3>
+          <p>Your deal reaches people nearby who are actively looking for exactly what you offer, right now.</p>
+        </div>
+        <div class="value-card">
+          <div class="icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2"/><path d="M12 7v5l3 2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></div>
+          <h3>AI protects your margin</h3>
+          <p>Set the lowest discount you'll accept. Our AI never goes below it, even as urgency builds toward expiry.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WAITLIST -->
+  <section id="waitlist" class="section-pad">
+    <div class="wrap">
+      <div class="waitlist">
+        <div class="waitlist-head">
+          <span class="eyebrow">Join the waitlist</span>
+          <h2>Be first in line when we go live.</h2>
+          <p>We're onboarding our first businesses and customers in Brighton now, with more high streets following right after. Tell us who you are and we'll let you know the moment it's your turn.</p>
+        </div>
+
+        <div class="wl-toggle">
+          <button class="active" id="wl-tab-customer" onclick="switchWaitlist('customer')">I'm a customer</button>
+          <button id="wl-tab-business" onclick="switchWaitlist('business')">I'm a business</button>
+        </div>
+
+        <div class="wl-form-wrap">
+          <form class="wl-form active" id="wl-form-customer" onsubmit="return submitWaitlist(event, 'customer')">
+            <div class="wl-row">
+              <input type="email" name="email" placeholder="Email address" required>
+              <input type="text" name="postcode" id="customer-postcode" placeholder="UK postcode, e.g. BN1 1AA" autocapitalize="characters" required>
+            </div>
+            <p class="wl-error" id="customer-postcode-error">Please enter a valid UK postcode.</p>
+            <button type="submit" class="wl-submit">Get early access</button>
+            <p class="wl-fineprint">Free forever. Unsubscribe any time. We'll never sell your data.</p>
+          </form>
+
+          <form class="wl-form" id="wl-form-business" onsubmit="return submitWaitlist(event, 'business')">
+            <div class="wl-row">
+              <input type="text" name="business" placeholder="Business name" required>
+              <select name="category" required>
+                <option value="" disabled selected>Business type</option>
+                <option>Hair &amp; beauty</option>
+                <option>Fitness &amp; wellness</option>
+                <option>Restaurant &amp; café</option>
+                <option>Retail &amp; boutique</option>
+                <option>Other services</option>
+              </select>
+            </div>
+            <div class="wl-row">
+              <input type="email" name="email" placeholder="Email address" required>
+              <input type="text" name="postcode" id="business-postcode" placeholder="UK postcode, e.g. BN1 1AA" autocapitalize="characters" required>
+            </div>
+            <p class="wl-error" id="business-postcode-error">Please enter a valid UK postcode.</p>
+            <button type="submit" class="wl-submit">List your business</button>
+            <p class="wl-fineprint">Free to join. No commission until you choose to promote a deal.</p>
+          </form>
+
+          <div class="wl-success" id="wl-success">
+            <div class="check"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M5 12.5 10 17 19 7" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+            <div>
+              <h4 id="wl-success-title">You're on the list.</h4>
+              <p id="wl-success-body">We'll email you the moment Last Minute Local goes live near you.</p>
+            </div>
+          </div>
+        </div>
+
+        <p class="wl-contact">Investor or potential partner? <a href="mailto:hello@lastminutelocal.co?subject=Investor%20enquiry">Get in touch</a>.</p>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap footer-inner">
+    <div class="footer-brand">
+      <svg width="20" height="24" viewBox="0 0 100 120" aria-hidden="true">
+        <path d="M50 4 C 24 4, 8 24, 8 49 C 8 80, 50 116, 50 116 C 50 116, 92 80, 92 49 C 92 24, 76 4, 50 4 Z" fill="#3DBFA0"/>
+        <circle cx="50" cy="49" r="24" fill="#fff"/>
+        <line x1="50" y1="49" x2="50" y2="36" stroke="#3DBFA0" stroke-width="4" stroke-linecap="round"/>
+        <line x1="50" y1="49" x2="61" y2="51" stroke="#3DBFA0" stroke-width="4" stroke-linecap="round"/>
+        <circle cx="50" cy="49" r="2.8" fill="#3DBFA0"/>
+      </svg>
+      Last Minute Local
+    </div>
+    <p class="footer-note">© 2026 Last Minute Local. Made for the high street.</p>
+    <div class="footer-links">
+      <a href="#why">Why we exist</a>
+      <a href="#how">How it works</a>
+      <a href="#waitlist">Join waitlist</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  function showJourney(which, btn) {
+    document.querySelectorAll('#how .toggle button').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById('journey-customer').style.display = which === 'customer' ? 'grid' : 'none';
+    document.getElementById('journey-business').style.display = which === 'business' ? 'grid' : 'none';
+  }
+
+  function switchWaitlist(which) {
+    document.getElementById('wl-tab-customer').classList.toggle('active', which === 'customer');
+    document.getElementById('wl-tab-business').classList.toggle('active', which === 'business');
+    document.getElementById('wl-form-customer').classList.toggle('active', which === 'customer');
+    document.getElementById('wl-form-business').classList.toggle('active', which === 'business');
+    document.getElementById('wl-form-customer').style.display = which === 'customer' ? 'flex' : 'none';
+    document.getElementById('wl-form-business').style.display = which === 'business' ? 'flex' : 'none';
+    document.getElementById('wl-success').classList.remove('active');
+  }
+
+  function selectAudience(which) {
+    switchWaitlist(which);
+  }
+
+  const UK_POSTCODE_RE = /^[A-Z]{1,2}[0-9][A-Z0-9]?\s*[0-9][A-Z]{2}$/i;
+
+  function submitWaitlist(evt, kind) {
+    evt.preventDefault();
+    const form = evt.target;
+
+    if (kind === 'business' || kind === 'customer') {
+      const pc = form.querySelector('#' + kind + '-postcode');
+      const err = document.getElementById(kind + '-postcode-error');
+      const valid = UK_POSTCODE_RE.test(pc.value.trim());
+      pc.classList.toggle('invalid', !valid);
+      err.classList.toggle('active', !valid);
+      if (!valid) { pc.focus(); return false; }
+    }
+
+    const data = Object.fromEntries(new FormData(form).entries());
+
+    try {
+      const key = 'lml_waitlist_signups';
+      const existing = JSON.parse(localStorage.getItem(key) || '[]');
+      existing.push({ kind, ...data, ts: Date.now() });
+      localStorage.setItem(key, JSON.stringify(existing));
+    } catch (e) {}
+
+    form.style.display = 'none';
+    const otherForm = document.getElementById(kind === 'customer' ? 'wl-form-business' : 'wl-form-customer');
+    otherForm.style.display = 'none';
+    otherForm.classList.remove('active');
+
+    document.getElementById('wl-success-title').textContent = "You're on the list.";
+    document.getElementById('wl-success-body').textContent = kind === 'customer'
+      ? "We'll email you the moment deals go live near you."
+      : "We'll be in touch to get " + (data.business || 'your business') + " set up before we launch.";
+    document.getElementById('wl-success').classList.add('active');
+
+    return false;
+  }
+</script>
+
+</body>
+</html>

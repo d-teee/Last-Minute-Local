@@ -1,0 +1,566 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Last Minute Local — Unit Economics Model</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --teal: #3DBFA0;
+    --teal-dark: #2A9E82;
+    --teal-deep: #1F7E68;
+    --teal-tint: #E6F5F0;
+    --bg: #FFFFFF;
+    --surface: #F7F9F8;
+    --ink: #2C2C2C;
+    --grey: #6B7280;
+    --grey-light: #D1D5DB;
+    --amber: #F59E0B;
+    --red: #EF4444;
+    --line: #E5E9E8;
+    --input-bg: #FFFCEF;
+    --input-border: #E8D98A;
+    --radius-card: 18px;
+    --radius-sm: 10px;
+    --shadow-card: 0 18px 40px -22px rgba(31, 126, 104, 0.22), 0 2px 8px rgba(44,44,44,0.05);
+  }
+
+  * { box-sizing: border-box; }
+  html, body { margin: 0; }
+  body {
+    background: #EEF2F1;
+    font-family: 'Inter', system-ui, sans-serif;
+    color: var(--ink);
+    line-height: 1.45;
+    -webkit-font-smoothing: antialiased;
+    padding: 0 0 80px;
+  }
+  .mono { font-family: 'JetBrains Mono', monospace; font-variant-numeric: tabular-nums; letter-spacing: -0.02em; }
+
+  /* ---------------- Top bar ---------------- */
+  .topbar {
+    position: sticky; top: 0; z-index: 20;
+    background: var(--teal-deep);
+    color: #fff;
+    padding: 18px 32px;
+    display: flex; align-items: center; gap: 24px; flex-wrap: wrap;
+    box-shadow: 0 4px 20px rgba(31,126,104,0.25);
+  }
+  .brand { display: flex; align-items: center; gap: 12px; }
+  .brand .dot { width: 14px; height: 14px; border-radius: 50%; background: var(--teal); box-shadow: 0 0 0 4px rgba(61,191,160,0.3); }
+  .brand h1 { font-size: 17px; font-weight: 800; margin: 0; letter-spacing: -0.01em; }
+  .brand p { font-size: 12px; margin: 1px 0 0; color: rgba(255,255,255,0.7); font-weight: 500; }
+  .topbar .spacer { flex: 1; }
+  .preset-group { display: flex; align-items: center; gap: 8px; }
+  .preset-group span.lbl { font-size: 11px; text-transform: uppercase; letter-spacing: 0.12em; color: rgba(255,255,255,0.65); font-weight: 700; margin-right: 4px; }
+  .btn {
+    font-family: inherit; font-size: 13px; font-weight: 700;
+    border: 1.5px solid rgba(255,255,255,0.35); background: rgba(255,255,255,0.08); color: #fff;
+    padding: 7px 14px; border-radius: 999px; cursor: pointer; transition: all 0.15s;
+  }
+  .btn:hover { background: rgba(255,255,255,0.2); }
+  .btn.active { background: #fff; color: var(--teal-deep); border-color: #fff; }
+  .btn.ghost { border-color: rgba(255,255,255,0.25); }
+
+  /* ---------------- Layout ---------------- */
+  .wrap { max-width: 1340px; margin: 0 auto; padding: 28px 32px 0; }
+  .grid { display: grid; grid-template-columns: 380px 1fr; gap: 24px; align-items: start; }
+  @media (max-width: 1080px) { .grid { grid-template-columns: 1fr; } }
+
+  .card {
+    background: #fff; border-radius: var(--radius-card);
+    box-shadow: var(--shadow-card); border: 1px solid var(--line);
+    overflow: hidden;
+  }
+  .card + .card { margin-top: 24px; }
+  .card-head {
+    padding: 16px 22px; border-bottom: 1px solid var(--line);
+    display: flex; align-items: baseline; gap: 10px;
+  }
+  .card-head h2 { font-size: 15px; font-weight: 800; margin: 0; letter-spacing: -0.01em; }
+  .card-head .eyebrow { font-size: 10px; text-transform: uppercase; letter-spacing: 0.16em; font-weight: 800; color: var(--teal-dark); }
+  .card-head .hint { font-size: 11px; color: var(--grey); margin-left: auto; font-weight: 500; }
+  .card-body { padding: 8px 22px 18px; }
+
+  .group-label {
+    font-size: 10px; text-transform: uppercase; letter-spacing: 0.14em; font-weight: 800;
+    color: var(--grey); margin: 18px 0 6px; padding-top: 12px; border-top: 1px dashed var(--line);
+  }
+  .group-label:first-child { border-top: none; padding-top: 4px; margin-top: 6px; }
+
+  /* ---------------- Input rows ---------------- */
+  .row { display: flex; align-items: center; gap: 10px; padding: 5px 0; }
+  .row label { font-size: 13px; color: var(--ink); flex: 1; font-weight: 500; }
+  .row label small { display: block; color: var(--grey); font-size: 11px; font-weight: 400; margin-top: 1px; }
+  .input-cell { display: flex; align-items: center; gap: 0; }
+  .input-cell .pre, .input-cell .post {
+    font-size: 12px; color: var(--grey); font-weight: 600; padding: 0 6px;
+    font-family: 'JetBrains Mono', monospace;
+  }
+  input[type=number] {
+    width: 76px; text-align: right;
+    font-family: 'JetBrains Mono', monospace; font-size: 13px; font-weight: 600;
+    color: var(--teal-deep);
+    background: var(--input-bg); border: 1.5px solid var(--input-border);
+    border-radius: 7px; padding: 6px 8px;
+    -moz-appearance: textfield;
+  }
+  input[type=number]:focus { outline: none; border-color: var(--teal); box-shadow: 0 0 0 3px rgba(61,191,160,0.2); }
+  input[type=number]::-webkit-outer-spin-button,
+  input[type=number]::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+
+  /* ---------------- Output tables ---------------- */
+  table { width: 100%; border-collapse: collapse; }
+  th, td { text-align: right; padding: 9px 10px; font-size: 13px; }
+  th:first-child, td:first-child { text-align: left; }
+  thead th {
+    font-size: 10px; text-transform: uppercase; letter-spacing: 0.12em; color: var(--grey);
+    font-weight: 800; border-bottom: 2px solid var(--line); padding-bottom: 8px;
+  }
+  tbody tr { border-bottom: 1px solid var(--line); }
+  tbody tr:last-child { border-bottom: none; }
+  td.num { font-family: 'JetBrains Mono', monospace; font-weight: 600; font-variant-numeric: tabular-nums; }
+  td.lbl { font-weight: 500; }
+  td.lbl small { color: var(--grey); font-weight: 400; font-size: 11px; }
+  tr.total td { font-weight: 800; border-top: 2px solid var(--ink); border-bottom: none; padding-top: 11px; }
+  tr.total td.num { color: var(--teal-deep); font-size: 15px; }
+  tr.sub td { color: var(--grey); }
+  tr.cost td.num { color: var(--red); }
+  tr.spacer-row td { padding: 3px; border: none; }
+
+  /* KPI strip */
+  .kpis { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 24px; }
+  @media (max-width: 720px) { .kpis { grid-template-columns: repeat(2, 1fr); } }
+  .kpi {
+    background: #fff; border-radius: var(--radius-card); border: 1px solid var(--line);
+    box-shadow: var(--shadow-card); padding: 18px 20px;
+  }
+  .kpi .k-label { font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--grey); font-weight: 700; }
+  .kpi .k-val { font-family: 'JetBrains Mono', monospace; font-size: 30px; font-weight: 700; letter-spacing: -0.03em; margin: 6px 0 2px; color: var(--teal-deep); }
+  .kpi .k-sub { font-size: 11px; color: var(--grey); font-weight: 500; }
+  .kpi.accent { background: var(--teal-deep); border-color: var(--teal-deep); }
+  .kpi.accent .k-label { color: rgba(255,255,255,0.7); }
+  .kpi.accent .k-val { color: #fff; }
+  .kpi.accent .k-sub { color: rgba(255,255,255,0.8); }
+
+  .pill { display: inline-block; font-size: 11px; font-weight: 700; padding: 2px 9px; border-radius: 999px; font-family: 'JetBrains Mono', monospace; }
+  .pill.warn { background: #FEF3C7; color: #92400E; }
+  .pill.good { background: var(--teal-tint); color: var(--teal-deep); }
+  .pill.bad { background: #FEE2E2; color: #991B1B; }
+
+  /* scenario columns table */
+  .scen-table td.num.hl { background: var(--teal-tint); border-radius: 6px; }
+
+  /* Sensitivity grid */
+  .sens-wrap { overflow-x: auto; }
+  table.sens td, table.sens th { text-align: center; padding: 7px 6px; font-size: 12px; }
+  table.sens th:first-child, table.sens td:first-child { text-align: right; }
+  table.sens .corner { font-size: 10px; color: var(--grey); font-weight: 700; }
+  table.sens .axis-h { background: var(--surface); font-weight: 700; }
+  table.sens .axis-v { background: var(--surface); font-weight: 700; font-family: 'JetBrains Mono', monospace; }
+  table.sens .cell { font-family: 'JetBrains Mono', monospace; font-weight: 600; color: #fff; border-radius: 5px; }
+
+  .note { font-size: 12px; color: var(--grey); line-height: 1.5; margin: 14px 22px 4px; }
+  .note strong { color: var(--ink); }
+
+  .axis-caption { font-size: 11px; color: var(--grey); font-weight: 600; margin: 4px 0 14px; }
+  .flag { font-size: 12.5px; color: var(--ink); background: #FEF9E7; border: 1px solid #F1E2A6; border-radius: 10px; padding: 12px 16px; margin: 6px 22px 16px; line-height: 1.5; }
+  .flag b { color: #92400E; }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="brand">
+    <span class="dot"></span>
+    <div>
+      <h1>Last Minute Local — Unit Economics Model</h1>
+      <p>Editable working model · not investor-facing</p>
+    </div>
+  </div>
+  <div class="spacer"></div>
+  <div class="preset-group">
+    <span class="lbl">Scenario</span>
+    <button class="btn" data-preset="bear">Bear</button>
+    <button class="btn active" data-preset="base">Base</button>
+    <button class="btn" data-preset="bull">Bull</button>
+    <button class="btn ghost" id="resetBtn" style="margin-left:8px;">Reset</button>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <!-- KPI strip -->
+  <div class="kpis" id="kpis"></div>
+
+  <div class="grid">
+
+    <!-- =============== ASSUMPTIONS =============== -->
+    <div>
+      <div class="card">
+        <div class="card-head">
+          <span class="eyebrow">Inputs</span>
+          <h2>Assumptions</h2>
+          <span class="hint">edit any yellow cell</span>
+        </div>
+        <div class="card-body" id="inputs"></div>
+      </div>
+    </div>
+
+    <!-- =============== OUTPUTS =============== -->
+    <div>
+      <!-- Per retailer -->
+      <div class="card">
+        <div class="card-head">
+          <span class="eyebrow">Output</span>
+          <h2>Revenue per active retailer</h2>
+          <span class="hint">per month unless noted</span>
+        </div>
+        <div class="card-body">
+          <table id="perRetailer"></table>
+        </div>
+      </div>
+
+      <!-- Scale -->
+      <div class="card">
+        <div class="card-head">
+          <span class="eyebrow">Output</span>
+          <h2>Scale — annual recurring revenue</h2>
+        </div>
+        <div class="card-body">
+          <table class="scen-table" id="scaleTable"></table>
+        </div>
+        <p class="note" id="penNote"></p>
+      </div>
+
+      <!-- P&L -->
+      <div class="card">
+        <div class="card-head">
+          <span class="eyebrow">Output</span>
+          <h2>P&amp;L at national scale</h2>
+          <span class="hint" id="plBasis"></span>
+        </div>
+        <div class="card-body">
+          <table id="plTable"></table>
+        </div>
+        <div class="flag" id="procFlag"></div>
+      </div>
+
+      <!-- Sensitivity -->
+      <div class="card">
+        <div class="card-head">
+          <span class="eyebrow">Output</span>
+          <h2>Sensitivity — national ARR</h2>
+        </div>
+        <div class="card-body">
+          <p class="axis-caption">National ARR (£) &nbsp;·&nbsp; Rows: completed bookings / retailer / month &nbsp;·&nbsp; Columns: active retailers / city</p>
+          <div class="sens-wrap">
+            <table class="sens" id="sensTable"></table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+// ---------------- Model definition ----------------
+const FIELDS = [
+  { group: 'Revenue · commission (Stream 01)' },
+  { key: 'atv',        label: 'Avg transaction value', sub: 'discounted price paid', pre: '£', val: 30, step: 1 },
+  { key: 'shareT1',    label: 'Baskets under £100',     sub: 'taxed at 10%', post: '%', val: 88, step: 1 },
+  { key: 'shareT2',    label: 'Baskets £100–£200',      sub: 'taxed at 7.5%', post: '%', val: 9, step: 1 },
+  { key: 'shareT3',    label: 'Baskets over £200',      sub: 'taxed at 5%', post: '%', val: 3, step: 1 },
+  { key: 'bookings',   label: 'Completed bookings', sub: 'per retailer / month', post: '/mo', val: 60, step: 5 },
+
+  { group: 'Revenue · marketing (Streams 02–04)' },
+  { key: 'dodPrice',   label: 'Deal of the Day price', pre: '£', post: '/day', val: 7, step: 1 },
+  { key: 'dodDays',    label: 'Days bought / month',   post: 'd', val: 8, step: 1 },
+  { key: 'dodAdopt',   label: 'Retailer adoption',    post: '%', val: 40, step: 5 },
+  { key: 'alertPrice', label: 'Alert / geo push fee', pre: '£', val: 1, step: 0.5 },
+  { key: 'alertVol',   label: 'Pushes / month',       post: '#', val: 30, step: 5 },
+  { key: 'alertAdopt', label: 'Push adoption',        post: '%', val: 50, step: 5 },
+
+  { group: 'Scale' },
+  { key: 'retPerCity', label: 'Active retailers / city', sub: 'at maturity', val: 400, step: 25 },
+  { key: 'cities',     label: 'Cities live',            sub: 'national scenario', val: 50, step: 1 },
+  { key: 'ukBiz',      label: 'UK target businesses',  sub: 'for penetration %', val: 320000, step: 10000 },
+
+  { group: 'Costs · cost of sale' },
+  { key: 'procFixed',  label: 'Processing fixed fee', sub: 'per transaction', pre: '£', val: 0.20, step: 0.01 },
+  { key: 'procVar',    label: 'Processing variable',  post: '%', val: 1.5, step: 0.1 },
+  { key: 'infraPct',   label: 'Infra & AI',           sub: '% of revenue', post: '%', val: 4, step: 0.5 },
+  { key: 'supportPct', label: 'Tier-1 support',       sub: '% of revenue', post: '%', val: 3, step: 0.5 },
+
+  { group: 'Costs · operating (% of revenue)' },
+  { key: 'smPct',      label: 'Sales & marketing',  post: '%', val: 20, step: 1 },
+  { key: 'rdPct',      label: 'R&D / product',      post: '%', val: 13, step: 1 },
+  { key: 'opsPct',     label: 'City ops / accounts',post: '%', val: 8, step: 1 },
+  { key: 'gaPct',      label: 'G&A',                post: '%', val: 7, step: 1 },
+];
+
+const PRESETS = {
+  bear: { atv: 25, bookings: 35, dodDays: 5, dodAdopt: 25, alertVol: 20, alertAdopt: 35, retPerCity: 250, cities: 40, smPct: 25, rdPct: 15, opsPct: 10, gaPct: 8 },
+  base: {}, // defaults defined inline below
+  bull: { atv: 35, bookings: 100, dodDays: 12, dodAdopt: 55, alertVol: 45, alertAdopt: 65, retPerCity: 550, cities: 60, smPct: 18, rdPct: 12, opsPct: 7, gaPct: 6 },
+};
+// capture base defaults
+const BASE_DEFAULTS = {};
+FIELDS.forEach(f => { if (f.key) BASE_DEFAULTS[f.key] = f.val; });
+PRESETS.base = { ...BASE_DEFAULTS };
+
+let state = { ...BASE_DEFAULTS };
+
+// ---------------- Formatting helpers ----------------
+const gbp = (n, dp=0) => '£' + n.toLocaleString('en-GB', { minimumFractionDigits: dp, maximumFractionDigits: dp });
+function gbpAbbr(n) {
+  const a = Math.abs(n);
+  if (a >= 1e9) return '£' + (n/1e9).toFixed(2) + 'bn';
+  if (a >= 1e6) return '£' + (n/1e6).toFixed(2) + 'M';
+  if (a >= 1e3) return '£' + (n/1e3).toFixed(0) + 'k';
+  return '£' + n.toFixed(0);
+}
+const pct = (n, dp=1) => n.toFixed(dp) + '%';
+
+// ---------------- The model ----------------
+function compute(s) {
+  // blended commission rate from tier mix
+  const t1 = s.shareT1, t2 = s.shareT2, t3 = s.shareT3;
+  const tot = Math.max(t1 + t2 + t3, 0.0001);
+  const blendedRate = (t1*10 + t2*7.5 + t3*5) / tot; // %
+  const commissionPerBooking = s.atv * blendedRate/100;
+
+  // per retailer / month
+  const commissionPM = commissionPerBooking * s.bookings;
+  const dodPM   = s.dodPrice * s.dodDays * (s.dodAdopt/100);
+  const alertPM = s.alertPrice * s.alertVol * (s.alertAdopt/100);
+  const marketingPM = dodPM + alertPM;
+  const revPM = commissionPM + marketingPM;
+
+  // cost of sale per retailer / month
+  const procPM = s.bookings * (s.procFixed + commissionPerBooking * s.procVar/100);
+  const infraPM = revPM * s.infraPct/100;
+  const supportPM = revPM * s.supportPct/100;
+  const cosPM = procPM + infraPM + supportPM;
+  const gpPM = revPM - cosPM;
+  const gmPct = revPM > 0 ? gpPM/revPM*100 : 0;
+
+  // scale
+  const revPerCity = revPM * 12 * s.retPerCity;
+  const nationalRet = s.retPerCity * s.cities;
+  const nationalRev = revPM * 12 * nationalRet;
+  const penetration = s.ukBiz > 0 ? nationalRet / s.ukBiz * 100 : 0;
+
+  // national P&L
+  const gp = nationalRev * gmPct/100;
+  const sm = nationalRev * s.smPct/100;
+  const rd = nationalRev * s.rdPct/100;
+  const ops = nationalRev * s.opsPct/100;
+  const ga = nationalRev * s.gaPct/100;
+  const ebit = gp - sm - rd - ops - ga;
+  const ebitPct = nationalRev > 0 ? ebit/nationalRev*100 : 0;
+
+  // processing drag on commission
+  const procDragOnComm = commissionPM > 0 ? procPM/commissionPM*100 : 0;
+
+  return { blendedRate, commissionPerBooking, commissionPM, dodPM, alertPM, marketingPM, revPM,
+    procPM, infraPM, supportPM, cosPM, gpPM, gmPct,
+    revPerCity, nationalRet, nationalRev, penetration,
+    gp, sm, rd, ops, ga, ebit, ebitPct, procDragOnComm };
+}
+
+// national ARR (for sensitivity) given override bookings & retailers/city
+function arrFor(bookings, retPerCity) {
+  const s = { ...state, bookings, retPerCity };
+  return compute(s).nationalRev;
+}
+
+// ---------------- Render: inputs ----------------
+function renderInputs() {
+  const host = document.getElementById('inputs');
+  host.innerHTML = '';
+  FIELDS.forEach(f => {
+    if (f.group) {
+      const g = document.createElement('div');
+      g.className = 'group-label';
+      g.textContent = f.group;
+      host.appendChild(g);
+      return;
+    }
+    const row = document.createElement('div');
+    row.className = 'row';
+    const lab = document.createElement('label');
+    lab.innerHTML = f.label + (f.sub ? `<small>${f.sub}</small>` : '');
+    const cell = document.createElement('div');
+    cell.className = 'input-cell';
+    const pre = f.pre ? `<span class="pre">${f.pre}</span>` : '';
+    const post = f.post ? `<span class="post">${f.post}</span>` : '';
+    cell.innerHTML = pre;
+    const inp = document.createElement('input');
+    inp.type = 'number'; inp.step = f.step || 1; inp.value = state[f.key];
+    inp.dataset.key = f.key;
+    inp.addEventListener('input', () => {
+      const v = parseFloat(inp.value);
+      state[f.key] = isNaN(v) ? 0 : v;
+      clearActivePreset();
+      renderOutputs();
+    });
+    cell.appendChild(inp);
+    if (post) cell.insertAdjacentHTML('beforeend', post);
+    row.appendChild(lab); row.appendChild(cell);
+    host.appendChild(row);
+  });
+}
+
+// ---------------- Render: outputs ----------------
+function renderOutputs() {
+  const m = compute(state);
+
+  // KPIs
+  document.getElementById('kpis').innerHTML = `
+    <div class="kpi">
+      <div class="k-label">Rev / retailer / yr</div>
+      <div class="k-val">${gbpAbbr(m.revPM*12)}</div>
+      <div class="k-sub">${gbp(m.revPM,0)} / month</div>
+    </div>
+    <div class="kpi">
+      <div class="k-label">Gross margin</div>
+      <div class="k-val">${pct(m.gmPct,0)}</div>
+      <div class="k-sub">${marginPill(m.gmPct, 78, 84)}</div>
+    </div>
+    <div class="kpi accent">
+      <div class="k-label">National ARR</div>
+      <div class="k-val">${gbpAbbr(m.nationalRev)}</div>
+      <div class="k-sub">${m.nationalRet.toLocaleString('en-GB')} retailers · ${pct(m.penetration,1)} of market</div>
+    </div>
+    <div class="kpi">
+      <div class="k-label">National EBIT</div>
+      <div class="k-val">${pct(m.ebitPct,0)}</div>
+      <div class="k-sub">${gbpAbbr(m.ebit)} operating profit</div>
+    </div>`;
+
+  // Per retailer table
+  document.getElementById('perRetailer').innerHTML = `
+    <thead><tr><th>Line</th><th>Driver</th><th>£ / month</th></tr></thead>
+    <tbody>
+      <tr><td class="lbl">Blended commission rate</td><td class="num" style="color:var(--grey)">${pct(m.blendedRate,2)}</td><td class="num" style="color:var(--grey)">${gbp(m.commissionPerBooking,2)}/bk</td></tr>
+      <tr><td class="lbl">Commission <small>Stream 01</small></td><td class="num" style="color:var(--grey)">${state.bookings} bookings</td><td class="num">${gbp(m.commissionPM,0)}</td></tr>
+      <tr class="sub"><td class="lbl">Deal of the Day <small>Stream 02</small></td><td class="num">${pct(state.dodAdopt,0)} adopt</td><td class="num">${gbp(m.dodPM,0)}</td></tr>
+      <tr class="sub"><td class="lbl">Alerts + geo pushes <small>Streams 03–04</small></td><td class="num">${pct(state.alertAdopt,0)} adopt</td><td class="num">${gbp(m.alertPM,0)}</td></tr>
+      <tr class="total"><td class="lbl">Total revenue / retailer</td><td class="num"></td><td class="num">${gbp(m.revPM,0)}</td></tr>
+      <tr class="spacer-row"><td colspan="3"></td></tr>
+      <tr class="cost"><td class="lbl">Payment processing</td><td class="num" style="color:var(--grey)">${pct(m.procDragOnComm,0)} of comm.</td><td class="num">−${gbp(m.procPM,0)}</td></tr>
+      <tr class="cost"><td class="lbl">Infra &amp; AI + support</td><td class="num" style="color:var(--grey)">${pct(state.infraPct+state.supportPct,0)} of rev</td><td class="num">−${gbp(m.infraPM+m.supportPM,0)}</td></tr>
+      <tr class="total"><td class="lbl">Gross profit / retailer</td><td class="num">${pct(m.gmPct,0)} margin</td><td class="num">${gbp(m.gpPM,0)}</td></tr>
+    </tbody>`;
+
+  // Scale table — pilot / 10-city / national
+  const pilotRet = 50, pilotRev = m.revPM*12*pilotRet;
+  const tenRet = state.retPerCity*10, tenRev = m.revPM*12*tenRet;
+  document.getElementById('scaleTable').innerHTML = `
+    <thead><tr><th>Stage</th><th>Active retailers</th><th>Annual revenue</th></tr></thead>
+    <tbody>
+      <tr><td class="lbl">Brighton pilot <small>50 signed-up</small></td><td class="num">${pilotRet.toLocaleString('en-GB')}</td><td class="num">${gbpAbbr(pilotRev)}</td></tr>
+      <tr><td class="lbl">10 cities <small>at maturity</small></td><td class="num">${tenRet.toLocaleString('en-GB')}</td><td class="num">${gbpAbbr(tenRev)}</td></tr>
+      <tr class="total"><td class="lbl">National <small>${state.cities} cities</small></td><td class="num">${m.nationalRet.toLocaleString('en-GB')}</td><td class="num hl">${gbpAbbr(m.nationalRev)}</td></tr>
+    </tbody>`;
+  document.getElementById('penNote').innerHTML =
+    `National scenario = <strong>${m.nationalRet.toLocaleString('en-GB')} active retailers</strong>, just <strong>${pct(m.penetration,1)}</strong> of your ${(state.ukBiz/1000).toFixed(0)}k-business target market.`;
+
+  // P&L
+  document.getElementById('plBasis').textContent = `${state.cities} cities · ${gbpAbbr(m.nationalRev)} ARR`;
+  document.getElementById('plTable').innerHTML = `
+    <thead><tr><th>Line</th><th>% of rev</th><th>£ / year</th></tr></thead>
+    <tbody>
+      <tr><td class="lbl">Revenue</td><td class="num" style="color:var(--grey)">100%</td><td class="num">${gbpAbbr(m.nationalRev)}</td></tr>
+      <tr><td class="lbl">Gross profit</td><td class="num" style="color:var(--grey)">${pct(m.gmPct,0)}</td><td class="num">${gbpAbbr(m.gp)}</td></tr>
+      <tr class="cost"><td class="lbl">Sales &amp; marketing</td><td class="num" style="color:var(--grey)">${pct(state.smPct,0)}</td><td class="num">−${gbpAbbr(m.sm)}</td></tr>
+      <tr class="cost"><td class="lbl">R&amp;D / product</td><td class="num" style="color:var(--grey)">${pct(state.rdPct,0)}</td><td class="num">−${gbpAbbr(m.rd)}</td></tr>
+      <tr class="cost"><td class="lbl">City ops / accounts</td><td class="num" style="color:var(--grey)">${pct(state.opsPct,0)}</td><td class="num">−${gbpAbbr(m.ops)}</td></tr>
+      <tr class="cost"><td class="lbl">G&amp;A</td><td class="num" style="color:var(--grey)">${pct(state.gaPct,0)}</td><td class="num">−${gbpAbbr(m.ga)}</td></tr>
+      <tr class="total"><td class="lbl">Operating profit (EBIT)</td><td class="num">${pct(m.ebitPct,0)}</td><td class="num">${gbpAbbr(m.ebit)}</td></tr>
+    </tbody>`;
+
+  // processing flag
+  document.getElementById('procFlag').innerHTML =
+    `<b>Watch:</b> payment processing eats <b>${pct(m.procDragOnComm,0)}</b> of commission at ${gbp(m.commissionPerBooking,2)}/booking — small-ticket fees are the biggest drag on a thin per-booking fee. A minimum booking fee or batched settlement is the lever.`;
+
+  renderSensitivity();
+  syncPresetButtons();
+}
+
+function marginPill(v, lo, hi) {
+  if (v >= hi) return `<span class="pill good">healthy</span>`;
+  if (v >= lo) return `<span class="pill warn">ok</span>`;
+  return `<span class="pill bad">thin</span>`;
+}
+
+// ---------------- Sensitivity heat grid ----------------
+function renderSensitivity() {
+  const bookingsAxis = [20, 30, 40, 60, 80, 100];
+  const retAxis = [200, 300, 400, 500, 600];
+  const vals = bookingsAxis.map(bk => retAxis.map(r => arrFor(bk, r)));
+  let lo = Infinity, hi = -Infinity;
+  vals.forEach(row => row.forEach(v => { lo = Math.min(lo, v); hi = Math.max(hi, v); }));
+  let html = '<thead><tr><th class="corner">bk ↓ / ret →</th>';
+  retAxis.forEach(r => html += `<th class="axis-h">${r}</th>`);
+  html += '</tr></thead><tbody>';
+  bookingsAxis.forEach((bk, i) => {
+    html += `<tr><td class="axis-v">${bk}</td>`;
+    retAxis.forEach((r, j) => {
+      const v = vals[i][j];
+      const t = hi > lo ? (v - lo) / (hi - lo) : 0.5;
+      html += `<td class="cell" style="background:${heat(t)}">${gbpAbbr(v)}</td>`;
+    });
+    html += '</tr>';
+  });
+  html += '</tbody>';
+  document.getElementById('sensTable').innerHTML = html;
+}
+// t in 0..1 : red (low) -> amber -> teal (high)
+function heat(t) {
+  t = Math.max(0, Math.min(1, t));
+  if (t < 0.5) {
+    const k = t/0.5; // red -> amber
+    return `rgb(${Math.round(214 + (245-214)*k)},${Math.round(64 + (158-64)*k)},${Math.round(64 + (11-64)*k)})`;
+  } else {
+    const k = (t-0.5)/0.5; // amber -> teal
+    return `rgb(${Math.round(245 + (31-245)*k)},${Math.round(158 + (126-158)*k)},${Math.round(11 + (104-11)*k)})`;
+  }
+}
+
+// ---------------- Presets ----------------
+function applyPreset(name) {
+  const p = PRESETS[name];
+  state = { ...BASE_DEFAULTS, ...p };
+  renderInputs();
+  renderOutputs();
+  document.querySelectorAll('.btn[data-preset]').forEach(b => b.classList.toggle('active', b.dataset.preset === name));
+}
+function clearActivePreset() {
+  // if a value was hand-edited, only un-highlight if it no longer matches the preset
+  syncPresetButtons();
+}
+function syncPresetButtons() {
+  let match = null;
+  for (const name of ['bear','base','bull']) {
+    const p = { ...BASE_DEFAULTS, ...PRESETS[name] };
+    if (Object.keys(p).every(k => Math.abs((state[k]??0) - p[k]) < 1e-9)) { match = name; break; }
+  }
+  document.querySelectorAll('.btn[data-preset]').forEach(b => b.classList.toggle('active', b.dataset.preset === match));
+}
+
+document.querySelectorAll('.btn[data-preset]').forEach(b => {
+  b.addEventListener('click', () => applyPreset(b.dataset.preset));
+});
+document.getElementById('resetBtn').addEventListener('click', () => applyPreset('base'));
+
+// ---------------- Init ----------------
+renderInputs();
+renderOutputs();
+</script>
+</body>
+</html>
