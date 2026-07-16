@@ -9,15 +9,15 @@ const STAGES = [
 
 export default function AI() {
   return (
-    <section id="ai" className="section-pad surface">
+    <section id="ai" className="section-pad">
       <div className="wrap">
         <div className="ai-grid">
           <Reveal className="ai-copy">
-            <span className="eyebrow">The AI</span>
-            <h2>Our AI sets the price. Not guesswork, not panic.</h2>
-            <p>The moment a slot is about to go to waste, our pricing engine starts lifting the discount in real time, calibrated to exactly how much time is left and how much interest the offer is getting. Retailers set the floor they're comfortable with. The AI never crosses it. It just finds the smallest discount that still fills the seat before the clock runs out.</p>
+            <span className="eyebrow">Your AI Buddy</span>
+            <h2>You set the minimum price. Let the AI do the heavy lifting. No hassle. No panic.</h2>
+            <p>The moment you post your discounted offer onto the platform, our pricing engine starts to automatically calibrate the level of interest in your offer and the time left before the offer expires. The AI never goes below the minimum price level you've set. It will calculate the best price for you that reflects how long your deal has to run.</p>
             <div className="ai-chips">
-              <span className="pill-tag">Retailer sets the floor</span>
+              <span className="pill-tag">You set the floor</span>
               <span className="pill-tag">Repriced in real time</span>
               <span className="pill-tag">Zero manual work</span>
             </div>

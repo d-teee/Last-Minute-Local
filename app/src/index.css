@@ -91,8 +91,6 @@ header.nav {
 .btn:hover { transform: translateY(-1px); }
 .btn-primary { background: var(--teal); color: #fff; box-shadow: 0 10px 24px -10px rgba(42,158,130,0.55); }
 .btn-primary:hover { background: var(--teal-dark); }
-.btn-dark { background: var(--ink); color: #fff; }
-.btn-dark:hover { background: #1a1a1a; }
 .btn-ghost { background: transparent; color: var(--ink); border: 1.5px solid var(--grey-light); }
 .btn-ghost:hover { border-color: var(--ink); }
 .btn-sm { padding: 10px 20px; font-size: 14px; }
@@ -132,24 +130,27 @@ header.nav {
   100% { box-shadow: 0 0 0 0 rgba(42,158,130,0); }
 }
 .hero h1 {
-  font-size: 66px;
   font-weight: 800;
-  line-height: 1.03;
+  line-height: 1.05;
   letter-spacing: -0.03em;
-  max-width: 12ch;
   text-wrap: balance;
 }
+.hero-customer h1 { font-size: 60px; max-width: 15ch; }
+.hero-retailer h1 { font-size: 58px; max-width: 14ch; }
 .hero h1 em { font-style: normal; color: var(--teal-dark); }
 .hero .sub {
   font-size: 21px;
   font-weight: 500;
   color: var(--grey);
   line-height: 1.5;
-  max-width: 42ch;
+  max-width: 44ch;
   margin: 26px 0 36px;
   text-wrap: pretty;
 }
-.hero-ctas { display: flex; gap: 14px; flex-wrap: wrap; }
+.hero-ctas { display: flex; gap: 14px; flex-wrap: wrap; align-items: center; }
+.hero-how-link { display: flex; align-items: center; gap: 8px; font-weight: 700; font-size: 15px; text-decoration: none; color: var(--ink); }
+.hero-how-link svg { flex-shrink: 0; transition: transform 0.2s ease; }
+.hero-how-link:hover svg { transform: translateX(3px); }
 .hero-note { font-size: 14px; color: var(--grey); margin-top: 18px; font-weight: 500; }
 
 /* ---------- Phone mock ---------- */
@@ -232,6 +233,18 @@ header.nav {
 .deal .meta .name { font-size: 13px; font-weight: 700; }
 .deal .meta .desc { font-size: 11px; color: var(--grey); margin-top: 1px; }
 
+/* ---------- Retailer hero phone (smaller, offer-creation mock) ---------- */
+.retailer-hero-phone .phone { width: 300px; aspect-ratio: 300 / 620; border-radius: 42px; }
+.retailer-hero-phone .phone .notch { width: 88px; height: 22px; }
+.retailer-hero-phone .float-banner { top: -20px; right: -30px; }
+.sp-photo-add { margin: 10px 14px 10px; height: 84px; border-radius: 12px; background: var(--teal-tint); color: var(--teal-deep); border: 1.5px dashed var(--teal); display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; }
+.sp-offer-box { margin: 0 14px 10px; background: #fff; border-radius: 10px; padding: 12px 14px; }
+.sp-offer-box .n { font-size: 13px; font-weight: 700; margin: 0; }
+.sp-offer-box .pr { font-size: 11px; color: var(--grey); margin: 3px 0 0; }
+.sp-chip-row { display: flex; gap: 6px; padding: 0 14px; margin-bottom: 10px; }
+.sp-chip { flex: 1; padding: 9px 0; border-radius: 8px; background: #fff; border: 1.5px solid var(--grey-light); text-align: center; font-weight: 700; font-size: 11px; }
+.sp-chip.active { background: var(--teal); color: #fff; border-color: var(--teal); }
+
 /* ---------- section frame ---------- */
 .section-pad { padding: 108px 0; }
 .section-head { max-width: 640px; margin-bottom: 56px; }
@@ -256,7 +269,7 @@ header.nav {
 .section-head.center p { margin-left: auto; margin-right: auto; }
 .surface { background: var(--surface); }
 
-/* ---------- Why ---------- */
+/* ---------- Why (card grid) ---------- */
 .why-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; }
 .why-card {
   background: #fff;
@@ -273,6 +286,15 @@ header.nav {
 .why-card h3 { font-size: 19px; font-weight: 700; letter-spacing: -0.01em; margin-bottom: 8px; }
 .why-card p { font-size: 15.5px; color: var(--grey); line-height: 1.55; }
 
+/* ---------- Problem list (retailer "why this matters") ---------- */
+.problem-list { display: flex; flex-direction: column; gap: 2px; }
+.problem-row { display: grid; grid-template-columns: 64px 1fr; gap: 24px; padding: 36px 0; border-top: 1px solid rgba(44,44,44,0.08); }
+.problem-row:last-child { border-bottom: 1px solid rgba(44,44,44,0.08); }
+.problem-num { font-family: 'JetBrains Mono', monospace; font-weight: 700; font-size: 20px; color: var(--teal-deep); transition: color 0.25s ease, transform 0.25s ease; }
+.problem-row:hover .problem-num { color: var(--teal); transform: translateX(4px); }
+.problem-row h3 { font-size: 22px; font-weight: 800; letter-spacing: -0.015em; margin-bottom: 10px; text-wrap: balance; }
+.problem-row p { font-size: 16.5px; color: var(--grey); line-height: 1.6; max-width: 62ch; }
+
 /* ---------- The AI ---------- */
 .ai-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
 .ai-copy h2 { font-size: 38px; font-weight: 800; letter-spacing: -0.025em; line-height: 1.14; margin-top: 14px; text-wrap: balance; }
@@ -281,13 +303,16 @@ header.nav {
 .pill-tag {
   display: inline-flex;
   align-items: center;
-  padding: 9px 16px;
+  padding: 8px 16px;
   border-radius: 999px;
-  background: var(--teal-tint);
-  color: var(--teal-deep);
+  background: #fff;
+  border: 1px solid rgba(44,44,44,0.1);
   font-size: 13.5px;
   font-weight: 700;
+  color: var(--ink);
+  transition: transform 0.2s ease, background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
 }
+.pill-tag:hover { background: var(--teal); color: #fff; border-color: var(--teal); transform: translateY(-2px); }
 
 .surge {
   position: relative;
@@ -313,71 +338,18 @@ header.nav {
 .surge-stage.urgent .surge-pct { color: var(--red); }
 .surge-stage.urgent .surge-time { color: var(--red); }
 
-/* ---------- How it works ---------- */
-.toggle-row { display: flex; justify-content: center; margin-bottom: 56px; }
-.toggle {
-  display: inline-flex;
-  padding: 5px;
-  background: var(--surface);
-  border-radius: 999px;
-  gap: 4px;
-}
-.toggle button {
-  padding: 12px 28px;
-  border-radius: 999px;
-  border: none;
-  background: transparent;
-  font-size: 15px;
-  font-weight: 700;
-  color: var(--grey);
-  cursor: pointer;
-  transition: all 0.2s ease;
-}
-.toggle button.active { background: var(--ink); color: #fff; }
-
-.steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
-.step {
-  display: flex;
-  flex-direction: column;
-  gap: 18px;
-  background: #fff;
-  border: 1px solid rgba(44,44,44,0.07);
-  border-radius: 20px;
-  padding: 0 0 28px;
-  box-shadow: 0 16px 32px -24px rgba(31,126,104,0.25);
-  overflow: hidden;
-}
-.step-photo { height: 150px; position: relative; }
-.step-photo img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
-.step-body { display: flex; flex-direction: column; gap: 14px; padding: 24px 28px 0; }
-.step .num {
-  width: 40px; height: 40px; border-radius: 12px;
-  background: var(--teal-tint); color: var(--teal-deep);
-  font-weight: 800; font-size: 17px;
-  display: flex; align-items: center; justify-content: center;
-}
-
 /* ---------- Customer journey (phones) ---------- */
 .journey { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; align-items: start; }
 .journey-step { display: flex; flex-direction: column; align-items: center; gap: 18px; text-align: center; }
 .journey-label { display: flex; align-items: center; gap: 10px; font-size: 17px; font-weight: 700; letter-spacing: -0.01em; }
 .jnum { width: 28px; height: 28px; border-radius: 50%; background: var(--teal); color: #fff; font-size: 13px; font-weight: 800; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
-.journey-caption { font-size: 14.5px; color: var(--grey); max-width: 26ch; line-height: 1.45; }
+.journey-caption { font-size: 14.5px; color: var(--grey); max-width: 28ch; line-height: 1.45; }
 .phone.sp-mini { width: 208px; }
 .phone.sp-mini .notch { width: 72px; height: 18px; top: 14px; }
 .sp-qr { height: 68px; margin: 0 12px 10px; background: var(--surface); border-radius: 10px; display: flex; align-items: center; justify-content: center; }
 .sp-cta { margin: auto 12px 16px; height: 36px; background: var(--teal); color: #fff; border-radius: 999px; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 11.5px; }
 .sp-redeem-body { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; }
 .sp-check { width: 58px; height: 58px; border-radius: 50%; background: #fff; display: flex; align-items: center; justify-content: center; margin-bottom: 12px; }
-.sp-photo-add { margin: 10px 12px 8px; height: 64px; border-radius: 12px; background: var(--teal-tint); color: var(--teal-deep); border: 1.5px dashed var(--teal); display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 700; }
-.sp-offer-box { margin: 0 12px 8px; background: var(--surface); border-radius: 10px; padding: 9px 11px; }
-.sp-offer-box .n { font-size: 11.5px; font-weight: 700; margin: 0; }
-.sp-offer-box .pr { font-size: 10px; color: var(--grey); margin: 3px 0 0; }
-.sp-chip-row { display: flex; gap: 6px; padding: 0 12px; margin-bottom: 8px; }
-.sp-chip { flex: 1; padding: 8px 0; border-radius: 8px; background: #fff; border: 1.5px solid var(--grey-light); text-align: center; font-weight: 700; font-size: 10.5px; }
-.sp-chip.active { background: var(--teal); color: #fff; border-color: var(--teal); }
-.step h3 { font-size: 20px; font-weight: 700; letter-spacing: -0.01em; }
-.step p { font-size: 15.5px; color: var(--grey); line-height: 1.55; max-width: 30ch; }
 
 /* ---------- Value strip ---------- */
 .value-strip {
@@ -423,18 +395,8 @@ header.nav {
 }
 .waitlist-head p { font-size: 17px; color: rgba(255,255,255,0.7); margin-top: 16px; line-height: 1.55; font-weight: 500; }
 
-.wl-toggle {
-  display: inline-flex; margin-top: 34px; padding: 5px; background: rgba(255,255,255,0.08); border-radius: 999px; gap: 4px; position: relative; z-index: 1;
-}
-.wl-toggle button {
-  padding: 11px 24px; border-radius: 999px; border: none; background: transparent;
-  font-size: 14px; font-weight: 700; color: rgba(255,255,255,0.65); cursor: pointer;
-}
-.wl-toggle button.active { background: var(--teal); color: #fff; }
-
-.wl-form-wrap { position: relative; z-index: 1; margin-top: 30px; max-width: 480px; }
-.wl-form { display: none; flex-direction: column; gap: 14px; }
-.wl-form.active { display: flex; }
+.wl-form-wrap { position: relative; z-index: 1; margin-top: 34px; max-width: 480px; }
+.wl-form { display: flex; flex-direction: column; gap: 14px; }
 .wl-row { display: flex; gap: 12px; flex-wrap: wrap; }
 .wl-form input, .wl-form select {
   flex: 1;
@@ -462,9 +424,14 @@ header.nav {
   font-size: 15.5px;
   border: none;
   cursor: pointer;
-  transition: background 0.15s ease;
+  transition: background 0.15s ease, transform 0.15s ease, box-shadow 0.15s ease;
 }
-.wl-submit:hover { background: #34ab8e; }
+.wl-submit:hover:not(:disabled) {
+  background: #34ab8e;
+  transform: translateY(-1px);
+  box-shadow: 0 12px 22px -10px rgba(61,191,160,0.55);
+}
+.wl-submit:disabled { opacity: 0.7; cursor: not-allowed; }
 .wl-fineprint { font-size: 13px; color: rgba(255,255,255,0.45); margin-top: 12px; }
 .wl-error { display: none; font-size: 13px; color: #FCA5A5; margin: -4px 0 0; }
 .wl-error.active { display: block; }
@@ -538,19 +505,13 @@ footer {
 }
 .nav-links a:hover::after { right: 0; }
 
-.btn-primary:hover { box-shadow: 0 14px 30px -10px rgba(42,158,130,0.65); }
-
-.why-card, .value-card, .step {
+.why-card, .value-card {
   transition: transform 0.28s ease, box-shadow 0.28s ease, border-color 0.28s ease;
 }
 .why-card:hover, .value-card:hover {
   transform: translateY(-6px);
   box-shadow: 0 22px 40px -22px rgba(31,126,104,0.32), 0 4px 12px rgba(44,44,44,0.08);
   border-color: rgba(61,191,160,0.4);
-}
-.step:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 26px 46px -20px rgba(31,126,104,0.35);
 }
 .why-card .icon, .value-card .icon {
   transition: transform 0.28s ease, background 0.28s ease, color 0.28s ease;
@@ -563,21 +524,6 @@ footer {
 
 .journey-step .phone { transition: transform 0.3s ease, box-shadow 0.3s ease; }
 .journey-step:hover .phone { transform: translateY(-6px) scale(1.02); }
-
-.pill-tag { transition: transform 0.2s ease, background 0.2s ease, color 0.2s ease; }
-.pill-tag:hover { background: var(--teal); color: #fff; transform: translateY(-2px); }
-
-.toggle button, .wl-toggle button { transition: background 0.2s ease, color 0.2s ease; }
-.toggle button:hover:not(.active) { color: var(--ink); background: rgba(44,44,44,0.07); }
-.wl-toggle button:hover:not(.active) { color: #fff; background: rgba(255,255,255,0.08); }
-
-.wl-submit { transition: background 0.15s ease, transform 0.15s ease, box-shadow 0.15s ease; }
-.wl-submit:hover:not(:disabled) {
-  background: #34ab8e;
-  transform: translateY(-1px);
-  box-shadow: 0 12px 22px -10px rgba(61,191,160,0.55);
-}
-.wl-submit:disabled { opacity: 0.7; cursor: not-allowed; }
 
 /* ---------- Idle floating (hero) ---------- */
 @keyframes floatBanner {
@@ -596,22 +542,23 @@ footer {
   .float-banner, .float-toast, .badge-live .dot, .fb-dot {
     animation: none;
   }
-  .why-card:hover, .value-card:hover, .step:hover, .journey-step:hover .phone {
+  .why-card:hover, .value-card:hover, .journey-step:hover .phone {
     transform: none;
   }
 }
 
 @media (max-width: 900px) {
   .hero-inner { grid-template-columns: 1fr; }
-  .hero h1 { font-size: 46px; max-width: none; }
+  .hero-customer h1 { font-size: 42px; max-width: none; }
+  .hero-retailer h1 { font-size: 40px; max-width: none; }
   .phone-stage { margin-top: 20px; }
   .why-grid { grid-template-columns: 1fr; }
   .journey { grid-template-columns: 1fr; gap: 40px; }
   .ai-grid { grid-template-columns: 1fr; gap: 36px; }
   .float-banner { width: 190px; right: -8px; top: -18px; }
   .float-toast { left: -8px; }
-  .steps { grid-template-columns: 1fr; gap: 32px; }
   .value-strip { grid-template-columns: 1fr; }
+  .problem-row { grid-template-columns: 1fr; gap: 10px; }
   .waitlist { padding: 40px 28px; }
   .nav-links { display: none; }
   .section-head h2 { font-size: 32px; }

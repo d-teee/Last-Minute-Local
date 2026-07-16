@@ -4,7 +4,7 @@ const CARDS = [
   {
     icon: <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M4 12h16M4 6h16M4 18h10" stroke="currentColor" strokeWidth="2" strokeLinecap="round" /></svg>,
     title: 'Free to list, always',
-    body: 'Create an account and start posting live offers in minutes. No subscription, no setup fee, no catch.',
+    body: 'Create an account and start posting live offers, on products or services, in minutes. So simple, no tech skills needed — snap a photo, set your price, done.',
   },
   {
     icon: <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M12 2 3 7v6c0 5 4 8 9 9 5-1 9-4 9-9V7l-9-5Z" stroke="currentColor" strokeWidth="2" strokeLinejoin="round" /></svg>,
@@ -18,14 +18,14 @@ const CARDS = [
   },
 ];
 
-export default function Business() {
+export default function GetStarted() {
   return (
-    <section id="business" className="section-pad surface">
+    <section id="value" className="section-pad surface">
       <div className="wrap">
         <Reveal className="section-head">
-          <span className="eyebrow">For business owners</span>
-          <h2>Fill the chair. Save the sale. Free to join.</h2>
-          <p>Turn your quietest hours into new customers, with no marketing budget and no long-term commitment.</p>
+          <span className="eyebrow">Get started</span>
+          <h2>Free to join. No catch.</h2>
+          <p>Turn your quietest hours and slowest-moving stock into new customers, with no marketing budget and no long-term commitment.</p>
         </Reveal>
         <div className="value-strip">
           {CARDS.map((card, i) => (

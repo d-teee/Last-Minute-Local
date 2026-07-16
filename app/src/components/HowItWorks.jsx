@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import Reveal from './Reveal.jsx';
 
 function Checkmark() {
@@ -27,162 +26,83 @@ function QrCode() {
   );
 }
 
-function CustomerJourney() {
-  return (
-    <div className="journey">
-      <Reveal className="journey-step">
-        <div className="journey-label"><span className="jnum">1</span> Browse locally</div>
-        <div className="phone sp-mini">
-          <div className="notch"></div>
-          <div className="screen">
-            <div className="status"><span>9:41</span><span>&#9679;&#9679;&#9679;</span></div>
-            <div className="app-header">
-              <div className="t">Nearby deals</div>
-              <div className="l">&#128205; Brighton &middot; 1 mi</div>
-            </div>
-            <div className="deal">
-              <div className="photo" style={{ background: 'linear-gradient(135deg,#2A9E82,#3DBFA0)' }}>
-                <img src="https://images.unsplash.com/photo-1503951914875-452162b0f3f1?auto=format&fit=crop&w=500&q=80" alt="" loading="lazy" decoding="async" onError={(e) => e.target.remove()} />
-                <span className="disc">40%</span><span className="timer">&#9201; 00:42</span>
-              </div>
-              <div className="meta"><div className="name">Frank's Barbers</div><div className="desc">Cut &middot; 0.4 mi</div></div>
-            </div>
-            <div className="deal" style={{ marginBottom: 0 }}>
-              <div className="photo" style={{ background: 'linear-gradient(135deg,#F59E0B,#FCD34D)' }}>
-                <img src="https://images.unsplash.com/photo-1599901860904-17e6ed7083a0?auto=format&fit=crop&w=500&q=80" alt="" loading="lazy" decoding="async" onError={(e) => e.target.remove()} />
-                <span className="disc">30%</span><span className="timer red">&#9201; 00:18</span>
-              </div>
-              <div className="meta"><div className="name">Bayside Yoga</div><div className="desc">5pm flow &middot; 0.2 mi</div></div>
-            </div>
-          </div>
-        </div>
-        <p className="journey-caption">Real deals near you right now, filtered by what you actually want.</p>
-      </Reveal>
-
-      <Reveal className="journey-step" delay={100}>
-        <div className="journey-label"><span className="jnum">2</span> Tap to claim</div>
-        <div className="phone sp-mini">
-          <div className="notch"></div>
-          <div className="screen">
-            <div className="status"><span>9:41</span><span>&#9679;&#9679;&#9679;</span></div>
-            <div style={{ padding: '10px 14px 0', fontSize: '11px', color: 'var(--grey)' }}>&larr; Back</div>
-            <div className="deal" style={{ margin: '10px 12px 8px' }}>
-              <div className="photo" style={{ background: 'linear-gradient(135deg,#2A9E82,#3DBFA0)', height: '84px' }}>
-                <img src="https://images.unsplash.com/photo-1503951914875-452162b0f3f1?auto=format&fit=crop&w=500&q=80" alt="" loading="lazy" decoding="async" onError={(e) => e.target.remove()} />
-                <span className="disc">40% off</span><span className="timer">&#9201; 00:42</span>
-              </div>
-              <div className="meta"><div className="name">Frank's Barbers</div><div className="desc">Cut &amp; blow-dry &middot; 0.4 mi</div></div>
-            </div>
-            <div className="sp-qr"><QrCode /></div>
-            <div className="sp-cta">Claimed &middot; tap to redeem</div>
-          </div>
-        </div>
-        <p className="journey-caption">Pay the booking fee in-app and get a QR code instantly. No forms.</p>
-      </Reveal>
-
-      <Reveal className="journey-step" delay={200}>
-        <div className="journey-label"><span className="jnum">3</span> Redeem &amp; go</div>
-        <div className="phone sp-mini">
-          <div className="notch"></div>
-          <div className="screen" style={{ background: 'var(--teal)' }}>
-            <div className="status" style={{ color: '#fff' }}><span>9:41</span><span>&#9679;&#9679;&#9679;</span></div>
-            <div className="sp-redeem-body">
-              <div className="sp-check"><Checkmark /></div>
-              <p style={{ fontSize: '16px', fontWeight: 800, margin: 0, color: '#fff' }}>Redeemed!</p>
-              <p style={{ fontSize: '11px', opacity: 0.85, margin: '6px 0 0', color: '#fff' }}>You saved &pound;14 at Frank's Barbers.</p>
-              <div style={{ fontSize: '14px', marginTop: '14px', color: '#fff' }}>&#9733; &#9733; &#9733; &#9733; &#9733;</div>
-            </div>
-          </div>
-        </div>
-        <p className="journey-caption">Show your code in store, or pick home delivery where it's on offer.</p>
-      </Reveal>
-    </div>
-  );
-}
-
-function BusinessJourney() {
-  return (
-    <div className="journey">
-      <Reveal className="journey-step">
-        <div className="journey-label"><span className="jnum">1</span> Snap a photo</div>
-        <div className="phone sp-mini">
-          <div className="notch"></div>
-          <div className="screen">
-            <div className="status"><span>9:41</span><span>&#9679;&#9679;&#9679;</span></div>
-            <div className="app-header"><div className="t">New offer</div></div>
-            <div className="sp-photo-add">+ Add photo</div>
-            <div className="sp-offer-box">
-              <p className="n">Cut &amp; blow-dry</p>
-              <p className="pr">Frank's Barbers</p>
-            </div>
-          </div>
-        </div>
-        <p className="journey-caption">Of the product, the service, or the empty chair you want to fill.</p>
-      </Reveal>
-
-      <Reveal className="journey-step" delay={100}>
-        <div className="journey-label"><span className="jnum">2</span> Set your floor</div>
-        <div className="phone sp-mini">
-          <div className="notch"></div>
-          <div className="screen">
-            <div className="status"><span>9:41</span><span>&#9679;&#9679;&#9679;</span></div>
-            <div className="app-header"><div className="t">Set discount</div></div>
-            <div className="sp-offer-box">
-              <p className="n">Cut &amp; blow-dry</p>
-              <p className="pr">&pound;35 &rarr; &pound;21</p>
-            </div>
-            <div className="sp-chip-row">
-              <div className="sp-chip">40%</div>
-              <div className="sp-chip active">50%</div>
-              <div className="sp-chip">60%</div>
-            </div>
-            <div className="sp-offer-box" style={{ marginTop: '8px' }}>
-              <p className="n" style={{ fontWeight: 600 }}>Expires in 1 hour</p>
-            </div>
-          </div>
-        </div>
-        <p className="journey-caption">Pick the lowest discount you'll accept. Our AI never goes lower.</p>
-      </Reveal>
-
-      <Reveal className="journey-step" delay={200}>
-        <div className="journey-label"><span className="jnum">3</span> Go live</div>
-        <div className="phone sp-mini">
-          <div className="notch"></div>
-          <div className="screen" style={{ background: 'var(--teal)' }}>
-            <div className="status" style={{ color: '#fff' }}><span>9:41</span><span>&#9679;&#9679;&#9679;</span></div>
-            <div className="sp-redeem-body">
-              <div className="sp-check"><Checkmark /></div>
-              <p style={{ fontSize: '16px', fontWeight: 800, margin: 0, color: '#fff' }}>You're live!</p>
-              <p style={{ fontSize: '11px', opacity: 0.85, margin: '6px 0 0', color: '#fff' }}>Reaching nearby customers now.</p>
-            </div>
-          </div>
-        </div>
-        <p className="journey-caption">The offer reaches every opted-in customer nearby, instantly.</p>
-      </Reveal>
-    </div>
-  );
-}
-
 export default function HowItWorks() {
-  const [audience, setAudience] = useState('customer');
-
   return (
     <section id="how" className="section-pad">
       <div className="wrap">
         <Reveal className="section-head center">
           <span className="eyebrow">How it works</span>
-          <h2>Browse. Claim. Redeem. Done.</h2>
-          <p>Three screens, sixty seconds, one very good deal.</p>
+          <h2>Browse. Buy. Redeem. Done.</h2>
+          <p>Just 3 screens. 60 seconds. Another great deal in the bag!</p>
         </Reveal>
 
-        <div className="toggle-row">
-          <div className="toggle">
-            <button className={audience === 'customer' ? 'active' : ''} onClick={() => setAudience('customer')}>I'm a customer</button>
-            <button className={audience === 'business' ? 'active' : ''} onClick={() => setAudience('business')}>I'm a business owner</button>
-          </div>
-        </div>
+        <div className="journey">
+          <Reveal className="journey-step">
+            <div className="journey-label"><span className="jnum">1</span> Browse locally</div>
+            <div className="phone sp-mini">
+              <div className="notch"></div>
+              <div className="screen">
+                <div className="status"><span>9:41</span><span>&#9679;&#9679;&#9679;</span></div>
+                <div className="app-header">
+                  <div className="t">Nearby deals</div>
+                  <div className="l">&#128205; Brighton &middot; 1 mi</div>
+                </div>
+                <div className="deal">
+                  <div className="photo" style={{ background: 'linear-gradient(135deg,#374151,#111827)' }}>
+                    <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=500&q=80" alt="" loading="lazy" decoding="async" onError={(e) => e.target.remove()} />
+                    <span className="disc">35%</span><span className="timer">&#9201; 03:10</span>
+                  </div>
+                  <div className="meta"><div className="name">Solestore</div><div className="desc">Trainers &middot; 0.3 mi</div></div>
+                </div>
+                <div className="deal" style={{ marginBottom: 0 }}>
+                  <div className="photo" style={{ background: 'linear-gradient(135deg,#F59E0B,#FCD34D)' }}>
+                    <img src="https://images.unsplash.com/photo-1599901860904-17e6ed7083a0?auto=format&fit=crop&w=500&q=80" alt="" loading="lazy" decoding="async" onError={(e) => e.target.remove()} />
+                    <span className="disc">30%</span><span className="timer red">&#9201; 00:18</span>
+                  </div>
+                  <div className="meta"><div className="name">Bayside Yoga</div><div className="desc">5pm flow &middot; 0.2 mi</div></div>
+                </div>
+              </div>
+            </div>
+            <p className="journey-caption">Real deals near you right now, on services and products, filtered by what you actually want.</p>
+          </Reveal>
 
-        {audience === 'customer' ? <CustomerJourney /> : <BusinessJourney />}
+          <Reveal className="journey-step" delay={100}>
+            <div className="journey-label"><span className="jnum">2</span> Tap &amp; buy</div>
+            <div className="phone sp-mini">
+              <div className="notch"></div>
+              <div className="screen">
+                <div className="status"><span>9:41</span><span>&#9679;&#9679;&#9679;</span></div>
+                <div style={{ padding: '10px 14px 0', fontSize: '11px', color: 'var(--grey)' }}>&larr; Back</div>
+                <div className="deal" style={{ margin: '10px 12px 8px' }}>
+                  <div className="photo" style={{ background: 'linear-gradient(135deg,#374151,#111827)', height: '84px' }}>
+                    <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=500&q=80" alt="" loading="lazy" decoding="async" onError={(e) => e.target.remove()} />
+                    <span className="disc">35% off</span><span className="timer">&#9201; 03:10</span>
+                  </div>
+                  <div className="meta"><div className="name">Solestore</div><div className="desc">Last season trainers &middot; 0.3 mi</div></div>
+                </div>
+                <div className="sp-qr"><QrCode /></div>
+                <div className="sp-cta">Paid &middot; tap to redeem</div>
+              </div>
+            </div>
+            <p className="journey-caption">Pay the retailer directly in-app and get a QR code instantly. No forms.</p>
+          </Reveal>
+
+          <Reveal className="journey-step" delay={200}>
+            <div className="journey-label"><span className="jnum">3</span> Redeem &amp; go</div>
+            <div className="phone sp-mini">
+              <div className="notch"></div>
+              <div className="screen" style={{ background: 'var(--teal)' }}>
+                <div className="status" style={{ color: '#fff' }}><span>9:41</span><span>&#9679;&#9679;&#9679;</span></div>
+                <div className="sp-redeem-body">
+                  <div className="sp-check"><Checkmark /></div>
+                  <p style={{ fontSize: '16px', fontWeight: 800, margin: 0, color: '#fff' }}>Redeemed!</p>
+                  <p style={{ fontSize: '11px', opacity: 0.85, margin: '6px 0 0', color: '#fff', maxWidth: '150px', textAlign: 'center' }}>Show your QR code in shop, or choose home delivery where it's on offer.</p>
+                </div>
+              </div>
+            </div>
+            <p className="journey-caption">Show your QR code in shop and pay the retailer directly, or select home delivery where available.</p>
+          </Reveal>
+        </div>
       </div>
     </section>
   );
