@@ -81,10 +81,10 @@ export default function HowItWorks() {
                   <div className="meta"><div className="name">Solestore</div><div className="desc">Last season trainers &middot; 0.3 mi</div></div>
                 </div>
                 <div className="sp-qr"><QrCode /></div>
-                <div className="sp-cta">Paid &middot; tap to redeem</div>
+                <div className="sp-cta">Booking fee paid</div>
               </div>
             </div>
-            <p className="journey-caption">Pay the retailer directly in-app and get a QR code instantly. No forms.</p>
+            <p className="journey-caption">Pay a small booking fee to secure the item. Get your QR code instantly. No forms.</p>
           </Reveal>
 
           <Reveal className="journey-step" delay={200}>
@@ -100,7 +100,7 @@ export default function HowItWorks() {
                 </div>
               </div>
             </div>
-            <p className="journey-caption">Show your QR code in shop and pay the retailer directly, or select home delivery where available.</p>
+            <p className="journey-caption">Show your QR code in-store. Pay the balance to the retailer directly, or select home delivery where available and pay the retailer in-app.</p>
           </Reveal>
         </div>
       </div>

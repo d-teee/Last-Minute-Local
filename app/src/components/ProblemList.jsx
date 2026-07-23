@@ -4,7 +4,7 @@ const ROWS = [
   {
     num: '01',
     title: 'Your time-sensitive inventory has no second chance',
-    body: "A missed appointment or unsold seasonal stock can't be sold tomorrow. Once the clock passes, that value is gone for good.",
+    body: "A missed hairdressing appointment or an empty restaurant table booking can't be sold tomorrow. Once the clock passes, that value is gone for good.",
   },
   {
     num: '02',

@@ -237,13 +237,25 @@ header.nav {
 .retailer-hero-phone .phone { width: 300px; aspect-ratio: 300 / 620; border-radius: 42px; }
 .retailer-hero-phone .phone .notch { width: 88px; height: 22px; }
 .retailer-hero-phone .float-banner { top: -20px; right: -30px; }
-.sp-photo-add { margin: 10px 14px 10px; height: 84px; border-radius: 12px; background: var(--teal-tint); color: var(--teal-deep); border: 1.5px dashed var(--teal); display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; }
+.sp-viewfinder { margin: 10px 14px 8px; width: calc(100% - 28px); aspect-ratio: 1 / 1; height: auto; border-radius: 14px; background: #14231f; position: relative; overflow: hidden; display: flex; align-items: center; justify-content: center; }
+.sp-viewfinder .vf-corner { position: absolute; width: 18px; height: 18px; border: 2.5px solid rgba(255,255,255,0.9); }
+.sp-viewfinder .vf-tl { top: 8px; left: 8px; border-right: none; border-bottom: none; }
+.sp-viewfinder .vf-tr { top: 8px; right: 8px; border-left: none; border-bottom: none; }
+.sp-viewfinder .vf-bl { bottom: 8px; left: 8px; border-right: none; border-top: none; }
+.sp-viewfinder .vf-br { bottom: 8px; right: 8px; border-left: none; border-top: none; }
+.image-slot-placeholder { display: flex; flex-direction: column; align-items: center; gap: 8px; color: rgba(255,255,255,0.55); text-align: center; padding: 0 20px; }
+.image-slot-placeholder .mono { font-size: 11px; font-weight: 600; }
 .sp-offer-box { margin: 0 14px 10px; background: #fff; border-radius: 10px; padding: 12px 14px; }
 .sp-offer-box .n { font-size: 13px; font-weight: 700; margin: 0; }
 .sp-offer-box .pr { font-size: 11px; color: var(--grey); margin: 3px 0 0; }
 .sp-chip-row { display: flex; gap: 6px; padding: 0 14px; margin-bottom: 10px; }
 .sp-chip { flex: 1; padding: 9px 0; border-radius: 8px; background: #fff; border: 1.5px solid var(--grey-light); text-align: center; font-weight: 700; font-size: 11px; }
 .sp-chip.active { background: var(--teal); color: #fff; border-color: var(--teal); }
+.sp-field-row { display: flex; gap: 8px; padding: 0 14px; margin-bottom: 10px; }
+.sp-field { flex: 1; background: #fff; border-radius: 8px; padding: 8px 10px; }
+.sp-field .fl { font-size: 9px; font-weight: 700; color: var(--grey); text-transform: uppercase; letter-spacing: 0.04em; margin: 0 0 2px; }
+.sp-field .fv { font-size: 12px; font-weight: 700; margin: 0; }
+.sp-post-btn { margin: auto 14px 14px; height: 42px; border-radius: 999px; background: var(--teal); color: #fff; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 13px; box-shadow: 0 8px 18px -6px rgba(42,158,130,0.55); }
 
 /* ---------- section frame ---------- */
 .section-pad { padding: 108px 0; }

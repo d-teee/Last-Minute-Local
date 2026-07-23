@@ -1,4 +1,5 @@
 import Reveal from './Reveal.jsx';
+import ImageSlot from './ImageSlot.jsx';
 
 export default function RetailerHero() {
   return (
@@ -22,7 +23,10 @@ export default function RetailerHero() {
               <div className="screen">
                 <div className="status"><span>9:41</span><span>&#9679;&#9679;&#9679;</span></div>
                 <div className="app-header"><div className="t">New offer</div></div>
-                <div className="sp-photo-add">+ Add photo of stock or slot</div>
+                <div className="sp-viewfinder">
+                  <span className="vf-corner vf-tl"></span><span className="vf-corner vf-tr"></span><span className="vf-corner vf-bl"></span><span className="vf-corner vf-br"></span>
+                  <ImageSlot label="Nike trainers photo" />
+                </div>
                 <div className="sp-offer-box">
                   <p className="n">Last season trainers &middot; 6 pairs</p>
                   <p className="pr">Solestore</p>
@@ -32,9 +36,14 @@ export default function RetailerHero() {
                   <div className="sp-chip active">35%</div>
                   <div className="sp-chip">50%</div>
                 </div>
+                <div className="sp-field-row">
+                  <div className="sp-field"><p className="fl">Qty</p><p className="fv">6 pairs</p></div>
+                  <div className="sp-field"><p className="fl">Expires</p><p className="fv">Today, 6pm</p></div>
+                </div>
                 <div className="sp-offer-box">
                   <p className="n" style={{ fontWeight: 600 }}>Floor set &middot; AI won't go lower</p>
                 </div>
+                <div className="sp-post-btn">Post Offer</div>
               </div>
             </div>
 

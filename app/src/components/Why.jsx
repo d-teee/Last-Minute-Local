@@ -19,7 +19,7 @@ const CARDS = [
   {
     icon: <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M12 2 3 7v6c0 5 4 8 9 9 5-1 9-4 9-9V7l-9-5Z" stroke="currentColor" strokeWidth="2" strokeLinejoin="round" /></svg>,
     title: 'Pay and prove it in one tap',
-    body: 'Claim in-app, get a QR code instantly, and redeem in store or have it delivered. No printing, no faff.',
+    body: 'Pay the retailer the small booking fee to secure the item. Get your QR code instantly. No forms.',
   },
 ];
 
