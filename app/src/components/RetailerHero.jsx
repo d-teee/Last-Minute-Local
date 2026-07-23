@@ -1,5 +1,4 @@
 import Reveal from './Reveal.jsx';
-import ImageSlot from './ImageSlot.jsx';
 
 export default function RetailerHero() {
   return (
@@ -25,7 +24,7 @@ export default function RetailerHero() {
                 <div className="app-header"><div className="t">New offer</div></div>
                 <div className="sp-viewfinder">
                   <span className="vf-corner vf-tl"></span><span className="vf-corner vf-tr"></span><span className="vf-corner vf-bl"></span><span className="vf-corner vf-br"></span>
-                  <ImageSlot label="Nike trainers photo" />
+                  <img src="/trainers.jpg" alt="Last season Nike trainers" />
                 </div>
                 <div className="sp-offer-box">
                   <p className="n">Last season trainers &middot; 6 pairs</p>
