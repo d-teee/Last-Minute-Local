@@ -7,10 +7,11 @@ export default function Footer({ variant }) {
   return (
     <footer>
       <div className="wrap footer-inner">
-        <div className="footer-brand">
-          <Logo width={20} height={24} />
-          Last Minute Local{isRetailer && ' for Business'}
-        </div>
+        <a className="brand" href="#top">
+          <Logo width={20} height={24} pin="#3FB894" ring="#F4F6F4" />
+          Last Minute Local
+          {isRetailer && <small>for Business</small>}
+        </a>
         <p className="footer-note">&copy; 2026 Last Minute Local. Made for the high street.</p>
         <div className="footer-links">
           {isRetailer ? (
