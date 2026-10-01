@@ -1,60 +1,62 @@
-import Reveal from './Reveal.jsx';
+import { Ladder } from '../lib/motion.jsx';
+import { useReady, useSequence } from '../lib/hooks.js';
+import { DealCard } from './atoms.jsx';
+
+const TOASTS = [
+  { initial: 'P', name: 'Priya M.', size: 'UK 8', val: 77 },
+  { initial: 'D', name: 'Dan R.', size: 'UK 8', val: 77 },
+  { initial: 'J', name: 'James O.', size: 'UK 10', val: 66 },
+  { initial: 'S', name: 'Sam K.', size: 'UK 9', val: 66 },
+];
+const UNITS = 6;
 
 export default function RetailerHero() {
+  // Claim toasts pop in one by one, filling the unit pips and the "Taken today" counter.
+  const shown = useSequence(TOASTS.length, 2200);
+  const ready = useReady();
+  const taken = TOASTS.slice(0, shown).reduce((sum, t) => sum + t.val, 0);
+
   return (
-    <section className="hero hero-retailer">
-      <div className="wrap hero-inner">
-        <Reveal>
-          <div className="badge-live"><span className="dot"></span> Onboarding Brighton businesses now</div>
-          <h1>Fill the chair. Move the stock. <em>Save the sale.</em></h1>
-          <p className="sub">Turn empty appointments and unsold stock into new revenue, automatically, in real time, for free.</p>
+    <section className="hero dark r-hero">
+      <div className="wrap hero-grid">
+        <div className="hero-copy">
+          <span className="live-pill"><i></i>Onboarding Brighton businesses now</span>
+          <h1 className="display">Move your stock. Find last minute bookings. <em>Get that sale!</em></h1>
+          <p className="lede">Now you can move your unsold stock and turn those empty bookings into new revenue. In real time. For free!</p>
           <div className="hero-ctas">
-            <a href="#waitlist" className="btn btn-primary">List your business</a>
-            <a href="#why" className="btn btn-ghost">Why this matters</a>
+            <a href="#waitlist" className="btn">List your business</a>
+            <a href="#how" className="btn gh">See how it works</a>
           </div>
           <p className="hero-note">Free to join. No commission until you choose to promote a deal.</p>
-        </Reveal>
+        </div>
 
-        <Reveal className="phone-stage retailer-hero-phone" delay={150}>
-          <div className="phone-frame-wrap">
-            <div className="phone">
-              <div className="notch"></div>
-              <div className="screen">
-                <div className="status"><span>9:41</span><span>&#9679;&#9679;&#9679;</span></div>
-                <div className="app-header"><div className="t">New offer</div></div>
-                <div className="sp-viewfinder">
-                  <span className="vf-corner vf-tl"></span><span className="vf-corner vf-tr"></span><span className="vf-corner vf-bl"></span><span className="vf-corner vf-br"></span>
-                  <img src="/trainers.jpg" alt="Last season Nike trainers" />
-                </div>
-                <div className="sp-offer-box">
-                  <p className="n">Last season trainers &middot; 6 pairs</p>
-                  <p className="pr">Solestore</p>
-                </div>
-                <div className="sp-chip-row">
-                  <div className="sp-chip">25%</div>
-                  <div className="sp-chip active">35%</div>
-                  <div className="sp-chip">50%</div>
-                </div>
-                <div className="sp-field-row">
-                  <div className="sp-field"><p className="fl">Qty</p><p className="fv">6 pairs</p></div>
-                  <div className="sp-field"><p className="fl">Expires</p><p className="fv">Today, 6pm</p></div>
-                </div>
-                <div className="sp-offer-box">
-                  <p className="n" style={{ fontWeight: 600 }}>Floor set &middot; AI won't go lower</p>
-                </div>
-                <div className="sp-post-btn">Post Offer</div>
-              </div>
-            </div>
+        <div className={`stage r-stage${ready ? ' ready' : ''}`}>
+          <DealCard className="float back dcard hide-sm pop" style={{ '--in': '.6s' }} phStyle={{ height: 150 }} img="https://images.unsplash.com/photo-1503951914875-452162b0f3f1?auto=format&fit=crop&w=500&q=75" sticker="Booked" stickerClass="sticker mint" biz="Frank's Barbers" meta="3:30pm" />
 
-            <div className="float-banner">
-              <span className="fb-dot"></span>
-              <div>
-                <p className="fb-title">You're live &middot; just now</p>
-                <p className="fb-body">Reaching 640 nearby customers with this offer.</p>
-              </div>
+          <DealCard className="float main dcard" img="/trainers.jpg" alt="Nike Air Max 90 trainers" sticker="Live" biz="Solestore" meta="6 pairs">
+            <div className="item" style={{ fontSize: 16 }}>Nike Air Max 90</div>
+            <Ladder prices={['£110', '£77', '£66', '£60']} interval={3000} />
+            <div className="rule"><i></i></div>
+            <div className="foot">
+              <span className="pips">
+                {Array.from({ length: UNITS }, (_, k) => <i key={k} className={k < shown ? 'on' : undefined}></i>)}
+              </span>
+              <span className="amber">Collect by 6pm</span>
             </div>
+          </DealCard>
+
+          <div className="float taken pop"><small>Taken today</small><b>£{taken}</b></div>
+
+          <div className="toasts">
+            {TOASTS.map((t, k) => (
+              <div key={t.name} className={`toast${k < shown ? ' on' : ''}`}>
+                <span className="av">{t.initial}</span>
+                <div><b>{t.name} claimed</b><span>{t.size}</span></div>
+                <span className="p">£{t.val}</span>
+              </div>
+            ))}
           </div>
-        </Reveal>
+        </div>
       </div>
     </section>
   );
