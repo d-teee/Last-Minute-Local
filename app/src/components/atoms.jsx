@@ -9,9 +9,9 @@ export function TagIcon({ size = 16, stroke = '#04211a', strokeWidth = 2 }) {
   );
 }
 
-export function Notif({ title, body, time, className = 'notif', style }) {
+export function Notif({ title, body, time, className = '', style }) {
   return (
-    <div className={className} style={style}>
+    <div className={`notif${className ? ` ${className}` : ''}`} style={style}>
       <span className="ic"><TagIcon /></span>
       <div><b>{title}</b><p>{body}</p></div>
       {time && <span className="t">{time}</span>}

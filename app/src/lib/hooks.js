@@ -14,7 +14,7 @@ export function useReducedMotion() {
 }
 
 // Reveals `count` items one by one, holds, then starts again. Returns how many are showing.
-export function useSequence(count) {
+export function useSequence(count, firstDelay = 1200) {
   const reduce = useReducedMotion();
   const [shown, setShown] = useState(reduce ? count : 0);
   useEffect(() => {
@@ -38,8 +38,19 @@ export function useSequence(count) {
       }
     };
     setShown(0);
-    timer = setTimeout(step, 1200);
+    timer = setTimeout(step, firstDelay);
     return () => clearTimeout(timer);
-  }, [reduce, count]);
+  }, [reduce, count, firstDelay]);
   return shown;
+}
+
+// True one frame after mount. Hero overlays key their delayed entrance off it,
+// so the app screenshot is seen on its own before anything pops in over it.
+export function useReady() {
+  const [ready, setReady] = useState(false);
+  useEffect(() => {
+    const id = requestAnimationFrame(() => setReady(true));
+    return () => cancelAnimationFrame(id);
+  }, []);
+  return ready;
 }

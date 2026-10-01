@@ -1,5 +1,5 @@
 import { Ladder } from '../lib/motion.jsx';
-import { useSequence } from '../lib/hooks.js';
+import { useReady, useSequence } from '../lib/hooks.js';
 import { DealCard } from './atoms.jsx';
 
 const TOASTS = [
@@ -12,7 +12,8 @@ const UNITS = 6;
 
 export default function RetailerHero() {
   // Claim toasts pop in one by one, filling the unit pips and the "Taken today" counter.
-  const shown = useSequence(TOASTS.length);
+  const shown = useSequence(TOASTS.length, 2200);
+  const ready = useReady();
   const taken = TOASTS.slice(0, shown).reduce((sum, t) => sum + t.val, 0);
 
   return (
@@ -29,8 +30,8 @@ export default function RetailerHero() {
           <p className="hero-note">Free to join. No commission until you choose to promote a deal.</p>
         </div>
 
-        <div className="stage r-stage">
-          <DealCard className="float back dcard hide-sm" phStyle={{ height: 150 }} img="https://images.unsplash.com/photo-1503951914875-452162b0f3f1?auto=format&fit=crop&w=500&q=75" sticker="Booked" stickerClass="sticker mint" biz="Frank's Barbers" meta="3:30pm" />
+        <div className={`stage r-stage${ready ? ' ready' : ''}`}>
+          <DealCard className="float back dcard hide-sm pop" style={{ '--in': '.6s' }} phStyle={{ height: 150 }} img="https://images.unsplash.com/photo-1503951914875-452162b0f3f1?auto=format&fit=crop&w=500&q=75" sticker="Booked" stickerClass="sticker mint" biz="Frank's Barbers" meta="3:30pm" />
 
           <DealCard className="float main dcard" img="/trainers.jpg" alt="Nike Air Max 90 trainers" sticker="Live" biz="Solestore" meta="6 pairs">
             <div className="item" style={{ fontSize: 16 }}>Nike Air Max 90</div>
@@ -44,7 +45,7 @@ export default function RetailerHero() {
             </div>
           </DealCard>
 
-          <div className="float taken"><small>Taken today</small><b>£{taken}</b></div>
+          <div className="float taken pop"><small>Taken today</small><b>£{taken}</b></div>
 
           <div className="toasts">
             {TOASTS.map((t, k) => (

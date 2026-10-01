@@ -8,7 +8,7 @@ const STEPS = [
     src: '/site-assets/c2-feed.png',
     alt: 'Deals feed with Nike Air Max 90 trainers at 40% off, 0.4 miles away',
     overlay: (
-      <div className="notif float">
+      <div className="notif float pop">
         <span className="dot" style={{ marginTop: 5 }}></span>
         <div><b>Solestore · just now</b><p>You're 0.4 mi away. 40% off Nike Air Max 90 trainers, 4 pairs left.</p></div>
       </div>
