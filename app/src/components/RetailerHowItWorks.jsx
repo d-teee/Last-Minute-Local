@@ -27,8 +27,8 @@ export default function RetailerHowItWorks() {
     <section id="how" className="section" style={{ paddingTop: 0 }}>
       <div className="wrap">
         <Reveal className="head c">
-          <span className="kick">Three taps to live</span>
-          <h2 className="display">Here's how it works&hellip;</h2>
+          <span className="kick">Creating your offers</span>
+          <h2 className="display">Just 3 taps to go live&hellip;</h2>
         </Reveal>
         <Steps steps={STEPS} />
       </div>

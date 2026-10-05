@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import Nav from '../components/Nav.jsx';
 import RetailerHero from '../components/RetailerHero.jsx';
 import RetailerWhy from '../components/RetailerWhy.jsx';
+import RetailerOffers from '../components/RetailerOffers.jsx';
 import RetailerHowItWorks from '../components/RetailerHowItWorks.jsx';
 import AI from '../components/AI.jsx';
 import GetStarted from '../components/GetStarted.jsx';
@@ -32,6 +33,7 @@ export default function RetailerPage() {
         <RetailerHero />
         <Ticker items={TICKER} />
         <RetailerWhy />
+        <RetailerOffers />
         <RetailerHowItWorks />
         <AI />
         <GetStarted />

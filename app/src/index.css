@@ -35,6 +35,8 @@ header.nav{position:sticky;top:0;z-index:50;background:rgba(7,27,22,.86);backdro
 .brand,.nav-inner .btn{white-space:nowrap}
 .nav-links a{font-size:15px;font-weight:600;color:#a8bdb6;text-decoration:none}
 .nav-links a:hover{color:var(--chalk)}
+header.nav .brand{font-size:30px;gap:12px}header.nav .brand svg{width:34px;height:40px}
+@media (max-width:600px){header.nav .brand{font-size:21px;gap:8px}header.nav .brand svg{width:24px;height:28px}}
 
 /* buttons */
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:52px;padding:0 24px;border-radius:16px;font-family:var(--b);font-size:16px;font-weight:600;background:var(--mint);color:#04211a;border:0;cursor:pointer;text-decoration:none;transition:transform .15s ease,background .15s ease}
@@ -234,6 +236,8 @@ footer{padding:48px 0;border-top:1px solid var(--line)}
 }
 
 /* ---------- customer page ---------- */
+.bento.three{grid-template-columns:repeat(3,minmax(0,1fr))}
+@media (max-width:900px){.bento.three{grid-template-columns:1fr}}
 .c-stage .fa{left:-10px;top:110px;width:200px;rotate:-7deg;z-index:2;animation-delay:-2s}
 .c-stage .fb{right:-14px;top:300px;width:210px;rotate:6deg;z-index:4;animation-delay:-4s}
 .c-stage .fc{left:6px;bottom:40px;width:196px;rotate:4deg;z-index:4}
@@ -242,69 +246,77 @@ footer{padding:48px 0;border-top:1px solid var(--line)}
 .step .frame .notif{left:-18px;top:auto;bottom:-28px;width:232px}
 
 /* ---------- retailer page ---------- */
-.hero .r-stage{height:760px}
-@media (max-width:1100px){.hero .r-stage{height:740px}}
-@media (max-width:900px){.hero .r-stage{height:760px}}
 .r-hero h1.display{font-size:clamp(44px,5.4vw,76px)}
-.r-stage .main{left:50%;top:70px;width:340px;margin-left:-170px;z-index:3}
+/* hero: Frank's Barbers live card with a bakery and a boutique card around it */
+.h-stage{height:720px}
+.h-stage .main{left:50%;top:110px;width:330px;margin-left:-165px;z-index:3}
+.h-stage .main .ph{height:220px}
+.h-stage .main .ladder{font-size:19px}
+.h-stage .back{left:-10px;top:-24px;width:210px;rotate:-8deg;z-index:1;animation-delay:-3s;opacity:.92}
+.h-stage .back2{right:-14px;top:440px;width:220px;rotate:6deg;z-index:4;animation-delay:-5s}
+.h-stage .notifs{position:absolute;right:-20px;top:16px;width:262px;height:90px;z-index:6}
+.h-stage .notifs .notif{position:absolute}
+/* offers */
+.offer-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:28px;max-width:940px;margin:0 auto}
+.offer{background:#fff;border:1px solid var(--line);border-radius:28px;padding:36px 28px 40px;display:flex;flex-direction:column;align-items:center;text-align:center;gap:8px;overflow:hidden}
+.offer .kick{color:var(--muted-ink)}
+.offer h3{font-family:var(--d);font-size:28px;font-weight:700;letter-spacing:-.025em;line-height:1.1}
+.offer p{font-size:16px;color:var(--muted-ink);line-height:1.5;max-width:34ch;text-wrap:pretty}
+.offer .crop{margin-top:22px;width:100%;display:flex;justify-content:center}
+.offer .shot{width:290px}
+.cust-cap{display:flex;justify-content:center;margin-top:28px;font-family:var(--m);font-size:14px;color:var(--muted-ink)}
+/* AI Buddy: Solestore live card, Taken today counter and claim toasts */
+.ai-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:64px;align-items:center}
+.ai-grid h2.display{margin-top:14px;font-size:clamp(34px,3.6vw,50px)}
+.ai-grid .lede{margin-top:20px;font-size:18px}
+.ai-grid .lede+.lede{margin-top:14px}
+.pills{display:flex;flex-wrap:wrap;gap:10px;margin-top:28px}
+.pills span{font-size:14px;font-weight:600;padding:10px 16px;border-radius:999px;background:rgba(244,246,244,.08);color:#c6d6d1}
+.r-stage{height:660px}
+.r-stage .main{left:50%;top:20px;width:340px;margin-left:-170px;z-index:3}
 .r-stage .main .ph{height:230px}
 .r-stage .main .ladder{font-size:19px}
-.r-stage .back{left:-6px;top:10px;width:220px;rotate:-8deg;z-index:1;animation-delay:-3s;opacity:.92}
-.r-stage .taken{right:-10px;top:30px;z-index:5;background:var(--mint-bright);color:#04211a;border-radius:18px;padding:14px 18px;rotate:4deg;animation-delay:-1.5s;box-shadow:var(--shadow)}
+.r-stage .taken{right:-10px;top:-10px;z-index:5;background:var(--mint-bright);color:#04211a;border-radius:18px;padding:14px 18px;rotate:4deg;animation-delay:-1.5s;box-shadow:var(--shadow)}
 .r-stage .taken small{display:block;font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase}
 .r-stage .taken b{display:block;font-family:var(--m);font-weight:500;font-size:34px;letter-spacing:-.03em;margin-top:2px}
-.toasts{position:absolute;right:-24px;top:470px;width:270px;display:flex;flex-direction:column;gap:10px;z-index:6}
-.toast{display:flex;align-items:center;gap:12px;background:rgba(20,49,42,.95);border:1px solid var(--slate-2);border-radius:16px;padding:11px 14px;color:var(--chalk);box-shadow:var(--shadow);opacity:0;transform:translateX(30px) scale(.96);transition:opacity .45s ease,transform .5s cubic-bezier(.2,.9,.3,1.2)}
+/* toasts sit below the card (design: top 350, which covers its price ladder) and rise in
+   rather than sliding in from the right, which pushed past the page edge on phones */
+.toasts{position:absolute;right:-24px;top:395px;width:270px;display:flex;flex-direction:column;gap:10px;z-index:6}
+.toast{display:flex;align-items:center;gap:12px;background:rgba(20,49,42,.95);border:1px solid var(--slate-2);border-radius:16px;padding:11px 14px;color:var(--chalk);box-shadow:var(--shadow);opacity:0;transform:translateY(12px) scale(.96);transition:opacity .45s ease,transform .5s cubic-bezier(.2,.9,.3,1.2)}
 .toast.on{opacity:1;transform:none}
 .toast .av{width:32px;height:32px;border-radius:50%;background:var(--mint-bright);color:#04211a;font-weight:700;font-size:13px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
 .toast b{display:block;font-size:13.5px;font-weight:600}
 .toast span{font-family:var(--m);font-size:12px;color:var(--muted)}
 .toast .p{margin-left:auto;font-family:var(--m);font-size:14px;color:var(--mint-bright)}
-.hero-note{margin-top:18px;font-size:14px;color:var(--muted)}
-.surge{background:var(--slate);border:1px solid var(--slate-2);border-radius:28px;padding:36px;display:flex;flex-direction:column;gap:6px}
-.sg{display:grid;grid-template-columns:110px 18px 1fr auto;align-items:center;gap:16px;padding:14px 0;border-bottom:1px solid var(--slate-2);opacity:.38;animation:sg 10s infinite}
-.sg:last-of-type{border-bottom:0}
-.sg .t{font-family:var(--m);font-size:13px;color:var(--muted)}
-.sg .d{width:14px;height:14px;border-radius:50%;background:var(--mint-bright);box-shadow:0 0 0 6px rgba(127,227,192,.14)}
-.sg .p{font-family:var(--m);font-size:26px;letter-spacing:-.03em}
-.sg .o{font-family:var(--m);font-size:14px;color:var(--mint-bright)}
-.sg.hot .d{background:var(--ember);box-shadow:0 0 0 6px rgba(255,90,31,.16)}.sg.hot .o{color:var(--ember)}
-.sg:nth-of-type(2){animation-delay:2.5s}.sg:nth-of-type(3){animation-delay:5s}.sg:nth-of-type(4){animation-delay:7.5s}
-@keyframes sg{0%{opacity:.38}4%,24%{opacity:1}30%,100%{opacity:.38}}
-.floor{display:flex;justify-content:space-between;align-items:center;margin-top:14px;padding-top:16px;border-top:1.5px dashed rgba(127,227,192,.35);font-family:var(--m);font-size:13px;color:var(--mint-bright)}
-.ai-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:64px;align-items:center}
-.ai-grid h2.display{margin-top:14px;font-size:clamp(34px,3.6vw,50px)}
-.ai-grid .lede{margin-top:20px;font-size:18px}
-.pills{display:flex;flex-wrap:wrap;gap:10px;margin-top:28px}
-.pills span{font-size:14px;font-weight:600;padding:10px 16px;border-radius:999px;background:rgba(244,246,244,.08);color:#c6d6d1}
 .pcard h3 .soft{font-weight:400;color:var(--muted-ink)}
 .wl-art .shot{position:absolute;left:50%;top:0;margin-left:-125px;rotate:4deg}
-@media (max-width:900px){.ai-grid{grid-template-columns:1fr;gap:40px}.toasts{right:0}.r-stage .taken{right:0}}
-@media (max-width:520px){.r-stage .main{width:300px;margin-left:-150px}.sg{grid-template-columns:90px 14px 1fr auto;gap:10px}}
-@media (prefers-reduced-motion:reduce){.sg{opacity:1}}
+@media (max-width:900px){.ai-grid,.offer-grid{grid-template-columns:1fr;gap:40px}.toasts{right:0}.r-stage .taken{right:0}.h-stage .notifs{right:0}}
+@media (max-width:520px){.r-stage .main,.h-stage .main{width:300px;margin-left:-150px}.offer .shot{width:250px}}
 
-/* ---------- amends 2026-10-01: overlays enter after the app screen, mobile spacing ---------- */
-/* Hero overlays wait (--in) so the screenshot is seen first. Uses scale/opacity so it
-   never fights the .float bob, which animates translate. */
+/* ---------- amends: overlays enter after the app screen; nothing may scroll sideways ---------- */
+/* Hero overlays wait (--in) so the screenshot or live card is seen first. Uses scale/opacity
+   so it never fights the .float bob, which animates translate. */
 .pop{opacity:0;scale:.92;transition:opacity .5s ease,scale .6s cubic-bezier(.2,.9,.3,1.2);transition-delay:var(--in,1.2s)}
 .ready .pop,[data-reveal].in .pop{opacity:1;scale:1}
-/* Nothing may widen the page sideways (mobile browsers zoom out to fit it). */
+/* Backstop: mobile browsers zoom out to fit anything wider than the screen. */
 @supports (overflow:clip){html,body{overflow-x:clip}}
 @media (max-width:900px){
-.c-stage{height:auto;padding:84px 0 150px}
+.c-stage{height:auto;padding:84px 0 40px}
 .c-stage .shot.lg{position:relative;left:auto;top:auto;transform:none;margin:0 auto}
 .c-stage .notifs{left:50%;right:auto;margin-left:-135px;top:0}
-.c-stage .fb{top:auto;bottom:0;right:0;width:200px}
 .c-stage .fa{top:150px}
-.c-stage .fc{bottom:110px}
+.c-stage .fc{bottom:60px}
 }
+/* The design's nav (logo + "for Business" + button) is wider than a phone: tighten it. */
 @media (max-width:520px){
 .nav-inner{gap:12px;padding-top:12px;padding-bottom:12px}
-.brand{font-size:17px;gap:8px}
-.nav-inner .brand small{display:none}
+header.nav .brand{font-size:17px;gap:8px}
+header.nav .brand svg{width:22px;height:26px}
+header.nav .brand small{display:none}
 .nav-inner .btn.sm{min-height:40px;padding:0 14px;font-size:14px}
 .c-stage .shot.lg{width:260px}
+.h-stage{height:470px}
 .toasts{width:250px}
 }
-@media (max-width:370px){.brand{font-size:15px}.nav-inner .btn.sm{padding:0 12px;font-size:13px}}
+@media (max-width:370px){.nav-inner{gap:8px;padding-left:16px;padding-right:16px}header.nav .brand{font-size:15px;gap:6px}header.nav .brand svg{width:20px;height:24px}.nav-inner .btn.sm{padding:0 12px;font-size:13px}}
 @media (prefers-reduced-motion:reduce){.pop{opacity:1;scale:1}}

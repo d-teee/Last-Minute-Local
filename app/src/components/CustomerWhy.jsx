@@ -26,7 +26,7 @@ export default function CustomerWhy() {
           <p className="lede">The best discounts on your high street disappear within hours, sometimes minutes. Last Minute Local surfaces them the moment they go live, so you never have to go looking.</p>
         </Reveal>
 
-        <div className="bento">
+        <div className="bento three">
           <Reveal className="tile">
             <div className="vis" style={col}>
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline' }}>
@@ -53,7 +53,7 @@ export default function CustomerWhy() {
             </div>
           </Reveal>
 
-          <Reveal className="tile">
+          <Reveal className="tile" delay="2">
             <div className="vis" style={col}>
               <Notif title="Bayside Yoga" body="Vinyasa at 6:30pm, 40% off. 0.2 mi away." time="2m" style={{ position: 'relative', width: 'auto' }} />
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
@@ -64,20 +64,6 @@ export default function CustomerWhy() {
             <div>
               <h3>No spam. Just stuff you need.</h3>
               <p>You only hear about deals that match what you actually want.</p>
-            </div>
-          </Reveal>
-
-          <Reveal className="tile" delay="1">
-            <div className="vis" style={{ flexDirection: 'column', alignItems: 'stretch' }}>
-              <div className="split">
-                <div><small>You pay now</small><b>£3.00</b></div>
-                <div><small>In the shop</small><b>£63.00</b></div>
-              </div>
-              <div className="tap-btn">Reserve UK 8 · £3.00</div>
-            </div>
-            <div>
-              <h3>Pay and complete the deal in one tap.</h3>
-              <p>Pay a small booking fee to secure the item, then the rest in-store. Get your QR code instantly. No forms.</p>
             </div>
           </Reveal>
         </div>

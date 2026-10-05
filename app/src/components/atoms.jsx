@@ -9,10 +9,10 @@ export function TagIcon({ size = 16, stroke = '#04211a', strokeWidth = 2 }) {
   );
 }
 
-export function Notif({ title, body, time, className = '', style }) {
+export function Notif({ title, body, time, icon = <TagIcon />, className = '', style }) {
   return (
     <div className={`notif${className ? ` ${className}` : ''}`} style={style}>
-      <span className="ic"><TagIcon /></span>
+      <span className="ic">{icon}</span>
       <div><b>{title}</b><p>{body}</p></div>
       {time && <span className="t">{time}</span>}
     </div>
@@ -73,18 +73,10 @@ export function Steps({ steps }) {
   );
 }
 
-export function Checkmark() {
+export function Checkmark({ size = 18 }) {
   return (
-    <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none">
       <path d="M5 12.5 10 17 19 7" stroke="#04211a" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
-    </svg>
-  );
-}
-
-export function Arrow() {
-  return (
-    <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
-      <path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
     </svg>
   );
 }

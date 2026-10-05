@@ -1,6 +1,6 @@
-import { Countdown, Cycle, Ladder } from '../lib/motion.jsx';
+import { Countdown, Cycle } from '../lib/motion.jsx';
 import { useReady } from '../lib/hooks.js';
-import { Arrow, DealCard, Notif, Shot } from './atoms.jsx';
+import { DealCard, Notif, Shot } from './atoms.jsx';
 
 const unsplash = (id) => `https://images.unsplash.com/${id}?auto=format&fit=crop&w=500&q=75`;
 
@@ -15,7 +15,7 @@ export default function CustomerHero() {
           <h1 className="display">Big daily discounts from your high street, <em>the second they drop.</em></h1>
           <p className="lede">Last Minute Local pushes today's best deals from nearby shops, salons and restaurants straight to your phone the minute they're released.</p>
           <div className="hero-ctas">
-            <a href="#how" className="text-link">See how it works <Arrow /></a>
+            <a href="#waitlist" className="btn">Join the waitlist</a>
           </div>
         </div>
 
@@ -26,11 +26,6 @@ export default function CustomerHero() {
             <div className="foot"><Countdown seconds={9240} className="amber" /><span className="mintc">£3 now</span></div>
           </DealCard>
 
-          <DealCard className="float fb dcard pop" style={{ '--in': '1.8s' }} img={unsplash('photo-1441986300917-64674bd600d8')} sticker="50% off" biz="Bloom & Ash" meta="0.5 mi">
-            <div className="item">Ganni check blazer</div>
-            <Ladder prices={['£226', '£170', '£136', '£113']} start={1} interval={2200} />
-            <div className="foot"><Countdown seconds={1320} className="ember" /><span>2 left</span></div>
-          </DealCard>
 
           <DealCard className="float fc dcard hide-sm pop" style={{ '--in': '3s' }} img={unsplash('photo-1599901860904-17e6ed7083a0')} sticker="40% off" biz="Bayside Yoga" meta="0.2 mi">
             <div className="item">Vinyasa, 6:30pm</div>

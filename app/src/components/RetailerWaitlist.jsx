@@ -15,8 +15,8 @@ export default function RetailerWaitlist() {
       <div className="wrap">
         <Reveal className="waitlist">
           <div>
-            <span className="kick">Join the waitlist</span>
-            <h2 className="display">Be first in line when we go live.</h2>
+            <span className="kick">Join the waiting list</span>
+            <h2 className="display">Join the waiting list now. <em>Be first in line when we go live.</em></h2>
             <p className="lede">We're onboarding our first businesses in Brighton now, with more high streets following right after. Tell us about your business and we'll get you set up before launch.</p>
 
             <div className="wl-form-wrap">
@@ -40,7 +40,6 @@ export default function RetailerWaitlist() {
                   <p className={`wl-error${invalid ? ' active' : ''}`}>Please enter a valid UK postcode.</p>
                   {submitError && <p className="wl-error active">{submitError}</p>}
                   <button type="submit" className="wl-submit" disabled={submitting}>{submitting ? 'Submitting…' : 'List your business'}</button>
-                  <p className="wl-fineprint">Free to join. No commission until you choose to promote a deal.</p>
                 </form>
               )}
 

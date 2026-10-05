@@ -16,15 +16,15 @@ const STEPS = [
   },
   {
     label: 'Tap & buy',
-    body: 'Pay a small booking fee to secure the item. Get your QR code instantly. No forms.',
+    body: 'Select a product or service, pay a small booking fee to secure it. Get your QR code instantly. No forms.',
     src: '/site-assets/c4-offer-detail.png',
     alt: 'Offer detail: pay £3 now, £63 on collection, choose your size',
   },
   {
     label: 'Redeem & go',
     body: 'Show your QR code in-store. Pay the balance to the retailer directly, or select home delivery where available and pay the retailer in-app.',
-    src: '/site-assets/c6-my-deals-qr.png',
-    alt: 'My deals screen with a QR code to show at the Solestore counter',
+    src: '/site-assets/c6-my-deal-summary.png',
+    alt: 'My deal summary: £129 saved this month, pending deals with QR codes, and deals completed this month',
   },
 ];
 
@@ -35,7 +35,7 @@ export default function CustomerHowItWorks() {
         <Reveal className="head c">
           <span className="kick">Browse. Buy. Redeem. Done.</span>
           <h2 className="display">How it works</h2>
-          <p className="lede">Just 3 screens. 60 seconds. Another great deal in the bag!</p>
+          <p className="lede">Just 3 screens. Takes just 60 seconds. Another great deal in the bag!</p>
         </Reveal>
         <Steps steps={STEPS} />
       </div>

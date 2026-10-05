@@ -15,9 +15,9 @@ export default function Nav({ variant }) {
         {isRetailer ? (
           <nav className="nav-links">
             <a href="#why">Why this matters</a>
+            <a href="#offers">Offers</a>
             <a href="#how">How it works</a>
             <a href="#ai">Your AI Buddy</a>
-            <a href="#value">Get started</a>
           </nav>
         ) : (
           <nav className="nav-links">

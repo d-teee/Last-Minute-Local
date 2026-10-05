@@ -18,7 +18,7 @@ const CARDS = [
         <circle cx="22" cy="21" r="7" stroke="currentColor" strokeWidth="3.4" />
       </svg>
     ),
-    title: 'You can now reach your local customers in real time, throughout the day',
+    title: 'Reach your local customers in real time, throughout the day',
     body: 'Your deal reaches people nearby who are actively looking for exactly what you offer, right now.',
   },
   {
@@ -27,7 +27,7 @@ const CARDS = [
         <path d="M12 2 3 7v6c0 5 4 8 9 9 5-1 9-4 9-9V7l-9-5Z" stroke="currentColor" strokeWidth="1.8" strokeLinejoin="round" />
       </svg>
     ),
-    title: 'AI protects your margin',
+    title: 'AI always protects your margin',
     body: "Set the lowest price you'll accept. Our AI never goes below it, even as urgency builds towards expiry.",
   },
 ];
@@ -38,7 +38,7 @@ export default function GetStarted() {
       <div className="wrap">
         <Reveal className="head">
           <span className="kick">Get started</span>
-          <h2 className="display">It's free to join. <em>No catch.</em></h2>
+          <h2 className="display">Get started. It's free to join. <em>No catch.</em></h2>
           <p className="lede">Turn your quietest hours and slowest-moving stock into new customers, with no marketing budget and no long-term commitment.</p>
         </Reveal>
         <div className="vcards">
