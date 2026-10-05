@@ -1,60 +1,45 @@
-import Reveal from './Reveal.jsx';
+import { Cycle, Ladder } from '../lib/motion.jsx';
+import { useReady } from '../lib/hooks.js';
+import { Checkmark, DealCard, Notif } from './atoms.jsx';
+
+const unsplash = (id, w = 500) => `https://images.unsplash.com/${id}?auto=format&fit=crop&w=${w}&q=75`;
+const tick = <Checkmark size={16} />;
 
 export default function RetailerHero() {
+  // The live card shows first; the side cards and notifications follow (see .pop).
+  const ready = useReady();
+
   return (
-    <section className="hero hero-retailer">
-      <div className="wrap hero-inner">
-        <Reveal>
-          <div className="badge-live"><span className="dot"></span> Onboarding Brighton businesses now</div>
-          <h1>Fill the chair. Move the stock. <em>Save the sale.</em></h1>
-          <p className="sub">Turn empty appointments and unsold stock into new revenue, automatically, in real time, for free.</p>
+    <section className="hero dark r-hero">
+      <div className="wrap hero-grid">
+        <div className="hero-copy">
+          <span className="live-pill"><i></i>Onboarding Brighton businesses now</span>
+          <h1 className="display">Move your stock. Find last minute bookings. <em>Get that sale!</em></h1>
+          <p className="lede">Now you can move your unsold stock and turn those empty bookings into new revenue. In real time. For free!</p>
           <div className="hero-ctas">
-            <a href="#waitlist" className="btn btn-primary">List your business</a>
-            <a href="#why" className="btn btn-ghost">Why this matters</a>
+            <a href="#waitlist" className="btn">List your business</a>
+            <a href="#offers" className="btn gh">See how it works</a>
           </div>
-          <p className="hero-note">Free to join. No commission until you choose to promote a deal.</p>
-        </Reveal>
+        </div>
 
-        <Reveal className="phone-stage retailer-hero-phone" delay={150}>
-          <div className="phone-frame-wrap">
-            <div className="phone">
-              <div className="notch"></div>
-              <div className="screen">
-                <div className="status"><span>9:41</span><span>&#9679;&#9679;&#9679;</span></div>
-                <div className="app-header"><div className="t">New offer</div></div>
-                <div className="sp-viewfinder">
-                  <span className="vf-corner vf-tl"></span><span className="vf-corner vf-tr"></span><span className="vf-corner vf-bl"></span><span className="vf-corner vf-br"></span>
-                  <img src="/trainers.jpg" alt="Last season Nike trainers" />
-                </div>
-                <div className="sp-offer-box">
-                  <p className="n">Last season trainers &middot; 6 pairs</p>
-                  <p className="pr">Solestore</p>
-                </div>
-                <div className="sp-chip-row">
-                  <div className="sp-chip">25%</div>
-                  <div className="sp-chip active">35%</div>
-                  <div className="sp-chip">50%</div>
-                </div>
-                <div className="sp-field-row">
-                  <div className="sp-field"><p className="fl">Qty</p><p className="fv">6 pairs</p></div>
-                  <div className="sp-field"><p className="fl">Expires</p><p className="fv">Today, 6pm</p></div>
-                </div>
-                <div className="sp-offer-box">
-                  <p className="n" style={{ fontWeight: 600 }}>Floor set &middot; AI won't go lower</p>
-                </div>
-                <div className="sp-post-btn">Post Offer</div>
-              </div>
-            </div>
+        <div className={`stage h-stage${ready ? ' ready' : ''}`}>
+          <Cycle className="notifs pop" interval={3400}>
+            <Notif icon={tick} title="New booking · Frank's Barbers" body="Cut & blow-dry, 3:30pm · £20" time="now" />
+            <Notif icon={tick} title="Claimed · Crownhill Bakery" body="End-of-day box · £4.80" time="now" />
+            <Notif icon={tick} title="Claimed · Bloom & Ash" body="Linen shirt, size M · £24" time="now" />
+          </Cycle>
 
-            <div className="float-banner">
-              <span className="fb-dot"></span>
-              <div>
-                <p className="fb-title">You're live &middot; just now</p>
-                <p className="fb-body">Reaching 640 nearby customers with this offer.</p>
-              </div>
-            </div>
-          </div>
-        </Reveal>
+          <DealCard className="float back dcard hide-sm pop" style={{ '--in': '1.8s' }} phStyle={{ height: 140 }} img={unsplash('photo-1509440159596-0249088772ff')} sticker="60% off" biz="Crownhill Bakery" meta="5 left" />
+
+          <DealCard className="float main dcard" img={unsplash('photo-1503951914875-452162b0f3f1', 700)} alt="A barber at work" sticker="Live" biz="Frank's Barbers" meta="3 slots">
+            <div className="item" style={{ fontSize: 16 }}>Cut &amp; blow-dry</div>
+            <Ladder prices={['£28', '£20', '£18', '£16']} interval={3000} />
+            <div className="rule"><i></i></div>
+            <div className="foot"><span className="mintc">Next: 3:30pm</span><span className="amber">Today only</span></div>
+          </DealCard>
+
+          <DealCard className="float back2 dcard hide-sm pop" style={{ '--in': '2.4s' }} phStyle={{ height: 140 }} img={unsplash('photo-1441986300917-64674bd600d8')} sticker="35% off" biz="Bloom & Ash" meta="Linen shirts" />
+        </div>
       </div>
     </section>
   );
