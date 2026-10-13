@@ -40,7 +40,10 @@ export default function HeroVideo() {
     v.muted = false;
     const p = v.play();
     if (p) {
-      p.catch(() => {
+      p.catch((err) => {
+        // Logged so a failure on a device we can't test locally (Safari/iOS) still
+        // leaves a trace, rather than just silently reverting to the poster.
+        console.error('Explainer video failed to play:', err, 'networkState:', v.networkState, 'error:', v.error);
         if (v.error || v.networkState === HTMLMediaElement.NETWORK_NO_SOURCE) {
           setMissing(true);
         }
@@ -79,8 +82,14 @@ export default function HeroVideo() {
           onDoubleClick={handleDoubleClick}
           onEnded={handleEnded}
         >
-          <source src="/site-assets/lml-explainer.webm" type="video/webm" />
+          {/* MP4 first: Safari has no WebM support and has a long-standing history of
+              not reliably skipping an unplayable first <source> to try the next one -
+              putting the universally-supported format first sidesteps that entirely.
+              Browsers that do support WebM (Chrome, Firefox, Edge) still choose it
+              correctly even listed second, since source selection is by support, not
+              document order. */}
           <source src="/site-assets/lml-explainer.mp4" type="video/mp4" />
+          <source src="/site-assets/lml-explainer.webm" type="video/webm" />
         </video>
         {!missing && (
           <button className="hv-play" type="button" aria-label="Play the Last Minute Local explainer, with sound" onClick={handlePlay}>
