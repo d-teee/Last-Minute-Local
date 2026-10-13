@@ -247,7 +247,21 @@ footer{padding:48px 0;border-top:1px solid var(--line)}
 
 /* ---------- retailer page ---------- */
 .r-hero h1.display{font-size:clamp(44px,5.4vw,76px)}
-/* hero: Frank's Barbers live card with a bakery and a boutique card around it */
+/* hero: explainer video, plays with sound on click, no autoplay */
+.hero-video{padding-bottom:96px}
+.hv-frame{position:relative;aspect-ratio:16/9;border-radius:24px;overflow:hidden;background:var(--slate) radial-gradient(circle at 70% 20%,rgba(127,227,192,.16),transparent 60%);border:1px solid var(--slate-2);box-shadow:var(--shadow)}
+.hv-frame video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;background:var(--ink)}
+.hv-play{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;padding:24px;border:0;background:radial-gradient(circle at 50% 50%,rgba(7,27,22,.35),rgba(7,27,22,0) 45%);z-index:6;color:var(--chalk);font-family:var(--b);text-align:left;cursor:pointer}
+.hv-btn{width:68px;height:68px;border-radius:50%;background:var(--mint-bright);display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:transform .2s ease;animation:pulse 2s infinite}
+.hv-btn svg{margin-left:3px}
+.hv-play:hover .hv-btn{transform:scale(1.06)}
+.hv-play:focus-visible{outline:3px solid var(--mint-bright);outline-offset:-3px}
+.hv-lbl{display:flex;flex-direction:column;align-items:center;gap:2px;text-shadow:0 1px 8px rgba(7,27,22,.7)}.hv-lbl b{font-size:18px;font-weight:600}.hv-lbl .mono{font-size:13px;color:var(--chalk)}
+.hv-frame.playing .hv-play{display:none}
+.hv-miss{position:absolute;right:20px;top:20px;z-index:6;border:1px solid var(--slate-2);margin:0;font-family:var(--m);font-size:14px;color:var(--chalk);background:var(--slate);padding:8px 12px;border-radius:10px}
+@media (max-width:900px){.hero-video{padding-bottom:56px;max-width:640px;margin:0 auto;width:100%}}
+@media (max-width:520px){.hv-play{padding:16px}.hv-btn{width:56px;height:56px}.hv-lbl b{font-size:16px}}
+/* hero: Frank's Barbers live card with a bakery and a boutique card around it (hidden, kept for reference) */
 .h-stage{height:720px}
 .h-stage .main{left:50%;top:110px;width:330px;margin-left:-165px;z-index:3}
 .h-stage .main .ph{height:220px}

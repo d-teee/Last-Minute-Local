@@ -1,6 +1,7 @@
 import { Cycle, Ladder } from '../lib/motion.jsx';
 import { useReady } from '../lib/hooks.js';
 import { Checkmark, DealCard, Notif } from './atoms.jsx';
+import HeroVideo from './HeroVideo.jsx';
 
 const unsplash = (id, w = 500) => `https://images.unsplash.com/${id}?auto=format&fit=crop&w=${w}&q=75`;
 const tick = <Checkmark size={16} />;
@@ -22,7 +23,10 @@ export default function RetailerHero() {
           </div>
         </div>
 
-        <div className={`stage h-stage${ready ? ' ready' : ''}`}>
+        <HeroVideo />
+
+        {/* Previous animated card stage: hidden, not deleted, per the 13 Oct 2026 handback. */}
+        <div className={`stage h-stage${ready ? ' ready' : ''}`} hidden>
           <Cycle className="notifs pop" interval={3400}>
             <Notif icon={tick} title="New booking · Frank's Barbers" body="Cut & blow-dry, 3:30pm · £20" time="now" />
             <Notif icon={tick} title="Claimed · Crownhill Bakery" body="End-of-day box · £4.80" time="now" />

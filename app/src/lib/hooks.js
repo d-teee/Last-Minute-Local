@@ -1,5 +1,40 @@
 import { useEffect, useState } from 'react';
 
+const SITE_URL = 'https://lastminutelocal.co.uk';
+
+function upsert(selector, make) {
+  return document.querySelector(selector) || document.head.appendChild(make());
+}
+
+// Sets the tab title and keeps <link rel="canonical">/<meta property="og:url">
+// (and, optionally, a <link rel="alternate"> to the other page) in sync with
+// the current route. This is a client-side SPA, so it only reaches crawlers
+// that execute JS - a real SSR/prerender pass would be needed for others.
+export function useDocumentMeta({ title, path, altPath, altTitle }) {
+  useEffect(() => {
+    document.title = title;
+    const url = `${SITE_URL}${path}`;
+
+    const canonical = upsert('link[rel="canonical"]', () => Object.assign(document.createElement('link'), { rel: 'canonical' }));
+    canonical.setAttribute('href', url);
+
+    const og = upsert('meta[property="og:url"]', () => {
+      const el = document.createElement('meta');
+      el.setAttribute('property', 'og:url');
+      return el;
+    });
+    og.setAttribute('content', url);
+
+    if (altPath) {
+      const alt = upsert('link[rel="alternate"]', () => Object.assign(document.createElement('link'), { rel: 'alternate' }));
+      alt.setAttribute('href', `${SITE_URL}${altPath}`);
+      alt.setAttribute('title', altTitle || '');
+    } else {
+      document.querySelector('link[rel="alternate"]')?.remove();
+    }
+  }, [title, path, altPath, altTitle]);
+}
+
 const REDUCE_QUERY = '(prefers-reduced-motion: reduce)';
 
 export function useReducedMotion() {

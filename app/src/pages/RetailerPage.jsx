@@ -1,4 +1,3 @@
-import { useEffect } from 'react';
 import Nav from '../components/Nav.jsx';
 import RetailerHero from '../components/RetailerHero.jsx';
 import RetailerWhy from '../components/RetailerWhy.jsx';
@@ -9,6 +8,7 @@ import GetStarted from '../components/GetStarted.jsx';
 import RetailerWaitlist from '../components/RetailerWaitlist.jsx';
 import Footer from '../components/Footer.jsx';
 import { Ticker } from '../components/atoms.jsx';
+import { useDocumentMeta } from '../lib/hooks.js';
 
 const TICKER = [
   ['Barbers', 'empty chairs'],
@@ -22,9 +22,12 @@ const TICKER = [
 ];
 
 export default function RetailerPage() {
-  useEffect(() => {
-    document.title = 'Last Minute Local for Business: Move your stock. Find last minute bookings.';
-  }, []);
+  useDocumentMeta({
+    title: 'Last Minute Local for Business: Move your stock. Find last minute bookings.',
+    path: '/',
+    altPath: '/shoppers',
+    altTitle: 'Last Minute Local for shoppers',
+  });
 
   return (
     <>

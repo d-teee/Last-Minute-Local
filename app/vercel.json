@@ -1,3 +1,4 @@
 {
+  "redirects": [{ "source": "/shoppers/", "destination": "/shoppers", "statusCode": 301 }],
   "rewrites": [{ "source": "/(.*)", "destination": "/index.html" }]
 }

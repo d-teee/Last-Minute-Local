@@ -18,13 +18,13 @@ export default function Footer({ variant }) {
             <>
               <a href="#why">Why this matters</a>
               <a href="#ai">Your AI Buddy</a>
-              <Link to="/">For customers</Link>
+              <Link to="/shoppers">For customers</Link>
             </>
           ) : (
             <>
               <a href="#why">Why it matters</a>
               <a href="#how">How it works</a>
-              <Link to="/business">For business owners</Link>
+              <Link to="/">For business owners</Link>
             </>
           )}
         </div>

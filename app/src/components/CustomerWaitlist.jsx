@@ -44,7 +44,7 @@ export default function CustomerWaitlist() {
               </div>
             </div>
 
-            <p className="wl-contact">Run a local business instead? <Link to="/business">Visit the business site</Link>.</p>
+            <p className="wl-contact">Run a local business instead? <Link to="/">Visit the business site</Link>.</p>
           </div>
 
           <div className="wl-art" aria-hidden="true">

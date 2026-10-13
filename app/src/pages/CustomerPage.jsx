@@ -1,4 +1,3 @@
-import { useEffect } from 'react';
 import Nav from '../components/Nav.jsx';
 import CustomerHero from '../components/CustomerHero.jsx';
 import CustomerHowItWorks from '../components/CustomerHowItWorks.jsx';
@@ -6,6 +5,7 @@ import CustomerWhy from '../components/CustomerWhy.jsx';
 import CustomerWaitlist from '../components/CustomerWaitlist.jsx';
 import Footer from '../components/Footer.jsx';
 import { Ticker } from '../components/atoms.jsx';
+import { useDocumentMeta } from '../lib/hooks.js';
 
 const TICKER = [
   ["Frank's Barbers", 'Cut & blow-dry · 40% off'],
@@ -17,9 +17,10 @@ const TICKER = [
 ];
 
 export default function CustomerPage() {
-  useEffect(() => {
-    document.title = 'Last Minute Local: Big daily deals, straight to your phone';
-  }, []);
+  useDocumentMeta({
+    title: 'Last Minute Local: Big daily deals, straight to your phone',
+    path: '/shoppers',
+  });
 
   return (
     <>

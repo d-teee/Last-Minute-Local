@@ -8,8 +8,8 @@ export default function App() {
     <>
       <ScrollToTop />
       <Routes>
-        <Route path="/" element={<CustomerPage />} />
-        <Route path="/business" element={<RetailerPage />} />
+        <Route path="/" element={<RetailerPage />} />
+        <Route path="/shoppers" element={<CustomerPage />} />
       </Routes>
     </>
   );

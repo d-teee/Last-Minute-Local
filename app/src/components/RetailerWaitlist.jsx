@@ -53,7 +53,7 @@ export default function RetailerWaitlist() {
             </div>
 
             <p className="wl-contact">
-              Looking for local deals instead? <Link to="/">Visit the customer site</Link>. Investor or partner? <a href="mailto:hello@lastminutelocal.co?subject=Investor%20enquiry">Get in touch</a>.
+              Looking for local deals instead? <Link to="/shoppers">Visit the customer site</Link>. Investor or partner? <a href="mailto:hello@lastminutelocal.co?subject=Investor%20enquiry">Get in touch</a>.
             </p>
           </div>
 

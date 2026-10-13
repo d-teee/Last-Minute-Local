@@ -23,7 +23,7 @@ export default function Nav({ variant }) {
           <nav className="nav-links">
             <a href="#how">How it works</a>
             <a href="#why">Why it matters</a>
-            <Link to="/business">For business owners</Link>
+            <Link to="/">For business owners</Link>
           </nav>
         )}
         <a href="#waitlist" className="btn sm">
