@@ -26,31 +26,34 @@ export default function AI() {
           <div className="pills"><span>You set the floor</span><span>Repriced in real time</span><span>Zero manual work</span></div>
         </Reveal>
 
-        <Reveal className="stage r-stage" delay="1">
-          <DealCard className="float main dcard" img="/trainers.jpg" alt="Nike Air Max 90 trainers" sticker="Live" biz="Solestore" meta="6 pairs">
-            <div className="item" style={{ fontSize: 16 }}>Nike Air Max 90</div>
-            <Ladder prices={['£110', '£77', '£66', '£60']} interval={3000} />
-            <div className="rule"><i></i></div>
-            <div className="foot">
-              <span className="pips">
-                {Array.from({ length: UNITS }, (_, k) => <i key={k} className={k < shown ? 'on' : undefined}></i>)}
-              </span>
-              <span className="amber">Collect by 6pm</span>
-            </div>
-          </DealCard>
-
-          <div className="float taken pop"><small>Taken today</small><b>£{taken}</b></div>
-
-          <div className="toasts">
-            {TOASTS.map((t, k) => (
-              <div key={t.name} className={`toast${k < shown ? ' on' : ''}`}>
-                <span className="av">{t.initial}</span>
-                <div><b>{t.name} claimed</b><span>{t.size}</span></div>
-                <span className="p">£{t.val}</span>
+        <div>
+          <p className="stage-cap">This shows your Sales Dashboard in real time&hellip;</p>
+          <Reveal className="stage r-stage" delay="1">
+            <DealCard className="float main dcard" img="/trainers.jpg" alt="Nike Air Max 90 trainers" sticker="Live" biz="Solestore" meta="6 pairs">
+              <div className="item" style={{ fontSize: 16 }}>Nike Air Max 90</div>
+              <Ladder prices={['£110', '£77', '£66', '£60']} interval={3000} />
+              <div className="rule"><i></i></div>
+              <div className="foot">
+                <span className="pips">
+                  {Array.from({ length: UNITS }, (_, k) => <i key={k} className={k < shown ? 'on' : undefined}></i>)}
+                </span>
+                <span className="amber">Collect by 6pm</span>
               </div>
-            ))}
-          </div>
-        </Reveal>
+            </DealCard>
+
+            <div className="float taken pop"><small>Taken today</small><b>£{taken}</b></div>
+
+            <div className="toasts">
+              {TOASTS.map((t, k) => (
+                <div key={t.name} className={`toast${k < shown ? ' on' : ''}`}>
+                  <span className="av">{t.initial}</span>
+                  <div><b>{t.name} claimed</b><span>{t.size}</span></div>
+                  <span className="p">£{t.val}</span>
+                </div>
+              ))}
+            </div>
+          </Reveal>
+        </div>
       </div>
     </section>
   );

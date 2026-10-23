@@ -9,7 +9,7 @@ const STEPS = [
     alt: 'Nike Air Max 90 found in the catalogue with title, description and usual price filled in',
   },
   {
-    label: 'Set your floor',
+    label: 'Set your lowest price',
     body: "Choose the lowest price you'll accept. Our AI suggests where to start and when to step down.",
     src: '/site-assets/r4-set-your-price.png',
     alt: 'Set your price screen with a suggested starting discount and a 45% floor',

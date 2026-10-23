@@ -36,9 +36,9 @@ export default function RetailerPage() {
         <RetailerHero />
         <Ticker items={TICKER} />
         <RetailerWhy />
+        <AI />
         <RetailerOffers />
         <RetailerHowItWorks />
-        <AI />
         <GetStarted />
         <RetailerWaitlist />
       </main>

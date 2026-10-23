@@ -286,6 +286,7 @@ footer{padding:48px 0;border-top:1px solid var(--line)}
 .ai-grid .lede+.lede{margin-top:14px}
 .pills{display:flex;flex-wrap:wrap;gap:10px;margin-top:28px}
 .pills span{font-size:14px;font-weight:600;padding:10px 16px;border-radius:999px;background:rgba(244,246,244,.08);color:#c6d6d1}
+.stage-cap{font-family:var(--d);font-weight:700;font-size:18px;letter-spacing:-.01em;text-align:center;margin-bottom:18px}
 .r-stage{height:660px}
 .r-stage .main{left:50%;top:20px;width:340px;margin-left:-170px;z-index:3}
 .r-stage .main .ph{height:230px}

@@ -17,10 +17,6 @@ export default function RetailerHero() {
           <span className="live-pill"><i></i>Onboarding Brighton businesses now</span>
           <h1 className="display">Move your stock. Find last minute bookings. <em>Get that sale!</em></h1>
           <p className="lede">Now you can move your unsold stock and turn those empty bookings into new revenue. In real time. For free!</p>
-          <div className="hero-ctas">
-            <a href="#waitlist" className="btn">List your business</a>
-            <a href="#offers" className="btn gh">See how it works</a>
-          </div>
         </div>
 
         <HeroVideo />

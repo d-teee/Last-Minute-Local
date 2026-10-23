@@ -9,7 +9,6 @@ const CARDS = [
       </svg>
     ),
     title: 'Free to list your products & services',
-    body: 'Create an account and start posting live offers, on products or services, in minutes. So simple, no tech skills needed. Snap a photo, set your price, done.',
   },
   {
     icon: (
@@ -19,7 +18,6 @@ const CARDS = [
       </svg>
     ),
     title: 'Reach your local customers in real time, throughout the day',
-    body: 'Your deal reaches people nearby who are actively looking for exactly what you offer, right now.',
   },
   {
     icon: (
@@ -28,7 +26,6 @@ const CARDS = [
       </svg>
     ),
     title: 'AI always protects your margin',
-    body: "Set the lowest price you'll accept. Our AI never goes below it, even as urgency builds towards expiry.",
   },
 ];
 
@@ -39,14 +36,12 @@ export default function GetStarted() {
         <Reveal className="head">
           <span className="kick">Get started</span>
           <h2 className="display">Get started. It's free to join. <em>No catch.</em></h2>
-          <p className="lede">Turn your quietest hours and slowest-moving stock into new customers, with no marketing budget and no long-term commitment.</p>
         </Reveal>
         <div className="vcards">
           {CARDS.map((c, k) => (
             <Reveal className="vcard" delay={k || undefined} key={c.title}>
               <div className="ic">{c.icon}</div>
               <h3>{c.title}</h3>
-              <p>{c.body}</p>
             </Reveal>
           ))}
         </div>
