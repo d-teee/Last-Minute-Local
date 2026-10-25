@@ -26,6 +26,7 @@ export default function RetailerOffers() {
           <span className="kick">Your offers</span>
           <h2 className="display">Create discounted offers like these <em>in seconds.</em></h2>
         </Reveal>
+        <Reveal as="p" className="stage-cap">What your customers see on their phones</Reveal>
         <div className="offer-grid">
           {OFFERS.map((o, k) => (
             <Reveal className="offer" delay={k || undefined} key={o.title}>
@@ -36,7 +37,6 @@ export default function RetailerOffers() {
             </Reveal>
           ))}
         </div>
-        <Reveal as="p" className="cust-cap">What your customers see on their phones</Reveal>
       </div>
     </section>
   );

@@ -11,8 +11,8 @@ const CARDS = [
     body: 'Discount your unsold fashion, sportswear, homewares, food and more at the click of a button. We promote them to your local customers in real time, throughout the day.',
   },
   {
-    src: img('photo-1503951914875-452162b0f3f1'),
-    alt: 'A barber at work',
+    src: '/site-assets/womens-hairdresser.jpg',
+    alt: "A hairdresser trimming a client's hair",
     title: 'Your time-sensitive inventory has no second chance.',
     body: 'Unbooked hairdressing appointments, empty restaurant tables, no takeaway customers. Their potential value disappears as the clock ticks by. Once the day passes, their value has gone.',
   },
