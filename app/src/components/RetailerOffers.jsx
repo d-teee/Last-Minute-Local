@@ -26,13 +26,13 @@ export default function RetailerOffers() {
           <span className="kick">Your offers</span>
           <h2 className="display">Create discounted offers like these <em>in seconds.</em></h2>
         </Reveal>
-        <Reveal as="p" className="stage-cap">What your customers see on their phones</Reveal>
         <div className="offer-grid">
           {OFFERS.map((o, k) => (
             <Reveal className="offer" delay={k || undefined} key={o.title}>
               <span className="kick">{o.kick}</span>
               <h3>{o.title}</h3>
               <p>{o.body}</p>
+              <p className="stage-cap">What your customers see on their phones</p>
               <div className="crop"><Shot src={o.src} alt={o.alt} /></div>
             </Reveal>
           ))}
