@@ -3,7 +3,17 @@ import { useEffect, useRef, useState } from 'react';
 // React port of the hv-frame behaviour in design_handoff_landing_page: plays
 // with sound on click (no autoplay), falls back to a "coming soon" message if
 // both sources fail to load, and resets to the poster when playback ends.
-export default function HeroVideo() {
+// Props default to the retailer explainer video so existing callers are unaffected.
+export default function HeroVideo({
+  mp4Src = '/site-assets/lml-explainer.mp4',
+  webmSrc = '/site-assets/lml-explainer.webm',
+  poster = '/site-assets/lml-explainer-poster.jpg',
+  ariaLabel = 'Last Minute Local explainer video',
+  ctaLabel = 'Watch how it works',
+  subLabel = 'With sound',
+  missingText = 'Explainer video coming soon',
+  logName = 'Explainer',
+}) {
   const videoRef = useRef(null);
   const [playing, setPlaying] = useState(false);
   const [missing, setMissing] = useState(false);
@@ -43,7 +53,7 @@ export default function HeroVideo() {
       p.catch((err) => {
         // Logged so a failure on a device we can't test locally (Safari/iOS) still
         // leaves a trace, rather than just silently reverting to the poster.
-        console.error('Explainer video failed to play:', err, 'networkState:', v.networkState, 'error:', v.error);
+        console.error(`${logName} video failed to play:`, err, 'networkState:', v.networkState, 'error:', v.error);
         if (v.error || v.networkState === HTMLMediaElement.NETWORK_NO_SOURCE) {
           setMissing(true);
         }
@@ -77,8 +87,8 @@ export default function HeroVideo() {
           preload="metadata"
           playsInline
           controlsList="nodownload"
-          poster="/site-assets/lml-explainer-poster.jpg"
-          aria-label="Last Minute Local explainer video"
+          poster={poster}
+          aria-label={ariaLabel}
           onDoubleClick={handleDoubleClick}
           onEnded={handleEnded}
         >
@@ -88,18 +98,18 @@ export default function HeroVideo() {
               Browsers that do support WebM (Chrome, Firefox, Edge) still choose it
               correctly even listed second, since source selection is by support, not
               document order. */}
-          <source src="/site-assets/lml-explainer.mp4" type="video/mp4" />
-          <source src="/site-assets/lml-explainer.webm" type="video/webm" />
+          <source src={mp4Src} type="video/mp4" />
+          <source src={webmSrc} type="video/webm" />
         </video>
         {!missing && (
-          <button className="hv-play" type="button" aria-label="Play the Last Minute Local explainer, with sound" onClick={handlePlay}>
+          <button className="hv-play" type="button" aria-label={`Play the ${ariaLabel}, with sound`} onClick={handlePlay}>
             <span className="hv-btn">
               <svg width="26" height="26" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l10.5-6.5Z" fill="#04211a" /></svg>
             </span>
-            <span className="hv-lbl"><b>Watch how it works</b><span className="mono">With sound</span></span>
+            <span className="hv-lbl"><b>{ctaLabel}</b><span className="mono">{subLabel}</span></span>
           </button>
         )}
-        {missing && <p className="hv-miss">Explainer video coming soon</p>}
+        {missing && <p className="hv-miss">{missingText}</p>}
       </div>
     </div>
   );
